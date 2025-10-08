@@ -1,2 +1,0 @@
-https://github.com/SixPenny/leetcode/tree/master/problems
-https://wihoho.gitbooks.io/leetcode-solutions/content/

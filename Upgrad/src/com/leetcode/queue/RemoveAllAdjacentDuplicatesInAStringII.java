@@ -1,7 +1,6 @@
 package com.leetcode.queue;
 
 
-import javafx.util.Pair;
 
 import java.util.ArrayDeque;
 import java.util.Deque;

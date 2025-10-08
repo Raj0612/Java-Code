@@ -24,7 +24,7 @@ public class DisplayBoard {
         parkingSpots.computeIfAbsent(spotType, k -> new ArrayList<>()).addAll(spots);
     }
 
-    public void  bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb(Map<Integer, ParkingSpot> allSpots) {
+    public void  update(Map<Integer, ParkingSpot> allSpots) {
         parkingSpots.clear();
         for (ParkingSpot spot : allSpots.values()) {
           //  parkingSpots.putIfAbsent(spot.getSpotType(), new ArrayList<>());
