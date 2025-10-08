@@ -1,0 +1,7 @@
+package Educative.Locker.enums;
+
+public class LockerState {
+    CLOSED,
+    BOOKED,
+    AVAILABLE
+}

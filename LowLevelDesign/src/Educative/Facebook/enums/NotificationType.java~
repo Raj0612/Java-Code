@@ -1,0 +1,4 @@
+package Educative.Facebook.enums;
+
+public enum NotificationType {
+}

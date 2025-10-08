@@ -1,0 +1,4 @@
+package Educative.CarRentalSyatem.equipment;
+
+public class SkiRack extends Equipment {
+}

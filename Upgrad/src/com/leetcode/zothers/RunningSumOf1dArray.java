@@ -1,0 +1,70 @@
+package com.leetcode.zothers;
+//Given an array nums. We define a running sum of an array as runningSum[i] = sum(nums[0]…nums[i]). Return the running sum of nums.
+
+/*
+Example 1:
+Input: nums = [1,2,3,4]
+Output: [1,3,6,10]
+Explanation: Running sum is obtained as follows: [1, 1+2, 1+2+3, 1+2+3+4].
+
+Example 2:
+Input: nums = [1,1,1,1,1]
+Output: [1,2,3,4,5]
+Explanation: Running sum is obtained as follows: [1, 1+1, 1+1+1, 1+1+1+1, 1+1+1+1+1].
+
+Example 3:
+Input: nums = [3,1,2,10,1]
+Output: [3,4,6,16,17]
+ */
+import java.util.Arrays;
+public class RunningSumOf1dArray {
+    public static void main(String[] args) {
+        //int nums[]={1,2,3,4};
+       // int nums[] = {3,1,2,10,1};
+        int nums[] = {1,1,1,1,1};
+        System.out.println("input: " + Arrays.toString(nums));
+        System.out.println("runningSum " + Arrays.toString(runningSum(nums)));
+        System.out.println("runningSum1 " + Arrays.toString(runningSum1(nums)));
+        System.out.println("runningSumNotOptimized " + Arrays.toString(runningSumNotOptimized(nums)));
+    }
+
+    //Time: O()n
+    public static int[] runningSum(int[] nums) {
+        int[] res= new int[nums.length];
+        if(nums.length==0)
+            return res;
+        res[0]=nums[0];
+        for(int i=1;i<nums.length;i++)  {
+            res[i]=res[i-1]+ nums[i];
+        }
+        return res;
+    }
+
+    //Time-O(n) Space-O(n)
+    public static int[] runningSum1(int[] nums) {
+        int[] res= new int[nums.length];
+        if(nums.length==0)
+            return res;
+        int curr_cum =0;
+        for(int i=0;i<nums.length;i++)  {
+            curr_cum = curr_cum + nums[i];
+            res[i] = curr_cum;
+        }
+        return res;
+    }
+
+    //Time-O(n*n) Space-O(n)
+    public static int[] runningSumNotOptimized(int[] nums) {
+        int[] res= new int[nums.length];
+        if(nums.length==0)
+            return res;
+        for(int i=0;i<nums.length;i++)  {
+            int sum_till_ith_index = 0;
+            for(int j=0;j<=i;j++)  {
+                sum_till_ith_index += nums[j];
+            }
+            res[i] = sum_till_ith_index;
+        }
+        return res;
+    }
+}

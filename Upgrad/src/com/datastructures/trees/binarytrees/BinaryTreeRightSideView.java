@@ -1,0 +1,78 @@
+package com.datastructures.trees.binarytrees;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BinaryTreeRightSideView {
+    static int max_level = 0;
+
+    public static void main(String[] args) {
+        TreeNode root = BinaryTree.constructTreeLeftRightView();
+          /*
+               10
+              / \
+             /   \
+            2     3
+           / \   / \
+          7  8  12  15
+               /
+              14
+        */
+        System.out.print("rightViewUtil: ");
+        rightViewUsingRecursion(root);
+        System.out.println();
+        System.out.print("rightViewUsingLevelOrder: ");
+        rightViewUsingLevelOrder(root);
+        System.out.println();
+    }
+    static void rightViewUsingRecursion(TreeNode root) {
+        max_level = 0;
+        rightViewUtil(root, 1);
+    }
+
+    static void rightViewUtil(TreeNode node, int level) {
+        if (node == null)
+            return;
+
+        // If this is the first node of its level
+        if (max_level < level) {
+            System.out.print(node.value + " ");
+            max_level = level;
+        }
+
+        // Recur for left and right subtrees
+        rightViewUtil(node.right, level + 1);
+        rightViewUtil(node.left, level + 1);
+    }
+
+    static void rightViewUsingLevelOrder(TreeNode root) {
+        if (root == null) {
+            return;
+        }
+
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+
+        while (!q.isEmpty()) {
+
+            int n = q.size();
+
+            for (int i = 0; i < n; i++) {
+                TreeNode curr = q.remove();
+
+                if (i == n - 1) {
+                    System.out.print(curr.value);
+                    System.out.print(" ");
+                }
+
+                if (curr.left != null) {
+                    q.add(curr.left);
+                }
+
+                if (curr.right != null) {
+                    q.add(curr.right);
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+package Educative.StockBrokerage.orders;
+
+public class MarketOrder extends Order {
+    public MarketOrder(Member member, Stock stock, double quantity, TimeEnforcementType timeEnforcement, boolean isBuyOrder) {
+        super(member, stock, quantity, 0, timeEnforcement, isBuyOrder);
+    }
+}
+

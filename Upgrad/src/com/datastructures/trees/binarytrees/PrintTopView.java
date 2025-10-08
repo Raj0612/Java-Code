@@ -1,0 +1,83 @@
+package com.datastructures.trees.binarytrees;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class PrintTopView {
+
+    public static void main(String[] args) {
+        TreeNode root = BinaryTree.constructTreeLeftRightView();
+          /*
+               10
+              / \
+             /   \
+            2     3
+           / \   / \
+          7  8  12  15
+               /
+              14
+        */
+
+        ArrayList<Integer> result = topView(root);
+        for (int i : result) {
+            System.out.print(i + " ");
+        }
+    }
+
+    static class Pair {
+        TreeNode node;
+        int hd;
+        Pair(TreeNode node, int hd) {
+            this.node = node;
+            this.hd = hd;
+        }
+    }
+    static ArrayList<Integer> topView(TreeNode root) {
+        if (root == null) {
+            return new ArrayList<>();
+        }
+        Queue<Pair> queue = new LinkedList<>();
+        queue.add(new Pair(root, 0));
+
+        HashMap<Integer, Integer> map = new HashMap<>();
+        int minHD = 0;
+        int maxHD = 0;
+
+        while (!queue.isEmpty()) {
+            Pair current = queue.poll();
+            TreeNode currentNode = current.node;
+            int hd = current.hd;
+
+            if (hd < minHD) {
+                minHD = hd;
+            }
+            if (hd > maxHD) {
+                maxHD = hd;
+            }
+
+            if (!map.containsKey(hd)) {
+                map.put(hd, currentNode.value);
+            }
+
+            if (currentNode.left != null) {
+                queue.add(
+                        new Pair(currentNode.left, hd - 1));
+            }
+            if (currentNode.right != null) {
+                queue.add(
+                        new Pair(currentNode.right, hd + 1));
+            }
+        }
+        System.out.println("map " + map);
+        ArrayList<Integer> topViewList = new ArrayList<>();
+        for (int hd = minHD; hd <= maxHD; hd++) {
+            if (map.containsKey(hd)) {
+                topViewList.add(map.get(hd));
+            }
+        }
+        return topViewList;
+
+    }
+}

@@ -1,0 +1,116 @@
+package com.leetcode.backtracking;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+//Write a program to solve a Sudoku puzzle by filling the empty cells.
+public class SudokuSolver {
+    private static boolean solved;
+    private static char[][] board;
+    private static List<Integer> emptyCells = new ArrayList<>();
+    private static boolean[][] usedInRow = new boolean[9][9];
+    private static boolean[][] usedInColumn = new boolean[9][9];
+
+    private static boolean[][][] usedInBlock = new boolean[3][3][9];
+
+    public static void main(String[] args) {
+        char[][] sudokuBoard ={{'5','3','.','.','7','.','.','.','.'},
+                         {'6','.','.','1','9','5','.','.','.'},
+                         {'.','9','8','.','.','.','.','6','.'},
+                         {'8','.','.','.','6','.','.','.','3'},
+                         {'4','.','.','8','.','3','.','.','1'},
+                         {'7','.','.','.','2','.','.','.','6'},
+                         {'.','6','.','.','.','.','2','8','.'},
+                         {'.','.','.','4','1','9','.','.','5'},
+                         {'.','.','.','.','8','.','.','7','9'}};
+
+        solveSudoku(sudokuBoard);
+        System.out.println("solveSudoku usedInRow " + Arrays.deepToString(usedInRow));
+        System.out.println("solveSudoku usedInColumn " + Arrays.deepToString(usedInColumn));
+        System.out.println("solveSudoku usedInBlock " + Arrays.deepToString(usedInBlock));
+        System.out.println("solveSudoku " + Arrays.deepToString(board));
+       // dfs(board, 0);
+    }
+
+    public static void solveSudoku(char[][] sudokuBoard) {
+        board = sudokuBoard;
+        for (int i = 0; i < 9; ++i) {
+            for (int j = 0; j < 9; ++j) {
+                if (board[i][j] == '.') {
+                    emptyCells.add(i * 9 + j); // Record the position of an empty cell
+                } else {
+                    // Convert char to int value ranging from 0-8
+                    int value = board[i][j] - '1';
+                    // Mark the value as used in the corresponding row, column, and block
+                    usedInRow[i][value] = true;
+                    usedInColumn[j][value] = true;
+                    usedInBlock[i / 3][j / 3][value] = true;
+                }
+            }
+        }
+        // Begin the recursive depth-first search to solve the puzzle
+        dfs(0);
+    }
+
+    private static  void dfs(int index) {
+        // If we have filled all empty cells, we have solved the puzzle
+        if (index == emptyCells.size()) {
+            solved = true;
+            return;
+        }
+        // Calculate the row and column from the current empty cell's index
+        int i = emptyCells.get(index) / 9;
+        int j = emptyCells.get(index) % 9;
+
+        // Try placing values 1-9 in the current empty cell
+        for (int value = 0; value < 9; ++value) {
+            if (!usedInRow[i][value] && !usedInColumn[j][value] && !usedInBlock[i / 3][j / 3][value]) {
+                // If the value isn't used in the row, column, or block, place it
+                usedInRow[i][value] = true;
+                usedInColumn[j][value] = true;
+                usedInBlock[i / 3][j / 3][value] = true;
+                board[i][j] = (char) (value + '1');
+                // Continue to the next empty cell
+                dfs(index + 1);
+                // If the puzzle is solved, exit
+                if (solved) {
+                    return;
+                }
+                // If placing value did not lead to a solution, backtrack
+                usedInRow[i][value] = false;
+                usedInColumn[j][value] = false;
+                usedInBlock[i / 3][j / 3][value] = false;
+            }
+        }
+    }
+
+    private static boolean dfs(char[][] board, int s) {
+        if (s == 81)
+            return true;
+
+        final int i = s / 9;
+        final int j = s % 9;
+
+        if (board[i][j] != '.')
+            return dfs(board, s + 1);
+
+        for (char c = '1'; c <= '9'; ++c)
+            if (isValid(board, i, j, c)) {
+                board[i][j] = c;
+                if (dfs(board, s + 1))
+                    return true;
+                board[i][j] = '.';
+            }
+
+        return false;
+    }
+
+    private static boolean isValid(char[][] board, int row, int col, char c) {
+        for (int i = 0; i < 9; ++i)
+            if (board[i][col] == c || board[row][i] == c ||
+                    board[3 * (row / 3) + i / 3][3 * (col / 3) + i % 3] == c)
+                return false;
+        return true;
+    }
+}

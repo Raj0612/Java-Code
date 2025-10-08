@@ -1,0 +1,16 @@
+package Educative.StockBrokerage.stocks;
+
+import java.util.List;
+
+public class Watchlist {
+    private String name;
+    private List<Stock> stocks;
+
+    public Watchlist(String name) {
+        this.name = name;
+        this.stocks = new ArrayList<>();
+    }
+    public List<Stock> getStocks() { return stocks; }
+    public void addStock(Stock stock) { stocks.add(stock); }
+    public void removeStock(Stock stock) { stocks.remove(stock); }
+}

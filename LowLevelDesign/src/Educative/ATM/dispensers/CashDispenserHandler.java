@@ -1,0 +1,12 @@
+package Educative.ATM.dispensers;
+
+public abstract class CashDispenserHandler {
+
+    protected CashDispenserHandler nextHandler;
+
+    public void setNextHandler(CashDispenserHandler nextHandler) {
+        this.nextHandler = nextHandler;
+    }
+
+    public abstract void dispense(int amount);
+}

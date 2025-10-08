@@ -1,0 +1,10 @@
+package Educative.ATM.enums;
+
+public enum ATMStatus {
+    Idle,
+    HasCard,
+    SelestionOption,
+    Withdraw,
+    TransferMoney,
+    BalanceInquiry
+}

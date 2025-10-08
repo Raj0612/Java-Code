@@ -1,0 +1,19 @@
+package Educative.CarRentalSyatem.payment;
+
+import Educative.CarRentalSyatem.designpatterns.PaymentStrategy;
+import Educative.CarRentalSyatem.enums.PaymentStatus;
+
+import java.time.LocalDateTime;
+
+public class Cash extends Payment {
+
+    public Cash(double amount, PaymentStrategy paymentStrategy)) {
+        super(amount,  paymentStrategy);
+    }
+
+    @Override
+    public boolean makePayment() {
+        setStatus(PaymentStatus.COMPLETED);
+        return true;
+    }
+}

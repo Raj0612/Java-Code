@@ -1,0 +1,24 @@
+package Educative.MovieBookingSystem.accounts;
+
+import Educative.MovieBookingSystem.moviedetails.Booking;
+
+import java.util.*;
+
+public class TicketAgent extends Person {
+    private final List<Booking> bookings;
+
+    public TicketAgent(String name, String address, String phone, String email) {
+        super(name, address, phone, email);
+        this.bookings = new ArrayList<>();
+    }
+
+    public boolean createBooking(Booking booking) {
+        if (booking.confirmBooking()) {
+            bookings.add(booking);
+            System.out.println("Booking created by ticket agent " + getName());
+            return true;
+        }
+        return false;
+    }
+}
+

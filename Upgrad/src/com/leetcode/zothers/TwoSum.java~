@@ -1,0 +1,94 @@
+package com.leetcode.zothers;
+
+import java.util.Arrays;
+import java.util.HashMap;
+
+//Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target.
+//You may assume that each input would have exactly one solution, and you may not use the same element twice.
+//You can return the answer in any order.
+
+/*
+    Input: nums = [2,7,11,15], target = 9
+    Output: [0,1]
+    Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+ */
+public class TwoSum {
+
+    public static void main(String[] args) {
+        input1();
+        input2();
+        input3();
+        input4();
+    }
+
+    public static int[] twoSum(int[] numbers, int target) {
+        System.out.println("twoSum  " + Arrays.toString(numbers) + " target: " + target);
+        HashMap<Integer,Integer> hash = new HashMap<Integer,Integer>();
+        for(int i = 0; i < numbers.length; i++){
+
+            Integer diff = (Integer)(target - numbers[i]);
+            if(hash.containsKey(diff)){
+                int toReturn[] = {hash.get(diff), i};
+                return toReturn;
+            }
+            hash.put(numbers[i], i);
+        }
+        return null;
+    }
+
+    public static int[] twoSum1(int[] numbers, int target) {
+        System.out.println("twoSum1 " + Arrays.toString(numbers)+ " target: " + target);
+        HashMap<Integer,Integer> hash = new HashMap<Integer,Integer>();
+        int ans[] = new int[2];
+
+        for(int i = 0; i < numbers.length; i++){
+            hash.put(numbers[i], i);
+        }
+        System.out.println("twoSum1 hash " + hash);
+        for(int i = 0; i < numbers.length; i++){
+            int num1 = numbers[i];
+            int num2 = target - num1;
+            if(hash.containsKey(num2)){
+                int j = hash.get(num2);
+                if(i !=j) {
+                    ans[0] = i;
+                    ans[1] = j;
+                    return ans;
+                }
+            }
+        }
+        return null;
+    }
+
+    static void input1(){
+        int target = 6;
+        //int array[] = {2,3,6, 7, 24};
+        int array[] = {2,3,3, 7, 24};
+        System.out.println( "input1 Result " + Arrays.toString(twoSum(array, target)));
+        System.out.println( "input1 Result " + Arrays.toString(twoSum1(array, target)));
+    }
+
+    static void input2(){
+        System.out.println();
+        int target = 9;
+        int array[] = {2,3,11,8,7, 24, 1};
+        System.out.println( "input2 Result " + Arrays.toString(twoSum(array, target)));
+        System.out.println( "input2 Result " + Arrays.toString(twoSum1(array, target)));
+    }
+
+    static void input3(){
+        System.out.println();
+        int target = 9;
+        int array[] = {2,3,9,7};
+        System.out.println( "input3 Result " + Arrays.toString(twoSum(array, target)));
+        System.out.println( "input3 Result " + Arrays.toString(twoSum1(array, target)));
+    }
+    static void input4(){
+        System.out.println();
+        int target = 9;
+        int array[] = {3,2,4};
+        System.out.println( "input4 Result " + Arrays.toString(twoSum(array, target)));
+        System.out.println( "input4 Result " + Arrays.toString(twoSum1(array, target)));
+    }
+
+}

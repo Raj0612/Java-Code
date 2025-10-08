@@ -1,0 +1,31 @@
+package Educative.RestaurantManagement.accounts;
+
+import Educative.RestaurantManagement.enums.OrderStatus;
+import Educative.RestaurantManagement.meals.Order;
+
+import java.time.LocalDate;
+
+public class Waiter extends Employee{
+
+    boolean isAvailable;
+
+    public Waiter(String name, String email, String phone, int employeeID, LocalDate dateJoined, Account account) {
+        super(name, email, phone, employeeID, dateJoined, account);
+        isAvailable = true;
+    }
+
+    public boolean takeOrder(Order order) {
+        if (order == null) return false;
+        order.setWaiter(this);
+        order.setStatus(OrderStatus.Received);
+        // Assign chef (could be more complex in real system)
+        Chef chef = order.getChef();
+        if (chef != null) {
+            chef.prepareOrder(order);
+        } else {
+            System.out.println("No chef assigned to order " + order.getOrderID());
+        }
+        return true;
+    }
+
+}

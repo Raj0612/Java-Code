@@ -1,0 +1,4 @@
+package DesignPatterns.Structural.Adapter.educative;
+
+public class Client {
+}

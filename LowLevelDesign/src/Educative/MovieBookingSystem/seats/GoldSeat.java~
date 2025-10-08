@@ -1,0 +1,4 @@
+package Educative.MovieBookingSystem.seats;
+
+public class GoldSeat {
+}

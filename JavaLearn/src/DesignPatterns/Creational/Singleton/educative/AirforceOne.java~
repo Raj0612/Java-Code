@@ -1,0 +1,12 @@
+package DesignPatterns.Creational.Singleton.educative;
+
+public class AirforceOne {
+
+    private static AirforceOne onlyInstance;
+
+    private AirforceOne() {
+    }
+    public void fly() {
+        System.out.println("Airforce one is flying...");
+    }
+}

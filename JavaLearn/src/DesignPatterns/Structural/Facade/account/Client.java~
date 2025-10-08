@@ -1,0 +1,4 @@
+package DesignPatterns.Structural.Facade.account;
+
+public class Client {
+}

@@ -1,0 +1,19 @@
+package GeekForGeeks.DesignElevatorSystem.button;
+
+public class ElevatorButton extends Button{
+
+    private int destinationFloorNumber;
+
+    public ElevatorButton(int destinationFloorNumber){
+        this.destinationFloorNumber = destinationFloorNumber;
+    }
+
+    public int getDestinationFloorNumber() {
+        return destinationFloorNumber;
+    }
+
+    public void setDestinationFloorNumber(int destinationFloorNumber) {
+        this.destinationFloorNumber = destinationFloorNumber;
+    }
+
+}

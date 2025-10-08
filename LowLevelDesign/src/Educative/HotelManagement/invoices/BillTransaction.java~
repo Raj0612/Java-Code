@@ -1,0 +1,18 @@
+package Educative.HotelManagement.invoices;
+
+import Educative.ParkingLot.enums.PaymentStatus;
+
+import java.time.LocalDateTime;
+
+public abstract class BillTransaction {
+
+    protected LocalDateTime creationDate;
+    protected double amount;
+    protected PaymentStatus status;
+    public BillTransaction(double amount) {
+        this.creationDate = LocalDateTime.now();
+        this.amount = amount;
+        this.status = PaymentStatus.UNPAID;
+    }
+    public abstract void initiateTransaction();
+}

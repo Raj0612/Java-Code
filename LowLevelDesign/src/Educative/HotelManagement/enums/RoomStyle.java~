@@ -1,0 +1,4 @@
+package Educative.HotelManagement.enums;
+
+public enum RoomStyle {
+}

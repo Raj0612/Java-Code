@@ -1,0 +1,5 @@
+package Educative.Facebook.enums;
+
+public enum FriendInviteStatus {
+    PENDING, ACCEPTED, REJECTED, CANCELED
+}

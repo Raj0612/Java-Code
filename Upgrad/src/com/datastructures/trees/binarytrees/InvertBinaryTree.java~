@@ -1,0 +1,130 @@
+package com.datastructures.trees.binarytrees;
+//Given the root of a binary tree, invert the tree, and return its root.
+
+import java.util.ArrayDeque;
+import java.util.Queue;
+
+/*
+                4                   4
+              /   \               /   \
+            2       7           7       2
+          /  \    /  \        /  \    /   \
+        1     3  6    9      9    6  3     1
+
+
+Input: root = [4,2,7,1,3,6,9]
+Output: [4,7,2,9,6,3,1]
+ */
+public class InvertBinaryTree {
+
+    public static void main(String[] args) {
+        input1();
+        //input2();
+      //  input3();
+    }
+    static  void input1(){
+        TreeNode root = new TreeNode(2);
+        root.left = new TreeNode(4);
+        root.left.right = new TreeNode(5);
+        root.right = new TreeNode(7);
+        root.right.left = new TreeNode(9);
+        root.right.right =  new TreeNode(4);
+         /*    2
+              / \
+             4   7
+            / \   / \
+             5   9  4  */
+       // System.out.println("invertTree " + invertTree(root));
+        System.out.println("invertTreeByQueue " + invertTreeByQueue(root));
+        System.out.println();
+        System.out.println();
+       // System.out.println("invertTreeByUpgrad " + invertTreeByUpgrad(root));
+    }
+
+    static  void input2(){
+        /*
+                4                   4
+              /   \               /   \
+            2       7           7       2
+          /  \    /  \        /  \    /   \
+        1     3  6    9      9    6  3     1
+
+
+Input: root = [4,2,7,1,3,6,9]
+Output: [4,7,2,9,6,3,1]
+ */
+        TreeNode root = new TreeNode(4);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(7);
+        root.left.left = new TreeNode(1);
+        root.left.right =  new TreeNode(3);
+        root.right.left = new TreeNode(6);
+        root.right.right =  new TreeNode(9);
+        System.out.println("invertTreeByQueue " + invertTreeByQueue(root));
+
+    }
+
+    static  void input3(){
+        /*
+                1                   1
+              /                       \
+             2                          2
+
+  */
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+
+        System.out.println("invertTreeByQueue " + invertTreeByQueue(root));
+
+    }
+    static TreeNode invertTree(TreeNode root) {
+        if (root == null){
+            return null;
+        }
+        TreeNode temp = root.left;
+        root.left = root.right;
+        root.right = temp;
+        invertTree(root.left);
+        invertTree(root.right);
+        return root;
+    }
+
+    static TreeNode invertTreeByUpgrad(TreeNode root) {
+        if (root == null)
+            return null;
+
+        TreeNode left_part = invertTreeByUpgrad(root.left);
+        TreeNode right_part = invertTreeByUpgrad(root.right);
+        root.left = right_part;
+        root.right = left_part;
+        return root;
+    }
+
+    static TreeNode invertTreeByQueue(TreeNode root) {
+        if (root == null)
+            return null;
+
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.remove();
+            TreeNode temp = null;
+            if(node.left!=null && node.right!=null) {
+                temp = node.left;
+                node.left = node.right;
+                node.right = temp;
+                queue.add(node.left);
+                queue.add(node.right);
+            }else if(node.left!=null && node.right==null){
+                node.right = node.left;
+                node.left = null;
+                queue.add(node.right);
+            }else if(node.right!=null && node.left==null){
+                node.left = node.right;
+                node.right = null;
+                queue.add(node.left);
+            }
+        }
+        return root;
+    }
+}

@@ -1,0 +1,188 @@
+package Educative.Cricinfo.stats;
+
+import Educative.Cricinfo.accounts.*;
+import Educative.Cricinfo.teams.Team;
+
+import java.util.*;
+
+public class TournamentStat extends Stat {
+    private int totalMatches;
+    private int totalRuns;
+    private int totalWickets;
+    private int highestTeamTotal;
+    private int highestIndividualScore;
+    private Player topRunScorer;
+    private Player topWicketTaker;
+    private Team mostWinsTeam;
+    private double netRunRate;
+
+    // For NRR calculation
+    private int totalRunsScored;
+    private double totalOversFaced;
+    private int totalRunsConceded;
+    private double totalOversBowled;
+
+    // For aggregation
+    private Map<Player, Integer> playerRuns = new HashMap<>();
+    private Map<Player, Integer> playerWickets = new HashMap<>();
+    private Map<Team, Integer> teamWins = new HashMap<>();
+
+    public TournamentStat() {
+    }
+
+    /**
+     * Call this after each match to aggregate stats.
+     *
+     * @param runsScoredByTeam   Runs scored by the team in the match
+     * @param oversFacedByTeam   Overs faced by the team (e.g., 19.3 overs = 19 + 3/6 = 19.5)
+     * @param runsConcededByTeam Runs conceded by the team in the match
+     * @param oversBowledByTeam  Overs bowled by the team (same format as above)
+     * @param teamTotal          Team's match total (for highest team total)
+     * @param individualScores   Map of Player to runs scored in match
+     * @param individualWickets  Map of Player to wickets taken in match
+     * @param winningTeam        Team that won this match (null for tie/no result)
+     */
+    public void addMatchPerformance( int runsScoredByTeam,  double oversFacedByTeam, int runsConcededByTeam, double oversBowledByTeam,
+            int teamTotal, Map<Player, Integer> individualScores, Map<Player, Integer> individualWickets, Team winningTeam ) {
+        totalMatches++;
+        totalRuns += runsScoredByTeam;
+        totalRunsScored += runsScoredByTeam;
+        totalOversFaced += oversFacedByTeam;
+        totalRunsConceded += runsConcededByTeam;
+        totalOversBowled += oversBowledByTeam;
+
+        // Highest team total
+        if (teamTotal > highestTeamTotal) highestTeamTotal = teamTotal;
+
+        // Aggregate player scores
+        for (Map.Entry<Player, Integer> entry : individualScores.entrySet()) {
+            Player player = entry.getKey();
+            int runs = entry.getValue();
+            playerRuns.put(player, playerRuns.getOrDefault(player, 0) + runs);
+            if (runs > highestIndividualScore) highestIndividualScore = runs;
+        }
+
+        // Aggregate player wickets
+        for (Map.Entry<Player, Integer> entry : individualWickets.entrySet()) {
+            Player player = entry.getKey();
+            int wickets = entry.getValue();
+            playerWickets.put(player, playerWickets.getOrDefault(player, 0) + wickets);
+            totalWickets += wickets;
+        }
+
+        // Team wins
+        if (winningTeam != null) {
+            teamWins.put(winningTeam, teamWins.getOrDefault(winningTeam, 0) + 1);
+        }
+    }
+
+    @Override
+    public boolean updateStats() {
+        // Top run scorer
+        int maxRuns = -1;
+        for (Map.Entry<Player, Integer> entry : playerRuns.entrySet()) {
+            if (entry.getValue() > maxRuns) {
+                maxRuns = entry.getValue();
+                topRunScorer = entry.getKey();
+            }
+        }
+        // Top wicket taker
+        int maxWickets = -1;
+        for (Map.Entry<Player, Integer> entry : playerWickets.entrySet()) {
+            if (entry.getValue() > maxWickets) {
+                maxWickets = entry.getValue();
+                topWicketTaker = entry.getKey();
+            }
+        }
+        // Most wins team
+        int maxWins = -1;
+        for (Map.Entry<Team, Integer> entry : teamWins.entrySet()) {
+            if (entry.getValue() > maxWins) {
+                maxWins = entry.getValue();
+                mostWinsTeam = entry.getKey();
+            }
+        }
+        // Net Run Rate calculation (see [1][3][4])
+        if (totalOversFaced > 0 && totalOversBowled > 0) {
+            double runRateFor = totalRunsScored / totalOversFaced;
+            double runRateAgainst = totalRunsConceded / totalOversBowled;
+            netRunRate = runRateFor - runRateAgainst;
+        } else {
+            netRunRate = 0.0;
+        }
+        return true;
+    }
+
+
+    public int getTotalMatches() {
+        return totalMatches;
+    }
+
+    public int getTotalRuns() {
+        return totalRuns;
+    }
+
+    public int getTotalWickets() {
+        return totalWickets;
+    }
+
+    public int getHighestTeamTotal() {
+        return highestTeamTotal;
+    }
+
+    public int getHighestIndividualScore() {
+        return highestIndividualScore;
+    }
+
+    public Player getTopRunScorer() {
+        return topRunScorer;
+    }
+
+    public Player getTopWicketTaker() {
+        return topWicketTaker;
+    }
+
+    public Team getMostWinsTeam() {
+        return mostWinsTeam;
+    }
+
+    public double getNetRunRate() {
+        return netRunRate;
+    }
+
+    public void setTotalMatches(int totalMatches) {
+        this.totalMatches = totalMatches;
+    }
+
+    public void setTotalRuns(int totalRuns) {
+        this.totalRuns = totalRuns;
+    }
+
+    public void setTotalWickets(int totalWickets) {
+        this.totalWickets = totalWickets;
+    }
+
+    public void setHighestTeamTotal(int highestTeamTotal) {
+        this.highestTeamTotal = highestTeamTotal;
+    }
+
+    public void setHighestIndividualScore(int highestIndividualScore) {
+        this.highestIndividualScore = highestIndividualScore;
+    }
+
+    public void setTopRunScorer(Player topRunScorer) {
+        this.topRunScorer = topRunScorer;
+    }
+
+    public void setTopWicketTaker(Player topWicketTaker) {
+        this.topWicketTaker = topWicketTaker;
+    }
+
+    public void setMostWinsTeam(Team mostWinsTeam) {
+        this.mostWinsTeam = mostWinsTeam;
+    }
+
+    public void setNetRunRate(double netRunRate) {
+        this.netRunRate = netRunRate;
+    }
+}

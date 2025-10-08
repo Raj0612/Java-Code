@@ -1,0 +1,18 @@
+package Educative.ParkingLot.payments;
+
+import Educative.ParkingLot.enums.PaymentStatus;
+
+import java.time.LocalDateTime;
+
+public class CreditCard extends Payment {
+    public CreditCard(double amount) { super(amount); }
+
+    @Override
+    public boolean initiateTransaction() {
+        // Simulate credit card payment success
+        this.status = PaymentStatus.COMPLETED;
+        this.timestamp = LocalDateTime.now();
+        System.out.println("Credit card payment of $" + amount + " completed.");
+        return true;
+    }
+}

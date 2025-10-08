@@ -1,0 +1,74 @@
+package Educative.Facebook.features;
+
+import Educative.Facebook.accounts.User;
+
+import java.util.*;
+
+public class Message {
+    private int messageId;
+    private User sender;
+    private String content;
+    private List<User> recipient;
+    private List<byte[]> multimedia;
+    boolean isRead = false;
+
+    public Message(int messageId, User sender, String content, List<User> recipient, List<byte[]> multimedia) {
+        this.messageId = messageId;
+        this.sender = sender;
+        this.content = content;
+        this.recipient = recipient;
+        this.multimedia = multimedia;
+    }
+
+    public int getMessageId() {
+        return messageId;
+    }
+
+    public void setMessageId(int messageId) {
+        this.messageId = messageId;
+    }
+
+    public User getSender() {
+        return sender;
+    }
+
+    public void setSender(User sender) {
+        this.sender = sender;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public List<User> getRecipient() {
+        return recipient;
+    }
+
+    public void setRecipient(List<User> recipient) {
+        this.recipient = recipient;
+    }
+
+    public List<byte[]> getMultimedia() {
+        return multimedia;
+    }
+
+    public void setMultimedia(List<byte[]> multimedia) {
+        this.multimedia = multimedia;
+    }
+
+    public boolean addRecipient(List<User> users) {
+        return recipient.addAll(users);
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void setRead(boolean read) {
+        isRead = read;
+    }
+}

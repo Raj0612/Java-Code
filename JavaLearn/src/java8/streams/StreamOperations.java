@@ -1,0 +1,21 @@
+package java8.streams;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+public class StreamOperations {
+
+    public static void main(String[] args) {
+
+        List<Integer> numbers = Arrays.asList(2, 4, 6, 9, 10, 12);
+
+        numbers.stream().filter(n -> n % 2 == 0).forEach(System.out::println); // 2, 4, 6, 10, 12
+
+        //Introduced in java 9
+       // numbers.stream().takeWhile(n -> n % 10).forEach(System.out::println); // 2, 4, 6 -- Elements are taken from the start as long as they are even.
+        // When 9 (an odd number) is encountered, processing stops, and the rest of the list is ignored—even though 10 and 12 are also even
+
+       // numbers.stream().dropWhile( n % 2 == 0).forEach(System.out::println); // 9, 19, 12
+    }
+}

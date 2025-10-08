@@ -1,0 +1,34 @@
+package Educative.AirlineManagement.accounts;
+
+import Educative.AirlineManagement.airports.FlightReservation;
+import Educative.AirlineManagement.airports.Itinerary;
+import Educative.AirlineManagement.payments.Payment;
+import Educative.AirlineManagement.seats.FlightSeat;
+
+import java.util.*;
+
+public class FrontDeskOfficer extends Person {
+    public FrontDeskOfficer(String name, Address address, String email, String phone, Account account) {
+        super(name, address, email, phone, account);
+    }
+
+    public List<Itinerary> viewItinerary(Customer customer) {
+        return customer.viewItinerary();
+    }
+
+    public boolean createItinerary(Customer customer, Itinerary itinerary) {
+        return customer.addItinerary(itinerary);
+    }
+
+    public boolean createReservation(Itinerary itinerary, FlightReservation reservation) {
+        return itinerary.addReservation(reservation);
+    }
+
+    public boolean assignSeat(FlightReservation reservation, Passenger passenger, FlightSeat seat) {
+        return reservation.assignSeat(passenger, seat);
+    }
+
+    public boolean makePayment(Itinerary itinerary, Payment payment) {
+        return itinerary.makePayment(payment);
+    }
+}

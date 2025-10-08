@@ -1,0 +1,39 @@
+package com.bitwiseoperators;
+
+public class PowerOfTwo {
+
+    public static void main(String[] args) {
+        int a =5, b=16;
+        //binary of 5 is 101
+        //binary of 2 is 10
+        //binary of 4 is 100
+        //binary of 8 is 1000
+        //binary of 16 is 10000
+        //binary of 32 is 100000
+        //binary of 7 is 111
+        //binary of 15 is 1111
+        //binary of 31 is 11111
+        System.out.println("Is " + a + " Power of 2: " + isPowerOfTwo(a));
+        System.out.println("Is " + b + " Power of 2: " + isPowerOfTwo(b));
+    }
+
+    static boolean isPowerOfTwo(int num){
+        if(num<=0)
+            return false;
+        else if((num & num-1) == 0)
+            return true;
+        else
+            return false;
+    }
+
+    public static boolean isPowerOfTwoByWhile(int n) {
+        if(n<=0) return  false;
+        while(n!=1){
+            if(n%2 !=0){
+                return false;
+            }
+            n = n/2;
+        }
+        return true;
+    }
+}

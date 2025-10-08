@@ -1,0 +1,70 @@
+package com.leetcode.zothers;
+
+import java.util.*;
+
+public class TripletSum {
+    public static void main(String[] args) {
+        input1();
+    }
+
+  static void input1(){
+        int arr[] = {1, 4, 45, 6, 10, 8};
+        int target = 13;
+        System.out.println("input1 findTripletSum " + findTripletSumByBruteForce(arr, target));
+      System.out.println("input1 hasTripletSum " + hasTripletSum(arr, target));
+      System.out.println("input1 findTripletSumByHashMap " + Arrays.toString(findTripletSumByHashMap(arr, target)));
+  }
+
+  //Time : O(n^3) Space : O(1)
+  static int findTripletSumByBruteForce(int arr[], int target) {
+      int count = 0;
+      for (int i = 0; i < arr.length; i++) {
+          for (int j = i + 1; j < arr.length; j++) {
+              for (int k = j + 1; k < arr.length; k++) {
+                  if (arr[i] + arr[j] + arr[k] == target) {
+                      count++;
+                  }
+              }
+          }
+      }
+      return count;
+  }
+
+  //Time: O(n^2) Space: O(n)
+  static int[] findTripletSumByHashMap(int arr[], int targetSum) {
+      int n = arr.length;
+      Map<Integer, Integer> map = new HashMap<>();
+      for (int i = 0; i < n; i++) {
+          map.put(arr[i], i);
+      }
+      for (int i = 0; i < n - 1; i++) {
+          for (int j = i + 1; j < n; j++) {
+              int complement = targetSum - (arr[i] + arr[j]);
+              if (map.containsKey(complement)) {
+                  int k = map.get(complement);
+                  // Ensure all indices are distinct
+                  if (k != i && k != j) {
+                      return new int[]{i, j, k};
+                  }
+              }
+          }
+      }
+      return null;
+  }
+
+    static boolean hasTripletSum(int[] arr, int target) {
+        int n = arr.length;
+        for (int i = 0; i < n - 2; i++) {
+            Set<Integer> st = new HashSet<>();
+            for (int j = i + 1; j < n; j++) {
+                int complement = target - (arr[i] + arr[j]);
+                if (st.contains(complement)) {
+                    return true;
+                }
+                st.add(arr[j]);
+            }
+        }
+
+        return false;
+    }
+}

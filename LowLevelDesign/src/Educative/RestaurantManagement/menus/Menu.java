@@ -1,0 +1,74 @@
+package Educative.RestaurantManagement.menus;
+
+import java.util.*;
+
+public class Menu {
+
+    private int menuID;
+    private String title;
+    private String description;
+    private double price;
+    private List<MenuSection> menuSections;
+
+
+    public Menu(int menuID, String title, String description, double price) {
+        this.menuID = menuID;
+        this.title = title;
+        this.description = description;
+        this.price = price;
+        this.menuSections = new ArrayList<>();
+    }
+
+    public boolean addMenuSection(MenuSection menuSection) {
+        menuSections.add(menuSection);
+        return true;
+    }
+
+    public boolean print() {
+        System.out.println("Menu: " + title);
+        for (MenuSection section : menuSections) {
+            section.print();
+        }
+        return true;
+    }
+
+    public int getMenuID() {
+        return menuID;
+    }
+
+    public void setMenuID(int menuID) {
+        this.menuID = menuID;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public List<MenuSection> getMenuSections() {
+        return menuSections;
+    }
+
+    public void setMenuSections(List<MenuSection> menuSections) {
+        this.menuSections = menuSections;
+    }
+}

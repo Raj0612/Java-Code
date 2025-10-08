@@ -1,0 +1,77 @@
+package Educative.RestaurantManagement.commad;
+
+import Educative.RestaurantManagement.accounts.Chef;
+import Educative.RestaurantManagement.accounts.Waiter;
+import Educative.RestaurantManagement.enums.OrderStatus;
+import Educative.RestaurantManagement.enums.TableStatus;
+import Educative.RestaurantManagement.meals.Order;
+import Educative.RestaurantManagement.tables.Table;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
+public class PlaceOrderCommand implements Command {
+    private Order order;
+
+    public PlaceOrderCommand(Order order) {
+        this.order = order;
+    }
+
+    @Override
+    public void execute() {
+        // Logic to place order
+        if (order == null || order.getTable() == null || order.getSeatMealMap().isEmpty()) {
+            throw new IllegalArgumentException("Order is incomplete or invalid.");
+        }
+
+        // 2. Check if the table is available
+        Table table = order.getTable();
+        if (table.getStatus() != TableStatus.Free && table.getStatus() != TableStatus.Occupied) {
+            throw new IllegalStateException("Table is not available for new orders.");
+        }
+
+        // 3. Assign waiter and chef if not already assigned
+        if (order.getWaiter() == null) {
+            Waiter waiter = assignAvailableWaiter(table);
+            order.setWaiter(waiter);
+        }
+        if (order.getChef() == null) {
+            Chef chef = assignAvailableChef();
+            order.setChef(chef);
+        }
+        // 4. Set order status to Received and set creation time
+        order.setStatus(OrderStatus.Received);
+        order.setCreationTime(LocalDate.now());
+
+        // 5. Add the order to the table's current orders (if such a structure exists)
+        // table.addOrder(order); // Uncomment if you have this functionality
+
+        // 6. Notify kitchen/chef (Observer pattern, if implemented)
+        notifyChef(order.getChef(), order);
+
+        // 7. Optionally, update table status if it was Free
+        if (table.getStatus() == TableStatus.Free) {
+            table.setStatus(TableStatus.Occupied);
+        }
+
+        // 8. Log or print confirmation
+        System.out.println("Order placed successfully: " + order.getOrderID());
+    }
+
+    // Helper methods (implement as needed)
+    private Waiter assignAvailableWaiter(Table table) {
+        // Logic to find and assign an available waiter for the table
+        // (e.g., based on branch's employee list)
+        return new Waiter("Raj", "2gBm3@example.com", "123-456-7890", 1, LocalDate.now(), null); // Replace with real logic
+    }
+
+    private Chef assignAvailableChef() {
+        // Logic to find and assign an available chef (e.g., from kitchen staff)
+        return new Chef(  "Raj", "2gBm3@example.com", "123-456-7890", 1, LocalDate.now(), null  ); // Replace with real logic
+    }
+
+    private void notifyChef(Chef chef, Order order) {
+        // Observer pattern: notify chef about new order
+        // e.g., chef.update(order);
+    }
+}

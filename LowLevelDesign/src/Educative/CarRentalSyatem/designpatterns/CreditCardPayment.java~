@@ -1,0 +1,4 @@
+package Educative.CarRentalSyatem.designpatterns;
+
+public class CreditCardPayment {
+}

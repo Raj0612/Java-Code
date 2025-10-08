@@ -1,0 +1,57 @@
+package Educative.Cricinfo.accounts;
+
+import Educative.Cricinfo.teams.Team;
+
+import java.util.*;
+
+public class Coach {
+    private final UUID id;
+    private String name;
+    private int age;
+    private String country;
+    private List<Team> teams;
+
+    public Coach(String name, int age, String country) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.age = age;
+        this.country = country;
+        this.teams = new ArrayList<>();
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public List<Team> getTeams() {
+        return Collections.unmodifiableList(teams);
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void addTeam(Team team) {
+        if (!teams.contains(team)) teams.add(team);
+    }
+}

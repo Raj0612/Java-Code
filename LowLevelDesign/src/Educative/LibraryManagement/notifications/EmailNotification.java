@@ -1,0 +1,16 @@
+package Educative.LibraryManagement.notifications;
+
+
+import java.time.LocalDate;
+
+public class EmailNotification extends Notification {
+    private String email;
+    public EmailNotification(String notificationId, LocalDate creationDate, String content, String email) {
+        super(notificationId, creationDate, content); this.email = email;
+    }
+    @Override
+    public boolean sendNotification() {
+        System.out.println("Email sent to " + email + ": " + super.getContent());
+        return true;
+    }
+}

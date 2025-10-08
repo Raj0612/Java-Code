@@ -1,0 +1,206 @@
+package com.datastructures.trees.binarysearchtrees;
+
+import  com.datastructures.trees.binarysearchtrees.ConstructBinaryTree.TreeNode;
+
+//Given a BST and a key, the task is to find the inorder successor and predecessor of the given key.
+// In case the given key is not found in BST, then return the two values within which this key will lie.
+public class PredecessorAndSuccessor {
+
+    public static void main(String[] args) {
+        input1();
+        System.out.println();
+      //  input2();
+        System.out.println();
+      //   input3();
+        System.out.println();
+        input4();
+    }
+
+    static void input1(){
+        TreeNode root = ConstructBinaryTree.constructTree4();
+       // In the below diagram, successor of 4 is 5 and predecessor is 3. For 1, successor is 3 and there is no predecessor for 1
+        /*
+              7
+             / \
+            4   12
+           / \   /
+          3   6  8
+         /   /    \
+        1   5     10
+        */
+        int key = 4;
+        TreeNode[] pre = {null};
+        TreeNode[] suc = {null};
+        findPreSucByInorder(root, key, pre, suc);
+      //  findPreSucByBSTSearch(root, key, pre, suc);
+
+        if (pre[0] != null)
+            System.out.println("Predecessor is: " + pre[0].value);
+        else
+            System.out.println("No Predecessor");
+
+        if (suc[0] != null)
+            System.out.println("Successor is: " + suc[0].value);
+        else
+            System.out.println("No Successor");
+
+    }
+
+    static void input2(){
+        TreeNode root = ConstructBinaryTree.constructTree5();
+    /*
+                  50
+               /     \
+              30      70
+             /  \    /  \
+           20   40  60   80
+
+ */
+        int key = 65;
+        TreeNode[] pre = {null};
+        TreeNode[] suc = {null};
+        findPreSucByInorder(root, key, pre, suc);
+
+        if (pre[0] != null)
+            System.out.println("Predecessor is: " + pre[0].value);
+        else
+            System.out.println("No Predecessor");
+
+        if (suc[0] != null)
+            System.out.println("Successor is: " + suc[0].value);
+        else
+            System.out.println("No Successor");
+
+        TreeNode[] pre1 = {null};
+        TreeNode[] suc1 = {null};
+
+        findPreSucByBSTSearch(root, key, pre1, suc1);
+        if (pre1[0] != null)
+            System.out.println("Predecessor is1: " + pre1[0].value);
+        else
+            System.out.println("No Predecessor1");
+
+        if (suc1[0] != null)
+            System.out.println("Successor is1: " + suc1[0].value);
+        else
+            System.out.println("No Successor1");
+    }
+
+    static void input3(){
+        TreeNode root = ConstructBinaryTree.constructTree6();
+       /*
+              10
+             /   \
+            8     13
+           / \    /  \
+          5   9  12  14
+        /  \
+       3    6
+        */
+        System.out.println("input3: " + root);
+        int key = 8;
+        TreeNode[] pre = {null};
+        TreeNode[] suc = {null};
+        findPreSucByInorder(root, key, pre, suc);
+
+       // findPreSucByBSTSearch(root, key, pre, suc);
+
+        if (pre[0] != null)
+            System.out.println("Predecessor is: " + pre[0].value);
+        else
+            System.out.println("No Predecessor");
+
+        if (suc[0] != null)
+            System.out.println("Successor is: " + suc[0].value);
+        else
+            System.out.println("No Successor");
+
+        TreeNode[] pre1 = {null};
+        TreeNode[] suc1 = {null};
+
+        findPreSucByBSTSearch(root, key, pre1, suc1);
+        if (pre1[0] != null)
+            System.out.println("Predecessor is1: " + pre1[0].value);
+        else
+            System.out.println("No Predecessor1");
+
+        if (suc1[0] != null)
+            System.out.println("Successor is1: " + suc1[0].value);
+        else
+            System.out.println("No Successor1");
+    }
+
+    static void input4(){
+        TreeNode root = ConstructBinaryTree.constructTree7();
+        System.out.println("input3: " + root);
+        int key = 6;
+        TreeNode[] pre = {null};
+        TreeNode[] suc = {null};
+        findPreSucByInorder(root, key, pre, suc);
+        if (pre[0] != null)
+            System.out.println("Predecessor is: " + pre[0].value);
+        else
+            System.out.println("No Predecessor");
+
+        if (suc[0] != null)
+            System.out.println("Successor is: " + suc[0].value);
+        else
+            System.out.println("No Successor");
+    }
+    //O(n) Time and O(n) Space
+    static void findPreSucByInorder(TreeNode root, int key,
+                           TreeNode[] pre, TreeNode[] suc) {
+
+        if (root == null)
+            return;
+
+        findPreSucByInorder(root.left, key, pre, suc);
+
+        //The first greater value seen is successor
+        if (root.value > key) {
+            if (suc[0] == null || (suc[0] != null
+                    && suc[0].value > root.value))
+                suc[0] = root;
+        } else if (root.value < key)
+            pre[0] = root;
+
+        findPreSucByInorder(root.right, key, pre, suc);
+    }
+
+    //O(h) Time and O(1) Space
+    static void findPreSucByBSTSearch(TreeNode root, int key, TreeNode[] pre,
+                                      TreeNode[] suc) {
+        TreeNode curr = root;
+
+        while (curr != null) {
+            if (curr.value < key) {
+                pre[0] = curr;
+                curr = curr.right;
+            } else if (curr.value > key) {
+                suc[0] = curr;
+                curr = curr.left;
+            }else{
+                if (curr.left != null)
+                    pre[0] = rightMost(curr.left);
+
+                if (curr.right != null)
+                    suc[0] = leftMost(curr.right);
+                break;
+            }
+        }
+    }
+
+    static TreeNode leftMost(TreeNode node) {
+        while (node.left != null) {
+            node = node.left;
+        }
+        return node;
+    }
+
+    static TreeNode rightMost(TreeNode node) {
+        while (node.right != null) {
+            node = node.right;
+        }
+        return node;
+    }
+}

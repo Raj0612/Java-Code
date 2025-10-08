@@ -1,0 +1,32 @@
+package Educative.ChessGame.pieces;
+
+import Educative.ChessGame.Box;
+import Educative.ChessGame.Chessboard;
+
+public class King extends Piece {
+    private boolean castlingDone = false;
+
+    public King(boolean white) {
+        super(white);
+    }
+
+    public boolean isCastlingDone() {
+        return castlingDone;
+    }
+    public void setCastlingDone(boolean castlingDone) {
+        this.castlingDone = castlingDone;
+    }
+
+    @Override
+    public boolean canMove(Chessboard board, Box start, Box end) {
+        // Implement King move logic (1 square any direction, castling, etc.)
+        int dx = Math.abs(start.getX() - end.getX());
+        int dy = Math.abs(start.getY() - end.getY());
+        if ((dx <= 1 && dy <= 1) && (dx + dy > 0)) {
+            return end.getPiece() == null || end.getPiece().isWhite() != this.isWhite();
+        }
+        // Castling logic would go here
+        return false;
+    }
+}
+

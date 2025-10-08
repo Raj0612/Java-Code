@@ -1,0 +1,68 @@
+package com.leetcode.stack;
+
+import java.util.Arrays;
+import java.util.Stack;
+//Given n non-negative integers representing an elevation map where the width of each bar is 1, compute how much water it can trap after raining.
+/*
+Input: height = [0,1,0,2,1,0,1,3,2,1,2,1]
+Output: 6
+Explanation: The above elevation map (black section) is represented by array [0,1,0,2,1,0,1,3,2,1,2,1]. In this case, 6 units of rain water (blue section) are being trapped.
+
+Example 2:
+Input: height = [4,2,0,3,2,5]
+Output: 9
+ */
+public class TrappingRainWaterByStack {
+    public static void main(String[] args) {
+        //input1();
+        input2();
+        //input3();
+       // input4();
+    }
+
+    //Time  - O(N), as array is been traversed only once for n number of values
+    //Space - O(N), as we have used extra N sized stack for storing values.
+    static int findTrappingRainWater(int[] arr){
+        System.out.println("findTrappingRainWater " + Arrays.toString(arr));
+        Stack<Integer> stack = new Stack<Integer>();
+        int n = arr.length;
+        int ans = 0;
+        for (int i = 0; i < n; i++) {
+            while ((!stack.isEmpty())  && (arr[stack.peek()] < arr[i])) {
+                int pop_height = arr[stack.pop()];
+
+                if (stack.isEmpty())
+                    break;
+
+                int distance = i - stack.peek() - 1;
+                int min_height
+                        = Math.min(arr[stack.peek()], arr[i])  - pop_height;
+                ans += distance * min_height;
+            }
+            stack.push(i);
+        }
+        return ans;
+    }
+    static void input1(){
+        int arr[] = { 0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1 };
+        System.out.println("input1 findTrappingRainWater " + findTrappingRainWater(arr));
+    }
+
+    static void input2(){
+        System.out.println();
+        int arr[] = { 4,2,0,3,2,5 };
+        System.out.println("input2 findTrappingRainWater " + findTrappingRainWater(arr));
+    }
+
+    static void input3(){
+        System.out.println();
+        int arr[] = { 4,3,0,2,0,2,3 };
+        System.out.println("input3 findTrappingRainWater " + findTrappingRainWater(arr));
+    }
+
+    static void input4(){
+        System.out.println();
+        int arr[] = { 1,0,2};
+        System.out.println("input4 findTrappingRainWater " + findTrappingRainWater(arr));
+    }
+}

@@ -1,0 +1,51 @@
+package Educative.Cricinfo.accounts;
+
+import Educative.Cricinfo.matches.Match;
+
+import java.util.UUID;
+
+public class Umpire {
+    private final UUID id;
+    private String name;
+    private int age;
+    private String country;
+
+    public Umpire(String name, int age, String country) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+        this.age = age;
+        this.country = country;
+    }
+
+    public boolean assignMatch(Match match) {
+        return match.assignUmpire(this);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+}

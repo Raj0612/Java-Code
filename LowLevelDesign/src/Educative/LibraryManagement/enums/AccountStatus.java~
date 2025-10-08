@@ -1,0 +1,5 @@
+package Educative.LibraryManagement.enums;
+
+public class AccountStatus {
+    ACTIVE, CLOSED, CANCELED, BLACKLISTED, NONE
+}

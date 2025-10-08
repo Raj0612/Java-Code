@@ -1,0 +1,18 @@
+package Educative.CarRentalSyatem.equipment;
+
+public abstract class Equipment {
+    private int equipmentId;
+    private int price;
+
+    public Equipment() {}
+
+    public Equipment(int equipmentId, int price) {
+        this.equipmentId = equipmentId;
+        this.price = price;
+    }
+
+    public int getEquipmentId() { return equipmentId; }
+    public void setEquipmentId(int equipmentId) { this.equipmentId = equipmentId; }
+    public int getPrice() { return price; }
+    public void setPrice(int price) { this.price = price; }
+}

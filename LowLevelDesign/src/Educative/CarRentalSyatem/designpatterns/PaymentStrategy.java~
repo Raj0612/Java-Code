@@ -1,0 +1,5 @@
+package Educative.CarRentalSyatem.designpatterns;
+
+public interface PaymentStrategy {
+    boolean pay(double amount);
+}

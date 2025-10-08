@@ -1,0 +1,5 @@
+package Educative.ATM.components;
+
+public class Screen {
+    public void showMessage();
+}

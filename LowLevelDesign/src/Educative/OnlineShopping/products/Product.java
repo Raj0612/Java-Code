@@ -1,0 +1,121 @@
+package Educative.OnlineShopping.products;
+
+import Educative.OnlineShopping.accounts.Account;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Product {
+    private String productId;
+    private String name;
+    private String description;
+    private byte[] image;
+    private double price;
+    private ProductCategory category;
+    private List<ProductReview> reviews;
+    private int availableItemCount;
+    private Account account; // The seller’s account
+
+    public Product(String productId, String name, String description, double price,
+                   ProductCategory category, int availableItemCount, Account account) {
+        this.productId = productId;
+        this.name = name;
+        this.description = description;
+        this.price = price;
+        this.category = category;
+        this.availableItemCount = availableItemCount;
+        this.account = account;
+        this.reviews = new ArrayList<>();
+    }
+
+    public int getAvailableCount() {
+        return availableItemCount;
+    }
+
+    public int updateAvailableCount() {
+// Dummy update: reduce count by 1 (if available)
+        if (availableItemCount > 0) {
+            availableItemCount--;
+        }
+        System.out.println("Available count for '" + name + "' updated to " + availableItemCount);
+        return availableItemCount;
+    }
+
+    public boolean updatePrice(double newPrice) {
+        this.price = newPrice;
+        System.out.println("Price for '" + name + "' updated to $" + newPrice);
+        return true;
+    }
+
+    public String getProductId() {
+        return productId;
+    }
+
+    public void setProductId(String productId) {
+        this.productId = productId;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public ProductCategory getCategory() {
+        return category;
+    }
+
+    public void setCategory(ProductCategory category) {
+        this.category = category;
+    }
+
+    public List<ProductReview> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<ProductReview> reviews) {
+        this.reviews = reviews;
+    }
+
+    public int getAvailableItemCount() {
+        return availableItemCount;
+    }
+
+    public void setAvailableItemCount(int availableItemCount) {
+        this.availableItemCount = availableItemCount;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+
+    public void setAccount(Account account) {
+        this.account = account;
+    }
+}

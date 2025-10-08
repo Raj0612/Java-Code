@@ -1,0 +1,11 @@
+package Educative.Facebook.interfaces;
+
+import Educative.Facebook.notications.Notification;
+
+//Implemented by Group
+public interface Subject {
+
+    void addObserver(Observer observer);
+    void removeObserver(Observer observer);
+    void notifyObservers(Notification notification);
+}

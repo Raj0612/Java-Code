@@ -1,0 +1,174 @@
+package Educative.Elevator.building;
+
+import Educative.Elevator.enums.Direction;
+import Educative.Elevator.enums.ElevatorState;
+import Educative.Elevator.panels.ElevatorPanel;
+import Educative.Elevator.utility.Display;
+import Educative.Elevator.utility.Door;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentLinkedQueue;
+
+public class ElevatorCar {
+    private final int id;
+    private int currentFloor;
+    private ElevatorState state;
+    private final Door door;
+    private final Display display;
+    private final ElevatorPanel panel;
+    private final Queue<Integer> requestQueue = new ConcurrentLinkedQueue<>();
+    private int load;
+    private boolean overloaded;
+    private boolean maintenance;
+
+    private final int maxLoad = 1000; // max load in kg
+
+    public ElevatorCar(int id, int numFloors) {
+        this.id = id;
+        this.currentFloor = 0;
+        this.state = ElevatorState.IDLE;
+        this.panel = new ElevatorPanel(numFloors, this); // pass this ElevatorCar reference
+        this.load = 0;
+        this.overloaded = false;
+        this.maintenance = false;
+        this.display = new Display();
+        this.door = new Door();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public int getCurrentFloor() {
+        return currentFloor;
+    }
+
+    public ElevatorState getState() {
+        return state;
+    }
+
+    public ElevatorPanel getPanel() {
+        return panel;
+    }
+
+    public boolean isInMaintenance() {
+        return maintenance;
+    }
+
+    public boolean isOverloaded() {
+        return overloaded;
+    }
+
+    public void registerRequest(int floor) {
+        if (maintenance) {
+            System.out.printf("Elevator %d is in maintenance. Cannot register request.%n", id);
+            return;
+        }
+        if (!requestQueue.contains(floor)) {
+            requestQueue.offer(floor);
+            System.out.printf("Elevator %d: Registered request for floor %d.%n", id, floor);
+        }
+    }
+
+    public void move() {
+        if (maintenance) {
+            System.out.printf("Elevator %d is in maintenance. Cannot move.%n", id);
+            return;
+        }
+        if (requestQueue.isEmpty()) {
+            state = ElevatorState.IDLE;
+            updateDisplay();
+            System.out.printf("Elevator %d is idle at floor %d.%n", id, currentFloor);
+            return;
+        }
+
+        int destination = requestQueue.peek();
+        if (destination == currentFloor) {
+            stop();
+            requestQueue.poll();
+            return;
+        }
+
+        if (destination > currentFloor) {
+            state = ElevatorState.UP;
+           // currentFloor++;
+            currentFloor = destination;
+        } else if (destination < currentFloor) {
+            state = ElevatorState.DOWN;
+            currentFloor--;
+        }
+        updateDisplay();
+        System.out.printf("Elevator %d moving %s to floor %d.%n", id, state, currentFloor);
+
+        if (currentFloor == destination) {
+            stop();
+            requestQueue.poll();
+        }
+    }
+
+    public void stop() {
+        System.out.printf("Elevator %d stopped at floor %d.%n", id, currentFloor);
+        door.open();
+        try {
+            Thread.sleep(500); // simulate door open time
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+        door.close();
+        updateDisplay();
+    }
+
+    public void enterMaintenance() {
+        maintenance = true;
+        state = ElevatorState.MAINTENANCE;
+        System.out.printf("Elevator %d entered maintenance mode.%n", id);
+        updateDisplay();
+    }
+
+    public void exitMaintenance() {
+        maintenance = false;
+        state = ElevatorState.IDLE;
+        System.out.printf("Elevator %d exited maintenance mode.%n", id);
+        updateDisplay();
+    }
+
+    public void emergencyStop() {
+        System.out.printf("Elevator %d emergency stop activated!%n", id);
+        state = ElevatorState.IDLE;
+        door.open();
+        updateDisplay();
+    }
+
+    public void addLoad(int kg) {
+        load += kg;
+        if (load > maxLoad) {
+            overloaded = true;
+            System.out.printf("Elevator %d overloaded! Current load: %dkg%n", id, load);
+        } else {
+            overloaded = false;
+        }
+        updateDisplay();
+    }
+
+    public void removeLoad(int kg) {
+        load -= kg;
+        if (load < 0) load = 0;
+        if (load <= maxLoad) {
+            overloaded = false;
+        }
+        updateDisplay();
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public Door getDoor() {
+        return door;
+    }
+
+    private void updateDisplay() {
+        display.update(currentFloor, state == ElevatorState.UP ? Direction.UP : (state == ElevatorState.DOWN ? Direction.DOWN : Direction.IDLE),
+                load, state, overloaded, maintenance);
+    }
+}

@@ -1,0 +1,4 @@
+package Educative.StockBrokerage.enums;
+
+public enum TimeEnforcementType {
+}

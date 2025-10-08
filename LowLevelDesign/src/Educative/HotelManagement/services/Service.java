@@ -1,0 +1,20 @@
+package Educative.HotelManagement.services;
+
+
+import Educative.HotelManagement.invoices.Invoice;
+
+import java.time.LocalDateTime;
+
+public abstract class Service {
+
+    protected LocalDateTime issuedAt;
+    public abstract boolean addInvoiceItem(Invoice invoice);
+
+    public LocalDateTime getIssuedAt() {
+        return issuedAt;
+    }
+
+    public void setIssuedAt(LocalDateTime issuedAt) {
+        this.issuedAt = issuedAt;
+    }
+}

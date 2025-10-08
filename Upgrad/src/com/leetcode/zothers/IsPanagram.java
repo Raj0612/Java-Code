@@ -1,0 +1,68 @@
+package com.leetcode.zothers;
+
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+//A pangram is a sentence where every letter of the English alphabet appears at least once.
+//Given a string sentence containing only lowercase English letters, return true if sentence is a pangram, or false otherwise.
+/*
+Example 1:
+Input: sentence = "thequickbrownfoxjumpsoverthelazydog"
+Output: true
+Explanation: sentence contains at least one of every letter of the English alphabet.
+
+Example 2:
+Input: sentence = "leetcode"
+Output: false
+ */
+public class IsPanagram {
+
+    public static void main(String[] args) {
+        String sentence = "thequickbrownfoxjumpsoverthelazydog";
+        System.out.println("checkIfPangram " + checkIfPangram(sentence));
+        System.out.println("checkIfPangram1 " + checkIfPangram1(sentence));
+    }
+
+    static boolean checkIfPangram(String sentence){
+        Set<Character> set = new HashSet<Character>();
+        int length = sentence.length();
+        for (int i = 0; i < length; i++) {
+            char c = sentence.charAt(i);
+            if (c >= 'a' && c <= 'z')
+                set.add(c);
+        }
+        return set.size() == 26;
+    }
+
+    static boolean checkIfPangram1(String sentence) {
+        int mask = 0;
+        for (int i = 0; i < sentence.length(); ++i) {
+            mask |= 1 << (sentence.charAt(i) - 'a');
+        }
+        return mask == (1 << 26) - 1;
+    }
+
+    static boolean checkIfPangram2(String sentence) {
+        for (int i = 0; i < 26; ++i) {
+            char c =  (char)('a'+ i);
+          //  if(!sentence.contains(c))
+           //     return false;
+        }
+        return true;
+    }
+
+    static boolean checkIfPangramByArray(String sentence) {
+        int arr[] = new int[26];
+       // Arrays.fill(arr, 0);
+
+        for (int i = 0; i < sentence.length(); ++i) {
+            arr[sentence.charAt(i)-'a']++;
+        }
+        for (int i = 0; i < 26; ++i) {
+               if(arr[i]==0)
+                    return false;
+        }
+
+        return true;
+    }
+}

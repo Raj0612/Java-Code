@@ -1,0 +1,17 @@
+package Educative.CarRentalSyatem.notification;
+
+import Educative.CarRentalSyatem.account.Account;
+import Educative.CarRentalSyatem.designpatterns.Observer;
+
+public class EmailNotification implements Observer {
+    private Account account;
+
+    public EmailNotification(Account account) {
+        this.account = account;
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println("Sending Email to " + account.getEmail() + ": " + message);
+    }
+}

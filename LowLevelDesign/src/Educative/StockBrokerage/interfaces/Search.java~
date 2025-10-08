@@ -1,0 +1,7 @@
+package Educative.StockBrokerage.interfaces;
+
+import Educative.StockBrokerage.stocks.Stock;
+
+public interface Search {
+    Stock searchSymbol(String symbol);
+}

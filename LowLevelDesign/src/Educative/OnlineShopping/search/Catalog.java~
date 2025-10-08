@@ -1,0 +1,39 @@
+package Educative.OnlineShopping.search;
+
+import Educative.OnlineShopping.products.Product;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
+public class Catalog implements Search {
+    private HashMap<String, List<Product>> products;
+
+    public Catalog() {
+        products = new HashMap<String, List<Product>>();
+    }
+
+    public void addProduct(Product product) {
+        String category = product.getCategory().getName();
+        if (!products.containsKey(category)) {
+            products.put(category, new ArrayList());
+        }
+        products.get(category).add(product);
+        System.out.println("Product '" + product.getName() + "' added to catalog under category '" + category + "'.");
+    }
+
+    public List<Product> searchProductsByName(String name) {
+        List result = new ArrayList<>();
+        for (List<> list : products.values()) {
+            for (Product p : list) {
+                if (p.getName().toLowerCase().contains(name.toLowerCase()))
+                    result.add(p);
+            }
+        }
+        return result;
+    }
+
+    public List<Product> searchProductsByCategory(String category) {
+        return products.getOrDefault(category, new ArrayList<>());
+    }
+}

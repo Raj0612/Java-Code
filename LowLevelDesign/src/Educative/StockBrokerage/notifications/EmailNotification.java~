@@ -1,0 +1,4 @@
+package Educative.StockBrokerage.notifications;
+
+public class EmailNotification {
+}

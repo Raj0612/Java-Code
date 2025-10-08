@@ -1,0 +1,60 @@
+package Educative.HotelManagement;
+
+import Educative.HotelManagement.accounts.*;
+import Educative.HotelManagement.enums.*;
+import Educative.HotelManagement.structures.*;
+import Educative.HotelManagement.services.*;
+import Educative.HotelManagement.catalogs.*;
+import Educative.HotelManagement.notifications.*;
+
+import java.time.LocalDate;
+import java.util.*;
+
+
+public class HotelManagementSystemDemo {
+    public static void main(String[] args) {
+        // Sample data setup
+        Address addr1 = new Address("123 Main St", "Metropolis", "MetroState", 12345, "CountryA");
+        HotelBranch branch1 = new HotelBranch("Downtown", addr1);
+        branch1.addRoom(new Room("101", RoomStyle.STANDARD, 100.0, false));
+        branch1.addRoom(new Room("102", RoomStyle.DELUXE, 150.0, false));
+        branch1.addRoom(new Room("201", RoomStyle.FAMILY_SUITE, 200.0, true));
+        Hotel hotel = new Hotel("Grand Palace");
+        hotel.addLocation(branch1);
+
+        // Guests and staff
+        Account guestAcc = new Account("guest1", "pass", AccountStatus.ACTIVE);
+        Guest guest = new Guest("Alice", addr1, "alice@email.com", "1234567890", guestAcc);
+        Account recAcc = new Account("rec1", "recpass", AccountStatus.ACTIVE);
+        Receptionist receptionist = new Receptionist("Bob", addr1, "bob@email.com", "0987654321", recAcc);
+
+        // Core logic demo
+        Catalog catalog = new Catalog(branch1.getRooms());
+
+        // Search and book a room
+        List<Room> availableRooms = catalog.search(RoomStyle.STANDARD, LocalDate.now(), 2);
+        if (!availableRooms.isEmpty()) {
+            Room roomToBook = availableRooms.get(0);
+            RoomBooking booking = receptionist.createBooking(guest, roomToBook, LocalDate.now(), 2, 50.0);
+            System.out.println("Booking created: " + booking.getReservationNumber());
+            booking.addNotification(new EmailNotification("Your booking is confirmed!"));
+        }
+        RoomBooking booking = guest.getBookings().get(0);
+        // Add a service
+        Amenity spa = new Amenity("Spa", "Relaxing spa session");
+        booking.addService(spa);
+        System.out.println("Total invoice after adding spa: $" + booking.getInvoice().getAmount());
+
+        // Housekeeping assignment
+        Account hkAcc = new Account("hk1", "hkpass", AccountStatus.ACTIVE);
+        Housekeeper hk = new Housekeeper("Eve", addr1, "eve@email.com", "1122334455", hkAcc);
+        hk.assignToRoom(booking.getRoom(), "Daily cleaning", 60);
+
+        // Cancel a booking
+        boolean refund = booking.cancelBooking();
+        System.out.println("Booking cancelled. Full refund: " + refund);
+
+        // Output housekeeping log
+        System.out.println("Housekeeping assigned for room: " + booking.getRoom().getRoomNumber());
+    }
+}

@@ -1,0 +1,76 @@
+package com.leetcode.prefixsum;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+
+//Given a stream of integers and a window size, calculate the moving average of all integers in the sliding window.
+/*
+{1, 10, 3, 5, 8}
+MovingAverage m = new MovingAverage(3);
+m.next(1) = 1
+m.next(10) = (1 + 10) / 2
+m.next(3) = (1 + 10 + 3) / 3
+m.next(5) = (10 + 3 + 5) / 3
+m.next(8) = (3 + 5 + 8) / 3
+ */
+public class MovingAverageFromDataStream {
+    int window_size;
+    double sum;
+    Deque q = new ArrayDeque<Integer>();
+
+    ArrayList<Integer> list;
+
+    int count;
+    public MovingAverageFromDataStream(int size) {
+        this.window_size = size;
+        this.sum = 0;
+        count = 0;
+        list= new ArrayList<>();
+    }
+    public static void main(String[] args) {
+        MovingAverageFromDataStream obj = new MovingAverageFromDataStream(3 );
+
+        System.out.println(obj.next(1));
+        System.out.println(obj.next(10));
+        System.out.println(obj.next(3));
+        System.out.println(obj.next(5));
+        System.out.println(obj.next(8));
+        obj.sum =0;
+        obj.nextByList();
+    }
+
+    public void nextByList(){
+        System.out.println();
+        System.out.println(nextByList(1));
+        System.out.println(nextByList(10));
+        System.out.println(nextByList(3));
+        System.out.println(nextByList(5));
+        System.out.println(nextByList(8));
+    }
+
+    public double next(int val) {
+        q.add(val);
+        sum += val;
+        int curr_size = q.size();
+        if(curr_size> window_size){
+            curr_size = curr_size - 1;
+            sum = sum - (int)q.poll();
+        }
+        return (sum/curr_size);
+    }
+
+
+    public double nextByList(int val) {
+        list.add(val);
+        sum += val;
+        count ++;
+        if(count<= window_size){
+            return sum/count;
+        }else{
+            sum = sum - (list.get(list.size()-1-(int)window_size));
+            return sum/window_size;
+        }
+    }
+
+}

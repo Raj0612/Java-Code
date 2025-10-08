@@ -1,0 +1,42 @@
+package Educative.CarRentalSyatem.account;
+
+import java.time.LocalDate;
+
+public class Driver extends Person {
+    private int driverId;
+    private String licenseNumber;
+
+    private LocalDate licenseExpiry;
+
+    public Driver() {
+    }
+
+    public Driver(int driverId, String name, Address address, String email, String phoneNumber) {
+        super(name, address, email, phoneNumber);
+        this.driverId = driverId;
+    }
+
+    public int getDriverId() {
+        return driverId;
+    }
+
+    public void setDriverId(int driverId) {
+        this.driverId = driverId;
+    }
+
+    public String getLicenseNumber() {
+        return licenseNumber;
+    }
+
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
+    }
+
+    public LocalDate getLicenseExpiry() {
+        return licenseExpiry;
+    }
+
+    public void setLicenseExpiry(LocalDate licenseExpiry) {
+        this.licenseExpiry = licenseExpiry;
+    }
+}

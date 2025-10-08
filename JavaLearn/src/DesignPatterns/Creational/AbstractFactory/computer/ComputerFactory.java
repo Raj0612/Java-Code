@@ -1,0 +1,7 @@
+package DesignPatterns.Creational.AbstractFactory.computer;
+
+public class ComputerFactory {
+    public static Computer getComputer(ComputerAbstractFactory factory){
+        return factory.createComputer();
+    }
+}

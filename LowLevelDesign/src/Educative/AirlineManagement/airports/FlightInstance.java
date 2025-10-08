@@ -1,0 +1,122 @@
+package Educative.AirlineManagement.airports;
+
+import Educative.AirlineManagement.accounts.*;
+import Educative.AirlineManagement.enums.*;
+import Educative.AirlineManagement.interfaces.*;
+import Educative.AirlineManagement.interfaces.Observer;
+import Educative.AirlineManagement.seats.*;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class FlightInstance implements Subject {
+    private Flight flight;
+    private LocalDateTime departureTime;
+    private String gate;
+    private FlightStatus status;
+    private Aircraft aircraft;
+    private List<FlightSeat> seats;
+    private List<Crew> crewList;
+    private List<Observer> observers; // Passengers/Customers observing this flight
+
+    public FlightInstance(Flight flight, LocalDateTime departureTime, String gate, FlightStatus status, Aircraft aircraft, List<FlightSeat> seats) {
+        this.flight = flight;
+        this.departureTime = departureTime;
+        this.gate = gate;
+        this.status = status;
+        this.aircraft = aircraft;
+        this.seats = seats;
+        this.crewList = new ArrayList<>();
+        this.observers = new ArrayList<>();
+    }
+
+    // Observer pattern methods
+    @Override
+    public void attach(Observer observer) {
+        if (!observers.contains(observer))
+            observers.add(observer);
+    }
+
+    @Override
+    public void detach(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(String message) {
+        for (Observer obs : observers) {
+            obs.update(message);
+        }
+    }
+
+    public boolean assignCrew(Crew crew) {
+        if (!crewList.contains(crew)) {
+            crewList.add(crew);
+            crew.assignFlight(this);
+            return true;
+        }
+        return false;
+    }
+
+    public void updateStatus(FlightStatus newStatus) {
+        this.status = newStatus;
+        notifyObservers("Flight " + flight.getFlightNo() + " status updated to " + newStatus);
+    }
+
+    // Getters and setters
+    public Flight getFlight() {
+        return flight;
+    }
+
+    public void setFlight(Flight flight) {
+        this.flight = flight;
+    }
+
+    public LocalDateTime getDepartureTime() {
+        return departureTime;
+    }
+
+    public void setDepartureTime(LocalDateTime departureTime) {
+        this.departureTime = departureTime;
+    }
+
+    public String getGate() {
+        return gate;
+    }
+
+    public void setGate(String gate) {
+        this.gate = gate;
+    }
+
+    public FlightStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(FlightStatus status) {
+        this.status = status;
+    }
+
+    public Aircraft getAircraft() {
+        return aircraft;
+    }
+
+    public void setAircraft(Aircraft aircraft) {
+        this.aircraft = aircraft;
+    }
+
+    public List<FlightSeat> getSeats() {
+        return seats;
+    }
+
+    public void setSeats(List<FlightSeat> seats) {
+        this.seats = seats;
+    }
+
+    public List<Crew> getCrewList() {
+        return crewList;
+    }
+
+    public void setCrewList(List<Crew> crewList) {
+        this.crewList = crewList;
+    }
+}

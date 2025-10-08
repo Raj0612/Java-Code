@@ -1,0 +1,5 @@
+package Educative.LibraryManagement.enums;
+
+public class ReservationStatus {
+    WAITING, PENDING, CANCELED, NONE
+}

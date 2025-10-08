@@ -1,0 +1,6 @@
+package Educative.Elevator.enums;
+
+public enum DoorState {
+    OPEN,
+    CLOSED
+}

@@ -1,0 +1,7 @@
+package Educative.RestaurantManagement.payments.strategy;
+
+public class NoDiscount implements DiscountStrategy {
+    public double applyDiscount(double amount, Date date) {
+        return amount;
+    }
+}

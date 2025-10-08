@@ -1,0 +1,4 @@
+package Educative.MovieBookingSystem.enums;
+
+public enum BookingStatus {
+}

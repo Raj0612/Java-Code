@@ -1,0 +1,94 @@
+package Educative.LibraryManagement.bookdetails;
+
+import Educative.LibraryManagement.enums.BookStatus;
+
+import java.time.LocalDate;
+
+public class BookItem {
+    private String id;
+    private boolean isReferenceOnly;
+    private LocalDate borrowed;
+    private LocalDate dueDate;
+    private double price;
+    private BookStatus status;
+    private LocalDate dateOfPurchase;
+    private LocalDate publicationDate;
+    private Rack placedAt;
+    private Book book;
+
+    public BookItem(String id, boolean isReferenceOnly, double price, BookStatus status, LocalDate dateOfPurchase, LocalDate publicationDate, Rack placedAt, Book book) {
+        this.id = id;
+        this.isReferenceOnly = isReferenceOnly;
+        this.price = price;
+        this.status = status;
+        this.dateOfPurchase = dateOfPurchase;
+        this.publicationDate = publicationDate;
+        this.placedAt = placedAt;
+        this.book = book;
+    }
+
+    // Getters and Setters
+    public String getId() {
+        return id;
+    }
+
+    public boolean isReferenceOnly() {
+        return isReferenceOnly;
+    }
+
+    public LocalDate getBorrowed() {
+        return borrowed;
+    }
+
+    public LocalDate getDueDate() {
+        return dueDate;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public BookStatus getStatus() {
+        return status;
+    }
+
+    public LocalDate getDateOfPurchase() {
+        return dateOfPurchase;
+    }
+
+    public LocalDate getPublicationDate() {
+        return publicationDate;
+    }
+
+    public Rack getPlacedAt() {
+        return placedAt;
+    }
+
+    public Book getBook() {
+        return book;
+    }
+
+    public void setBorrowed(LocalDate borrowed) {
+        this.borrowed = borrowed;
+    }
+
+    public void setDueDate(LocalDate dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public void setStatus(BookStatus status) {
+        this.status = status;
+    }
+
+    public void setPlacedAt(Rack rack) {
+        this.placedAt = rack;
+    }
+
+    public boolean checkout(String memberId) {
+        if (status != BookStatus.AVAILABLE) return false;
+        status = BookStatus.LOANED;
+        borrowed = LocalDate.now();
+        dueDate = borrowed.plusDays(15);
+        return true;
+    }
+}

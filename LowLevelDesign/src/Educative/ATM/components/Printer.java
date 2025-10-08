@@ -1,0 +1,9 @@
+package Educative.ATM.components;
+
+public class Printer {
+    public void printReceipt(String details) {
+        System.out.println("----- Receipt -----");
+        System.out.println(details);
+        System.out.println("-------------------");
+    }
+}

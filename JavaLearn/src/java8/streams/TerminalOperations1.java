@@ -1,0 +1,59 @@
+package java8.streams;
+
+import java.util.*;
+import java.util.stream.Collectors;
+
+public class TerminalOperations1 {
+
+    public static void main(String[] args) {
+
+        List<Integer> numbers = Arrays.asList(1, 2, 3, 4, 5);
+        int sum = numbers.stream().reduce(0, Integer::sum);
+        System.out.println("sum " +sum); // Output: 15
+        int sum1 = numbers.stream().reduce(0, (n1, n2) -> n1 + n2);
+        System.out.println("sum1 " +sum1); // Output: 15
+
+        numbers = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9, 10);
+
+        //forEach
+        numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .forEach(System.out::println);
+
+        boolean hasEven = numbers.stream()
+                .anyMatch(n -> n % 2 == 0);
+        System.out.println("anyMatch " +hasEven); // Output: true
+
+
+        //collect
+        List<Integer> evenNumbers = numbers.stream()
+                .filter(n -> n % 2 == 0)
+                .collect(Collectors.toList());
+
+        List<Integer> squaredSorted =
+                numbers.stream()
+                        .map(n -> n * n)
+                        .sorted(Comparator.reverseOrder())
+                        .collect(Collectors.toList());
+        System.out.println("collect squaredSorted " +squaredSorted);
+
+        List<String> stringList = numbers.stream()
+                .map(n -> "Number-" + n)
+                .distinct()
+                .collect(Collectors.toList());
+
+        //count
+        long count = numbers.stream()
+                .filter(n -> n > 5)
+                .count();
+
+        //reduce
+        Optional<Integer> max = numbers.stream()
+                .reduce((a, b) -> a > b ? a : b);
+
+        //allMatch
+        boolean allPositive = numbers.stream()
+                .allMatch(n -> n > 0);
+
+    }
+}

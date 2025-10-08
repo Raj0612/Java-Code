@@ -1,0 +1,44 @@
+package Educative.Elevator.panels;
+
+import Educative.Elevator.appservice.ElevatorSystem;
+import Educative.Elevator.buttons.*;
+import Educative.Elevator.designpatterns.ButtonListener;
+import Educative.Elevator.enums.Direction;
+
+public class HallPanel implements ButtonListener {
+    private final HallButton up;
+    private final HallButton down;
+    private final int floorNumber;
+
+    public HallPanel(int floorNumber, int topFloor) {
+        this.floorNumber = floorNumber;
+        if (floorNumber == 0) {
+            up = new HallButton(Direction.UP);
+            down = null; // No down button on ground floor
+        } else if (floorNumber == topFloor) {
+            up = null; // No up button on top floor
+            down = new HallButton(Direction.DOWN);
+        } else {
+            up = new HallButton(Direction.UP);
+            down = new HallButton(Direction.DOWN);
+        }
+    }
+    @Override
+    public void onButtonPressed(Button button) {
+        if (button instanceof HallButton) {
+            HallButton hb = (HallButton) button;
+            System.out.printf("Hall button pressed at floor %d, direction: %s%n", floorNumber, hb.getDirection());
+            // Notify the ElevatorSystem about the hall call
+            ElevatorSystem.getInstance(/* pass required params or use singleton instance */)
+                    .handleHallCall(floorNumber, hb.getDirection());
+        }
+    }
+
+    public HallButton getUpButton() {
+        return up;
+    }
+
+    public HallButton getDownButton() {
+        return down;
+    }
+}

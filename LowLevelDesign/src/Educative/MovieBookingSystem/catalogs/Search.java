@@ -1,0 +1,13 @@
+package Educative.MovieBookingSystem.catalogs;
+
+import Educative.MovieBookingSystem.moviedetails.Movie;
+
+import java.time.LocalDate;
+import java.util.List;
+
+public interface Search {
+    List<Movie> searchMovieTitle(String title);
+    List<Movie> searchMovieLanguage(String language);
+    List<Movie> searchMovieGenre(String genre);
+    List<Movie> searchMovieReleaseDate(LocalDate date);
+}

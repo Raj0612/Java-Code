@@ -1,0 +1,5 @@
+package Educative.MovieBookingSystem.enums;
+
+public class SeatStatus {
+    AVAILABLE, BOOKED, RESERVED
+}

@@ -1,0 +1,6 @@
+package Educative.HotelManagement.enums;
+
+public enum BookingStatus {
+
+    REQUESTED, PENDING, CONFIRMED, CANCELLED, ABANDONED, COMPLETED
+}

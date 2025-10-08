@@ -1,0 +1,25 @@
+package Educative.StockBrokerage.accounts;
+
+public class Admin extends Account {
+    public Admin(String id, String password, String name, Address address, String email, String phone) {
+        super(id, password, name, AccountStatus.ACTIVE, address, email, phone);
+    }
+
+    public boolean blockMember(Member member) {
+        member.status = AccountStatus.BLACKLISTED;
+        return true;
+    }
+    public boolean unblockMember(Member member) {
+        member.status = AccountStatus.ACTIVE;
+        return true;
+    }
+    public boolean cancelMembership(Member member) {
+        member.status = AccountStatus.CANCELED;
+        return true;
+    }
+    @Override
+    public boolean resetPassword() {
+        // Reset logic
+        return true;
+    }
+}

@@ -1,0 +1,7 @@
+package Educative.MovieBookingSystem.observers;
+
+import Educative.MovieBookingSystem.notifications.Notification;
+
+public interface Observer {
+    void update(Notification notification);
+}

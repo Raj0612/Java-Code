@@ -1,0 +1,7 @@
+package DesignPatterns.Structural.Facade.account;
+
+public class BankingFacade {
+    private AccountService accountService;
+    private TransferService transferService;
+    private BillPaymentService billPaymentService;
+}

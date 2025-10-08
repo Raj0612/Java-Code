@@ -1,0 +1,26 @@
+package com.practice;
+
+public class Fibonacci {
+
+    public static void main(String[] args) {
+        int n = 10, firstTerm = 0, secondTerm = 1;
+        System.out.println("Fibonacci Series till " + n + " terms:");
+
+        for (int i = 1; i <= n; ++i) {
+            System.out.print(firstTerm + ", ");
+            // compute the next term
+            int nextTerm = firstTerm + secondTerm;
+            firstTerm = secondTerm;
+            secondTerm = nextTerm;
+        }
+        System.out.println();
+        int firstTerm1 = 0, secondTerm1 = 1;
+        for (int i = 1; i <= n; ++i) {
+            System.out.println(firstTerm1 + ", ");
+            // compute the next term
+            firstTerm1 = firstTerm1 + secondTerm1;
+            secondTerm1 = firstTerm1;
+            //secondTerm = nextTerm;
+        }
+    }
+}

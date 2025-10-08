@@ -1,0 +1,35 @@
+package Educative.Linkedin.accounts;
+
+import Educative.Linkedin.enums.AccountStatus;
+import Educative.Linkedin.features.*;
+
+public class Admin extends Person {
+    public Admin(String name, Address address, String phone, Account account) {
+        super(name, address, phone, account);
+    }
+
+    public boolean blockUser(User user) {
+        user.getAccount().setStatus(AccountStatus.BLOCKED);
+        return true;
+    }
+
+    public boolean unblockUser(User user) {
+        user.getAccount().setStatus(AccountStatus.ACTIVE);
+        return true;
+    }
+
+    public boolean disablePage(CompanyPage page) {
+        page.setEnabled(false);
+        return true;
+    }
+
+    public boolean enablePage(CompanyPage page) {
+        page.setEnabled(true);
+        return true;
+    }
+
+    public boolean deleteGroup(Group group) {
+        group.setDeleted(true);
+        return true;
+    }
+}

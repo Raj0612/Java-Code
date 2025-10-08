@@ -1,0 +1,98 @@
+package com.leetcode.stack;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Stack;
+//There are n buildings in a line. You are given an integer array heights of size n that represents the heights of the buildings in the line.
+//The ocean is to the right of the buildings. A building has an ocean view if the building can see the ocean without obstructions.
+// Formally, a building has an ocean view if all the buildings to its right have a smaller height.
+//Return a list of indices (0-indexed) of buildings that have an ocean view, sorted in increasing order.
+
+/*
+Example 1:
+Input: heights = [4,2,3,1]
+Output: [0,2,3]
+
+Example 2:
+Input: heights = [4,3,2,1]
+Output: [0,1,2,3]
+
+Example 3:
+Input: heights = [1,3,2,4]
+Output: [3]
+
+Example 4:
+Input: heights = [2,2,2,2]
+Output: [3]
+ */
+public class BuildingWithAnOceanView {
+    public static void main(String[] args) {
+        input1();
+        System.out.println();
+        input2();
+        System.out.println();
+        input3();
+    }
+
+    static void input1(){
+        int heights[] = {4,2,3,1};
+        System.out.println("input1: " + Arrays.toString(heights));
+        System.out.println("input1 findBuildingsNonOptimized " + Arrays.toString(findBuildingsNonOptimized(heights)));
+        System.out.println("input1 findBuildings " + Arrays.toString(findBuildings(heights)));
+    }
+
+    static void input2(){
+        int heights[] = {2,2,2,2};
+        System.out.println("input2: " + Arrays.toString(heights));
+        System.out.println("input2 findBuildingsNonOptimized " + Arrays.toString(findBuildingsNonOptimized(heights)));
+        System.out.println("input2 findBuildings " + Arrays.toString(findBuildings(heights)));
+    }
+
+    static void input3(){
+        int heights[] = {1,3,2,4};
+        System.out.println("input3: " + Arrays.toString(heights));
+        System.out.println("input3 findBuildingsNonOptimized " + Arrays.toString(findBuildingsNonOptimized(heights)));
+        System.out.println("input3 findBuildings " + Arrays.toString(findBuildings(heights)));
+    }
+    public static int[] findBuildings(int[] heights) {
+        int n = heights.length;
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = 0; i < n; ++i) {
+            while (!stack.isEmpty() && heights[i] >= heights[stack.peek()]) {
+                stack.pop();
+            }
+            stack.push(i);
+        }
+       // System.out.println("findBuildings stack " + stack);
+        int[] ans = new int[stack.size()];
+        for (int i = 0; i < ans.length; ++i) {
+            ans[ans.length - 1 - i] = stack.pop();
+        }
+        return ans;
+    }
+
+    public static int[] findBuildingsNonOptimized(int[] heights) {
+        int n = heights.length;
+        ArrayList<Integer> list = new ArrayList<>();
+        for (int i = 0; i < n; ++i) {
+            boolean hasOceanView  = true;
+            for(int j= i+1; j < n; j++){
+                if(heights[j] >= heights[i]){
+                    hasOceanView  = false;
+                    break;
+                }
+            }
+            if(hasOceanView )
+                list.add(i);
+        }
+
+//        int arr[] = new int[list.size()];
+//        for(int i =0 ; i< list.size(); i++){
+//            arr[i] = list.get(i);
+//        }
+//        return arr;
+
+        return list.stream().mapToInt(Integer::intValue).toArray();
+    }
+}

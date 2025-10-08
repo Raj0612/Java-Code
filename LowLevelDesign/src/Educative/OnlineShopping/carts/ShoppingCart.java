@@ -1,0 +1,42 @@
+package Educative.OnlineShopping.carts;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class ShoppingCart {
+    private int totalPrice;
+    private List<CartItem> items;
+
+    public ShoppingCart() {
+        items = new ArrayList<>();
+    }
+
+    public boolean addItem(CartItem item) {
+        items.add(item);
+        totalPrice += item.getPrice() * item.getQuantity();
+        System.out.println("Item '" + item.getProduct().getName() + "' added to cart.");
+        return true;
+    }
+
+    public boolean removeItem(CartItem item) {
+        if (items.remove(item)) {
+            totalPrice -= item.getPrice() * item.getQuantity();
+            System.out.println("Item '" + item.getProduct().getName() + "' removed from cart.");
+            return true;
+        }
+        System.out.println("Item '" + item.getProduct().getName() + "' not found in cart.");
+        return false;
+    }
+
+    public List getItems() {
+        return items;
+    }
+
+    public boolean checkout() {
+// Dummy checkout – in a real system payment and order creation would be handled.
+        System.out.println("Checkout complete. Total Price: $" + totalPrice);
+        return true;
+    }
+
+    public int getTotalPrice() { return totalPrice; }
+}

@@ -1,0 +1,101 @@
+package Educative.Linkedin.profiledetails;
+
+import Educative.Linkedin.accounts.Address;
+import Educative.Linkedin.accounts.User;
+import Educative.Linkedin.enums.JobStatus;
+import Educative.Linkedin.features.CompanyPage;
+
+import java.time.LocalDate;
+import java.util.*;
+
+public class Job {
+    private int jobId;
+    private String jobTitle;
+    private LocalDate dateOfPosting;
+    private String description;
+    private CompanyPage company;
+    private String employmentType;
+    private Address location;
+    private JobStatus status;
+    private Set<User> applicants;
+
+    public Job(int jobId, String jobTitle, LocalDate dateOfPosting, String description, CompanyPage company, String employmentType, Address location, JobStatus status) {
+        this.jobId = jobId;
+        this.jobTitle = jobTitle;
+        this.dateOfPosting = dateOfPosting;
+        this.description = description;
+        this.company = company;
+        this.employmentType = employmentType;
+        this.location = location;
+        this.status = status;
+        this.applicants = new HashSet<>();
+    }
+
+    public boolean addApplicant(User user) {
+        return applicants.add(user);
+    }
+
+    public int getJobId() {
+        return jobId;
+    }
+
+    public void setJobId(int jobId) {
+        this.jobId = jobId;
+    }
+
+    public String getJobTitle() {
+        return jobTitle;
+    }
+
+    public void setJobTitle(String jobTitle) {
+        this.jobTitle = jobTitle;
+    }
+
+    public LocalDate getDateOfPosting() {
+        return dateOfPosting;
+    }
+
+    public void setDateOfPosting(LocalDate dateOfPosting) {
+        this.dateOfPosting = dateOfPosting;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public CompanyPage getCompany() {
+        return company;
+    }
+
+    public void setCompany(CompanyPage company) {
+        this.company = company;
+    }
+
+    public String getEmploymentType() {
+        return employmentType;
+    }
+
+    public void setEmploymentType(String employmentType) {
+        this.employmentType = employmentType;
+    }
+
+    public Address getLocation() {
+        return location;
+    }
+
+    public void setLocation(Address location) {
+        this.location = location;
+    }
+
+    public JobStatus getStatus() {
+        return status;
+    }
+
+    public void setStatus(JobStatus status) {
+        this.status = status;
+    }
+}

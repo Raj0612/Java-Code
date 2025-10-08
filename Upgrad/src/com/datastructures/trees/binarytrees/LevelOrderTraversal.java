@@ -1,0 +1,96 @@
+package com.datastructures.trees.binarytrees;
+
+import java.util.*;
+
+public class LevelOrderTraversal {
+
+    public static void main(String[] args) {
+        TreeNode root = BinaryTree.constructTree();
+          /*   1
+              / \
+             2   3
+            /\   / \
+           4  5  6  7
+          /          \
+         8            15
+         */
+        System.out.println("levelOrderUpgrade " + levelOrderUpgrade(root));
+        System.out.println("levelOrderTraversal " + levelOrderTraversal(root));
+        System.out.println("levelOrderTraversal1 " + levelOrderTraversal1(root));
+    }
+
+    //Time: O(n)
+    //Space: O(n)
+    public static List<List<Integer>> levelOrderUpgrade(TreeNode root) {
+
+        List<List<Integer>> result = new ArrayList<List<Integer>>(); //Space: O(n)
+        if (root == null)
+            return result;
+        Queue<TreeNode> queue = new LinkedList<TreeNode>(); //Space: O(W) == O(n)
+        queue.add(root);
+        int level = 0;
+        while ( !queue.isEmpty() ) {
+            ArrayList<Integer> list_for_one_level = new ArrayList<>();
+            int size = queue.size();
+            for(int i = 0; i < size; ++i) {
+                TreeNode currNode = queue.remove();
+                list_for_one_level.add(currNode.value);
+
+
+                if (currNode.left != null)
+                    queue.add(currNode.left);
+                if (currNode.right != null)
+                    queue.add(currNode.right);
+            }
+            // go to next level
+            level++;
+            result.add(list_for_one_level);
+
+        }
+        return result;
+    }
+
+    public static List<List<Integer>> levelOrderTraversal(TreeNode root) {
+        if (root == null)
+            return new ArrayList<>();
+
+        List<List<Integer>> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>(Arrays.asList(root));
+
+        while (!queue.isEmpty()) {
+            List<Integer> currLevel = new ArrayList<>();
+            for (int size = queue.size(); size > 0; --size) {
+                TreeNode node = queue.poll();
+                currLevel.add(node.value);
+                if (node.left != null)
+                    queue.offer(node.left);
+                if (node.right != null)
+                    queue.offer(node.right);
+            }
+            ans.add(currLevel);
+        }
+
+        return ans;
+    }
+
+    public static List<Integer> levelOrderTraversal1(TreeNode root) {
+        if (root == null)
+            return new ArrayList<>();
+
+        List<Integer> ans = new ArrayList<>();
+        Queue<TreeNode> queue = new ArrayDeque<>(Arrays.asList(root));
+
+        while (!queue.isEmpty()) {
+                TreeNode node = queue.poll();
+                 ans.add(node.value);
+                if (node.left != null)
+                    queue.offer(node.left);
+                if (node.right != null)
+                    queue.offer(node.right);
+            }
+
+        return ans;
+    }
+
+
+}

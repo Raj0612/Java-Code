@@ -1,0 +1,67 @@
+package Educative.HotelManagement.structures;
+
+import Educative.HotelManagement.structures.Room;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
+
+public class RoomKey {
+    private String keyId, barcode;
+    private LocalDateTime issuedAt;
+    private boolean isActive, isMaster;
+
+    public RoomKey(String keyId, boolean isMaster) {
+        this.keyId = keyId;
+        this.isMaster = isMaster;
+        this.barcode = UUID.randomUUID().toString();
+        this.issuedAt = LocalDateTime.now();
+        this.isActive = true;
+    }
+    public boolean assignRoom(Room room) {
+        room.addKey(this);
+        return true;
+    }
+    public boolean isMasterKey() {
+        return isMaster;
+    }
+
+    public String getKeyId() {
+        return keyId;
+    }
+
+    public void setKeyId(String keyId) {
+        this.keyId = keyId;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setBarcode(String barcode) {
+        this.barcode = barcode;
+    }
+
+    public LocalDateTime getIssuedAt() {
+        return issuedAt;
+    }
+
+    public void setIssuedAt(LocalDateTime issuedAt) {
+        this.issuedAt = issuedAt;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public boolean isMaster() {
+        return isMaster;
+    }
+
+    public void setMaster(boolean master) {
+        isMaster = master;
+    }
+}

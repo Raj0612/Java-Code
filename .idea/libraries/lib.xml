@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="lib">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/JavaLearn/lib/commons-lang3-3.12.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaLearn/lib/mssql-jdbc-11.2.0.jre8.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaLearn/lib/commons-text-1.10.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/JavaLearn/lib/google-collect-0.5.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

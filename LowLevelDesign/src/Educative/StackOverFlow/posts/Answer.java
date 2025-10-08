@@ -1,0 +1,36 @@
+package Educative.StackOverFlow.posts;
+
+import Educative.StackOverFlow.accounts.User;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Answer extends Post {
+    private boolean isAccepted;
+    private List<User> deleteVotes;
+
+    public Answer(String id, String content, User postedBy) {
+        super(id, content, postedBy);
+        this.isAccepted = false;
+        this.deleteVotes = new ArrayList<>();
+    }
+
+    public void setAccepted(boolean accepted) {
+        this.isAccepted = accepted;
+    }
+
+    public boolean addDeleteVote(User user) {
+        if (deleteVotes.contains(user)) return false;
+        deleteVotes.add(user);
+        // If delete votes reach threshold, mark as flagged (or deleted)
+        if (deleteVotes.size() >= 3) {
+            // Mark as deleted or flagged
+        }
+        return true;
+    }
+
+    public boolean delete(User moderator) {
+        // Mark as deleted
+        return true;
+    }
+}

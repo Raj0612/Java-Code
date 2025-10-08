@@ -1,0 +1,25 @@
+package Educative.OnlineShopping.payments;
+
+import Educative.OnlineShopping.enums.PaymentStatus;
+
+public class ElectronicBankTransfer extends Payment {
+    private String bankName;
+    private String routingNumber;
+    private String accountNumber;
+    private String billingAddress;
+
+    public ElectronicBankTransfer(double amount, String bankName, String routingNumber, String accountNumber, String billingAddress) {
+        super(amount);
+        this.bankName = bankName;
+        this.routingNumber = routingNumber;
+        this.accountNumber = accountNumber;
+        this.billingAddress = billingAddress;
+    }
+
+    public PaymentStatus makePayment() {
+    // Dummy implementation – assume bank transfer is confirmed.
+        this.status = PaymentStatus.CONFIRMED;
+        System.out.println("Bank transfer payment of $" + amount + " made.");
+        return status;
+    }
+}

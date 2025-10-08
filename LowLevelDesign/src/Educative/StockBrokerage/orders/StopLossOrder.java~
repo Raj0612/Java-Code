@@ -1,0 +1,7 @@
+package Educative.StockBrokerage.orders;
+
+public class StopLossOrder extends Order {
+    public StopLossOrder(Member member, Stock stock, double quantity, double limitPrice, TimeEnforcementType timeEnforcement, boolean isBuyOrder) {
+        super(member, stock, quantity, limitPrice, timeEnforcement, isBuyOrder);
+    }
+}

@@ -1,0 +1,97 @@
+package Educative.MovieBookingSystem.moviedetails;
+
+import Educative.MovieBookingSystem.accounts.Person;
+import Educative.MovieBookingSystem.enums.*;
+import Educative.MovieBookingSystem.payments.*;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class Booking {
+    private static int nextBookingId = 1;
+    private final int bookingId;
+    private final LocalDateTime createdOn;
+    private BookingStatus status;
+    private final Payment payment;
+    private final List<MovieTicket> tickets;
+    private final Person bookedBy;
+
+    public Booking(Payment payment, List<MovieTicket> tickets, Person bookedBy) {
+        this.bookingId = nextBookingId++;
+        this.createdOn = LocalDateTime.now();
+        this.status = BookingStatus.PENDING;
+        this.payment = payment;
+        this.tickets = new ArrayList<>(tickets);
+        this.bookedBy = bookedBy;
+    }
+
+    public double getTotalAmount() {
+        return tickets.stream().mapToDouble(t -> t.getSeat().getRate()).sum();
+    }
+
+    // Confirm booking if payment succeeds and seats can be booked atomically
+    public synchronized boolean confirmBooking() {
+        // Attempt to book all seats atomically
+        for (MovieTicket ticket : tickets) {
+            if (!ticket.getSeat().book()) {
+                // If any seat fails, release all previously booked seats
+                for (MovieTicket t : tickets) {
+                    if (t.getSeat().getStatus() == SeatStatus.BOOKED) {
+                        t.getSeat().release();
+                    }
+                }
+                status = BookingStatus.DENIED;
+                System.out.println("Booking denied due to seat unavailability.");
+                return false;
+            }
+        }
+
+        if (payment.makePayment()) {
+            status = BookingStatus.CONFIRMED;
+            System.out.println("Booking #" + bookingId + " confirmed.");
+            return true;
+        } else {
+            // Release seats if payment fails
+            for (MovieTicket ticket : tickets) {
+                ticket.getSeat().release();
+            }
+            status = BookingStatus.DENIED;
+            System.out.println("Booking denied due to payment failure.");
+            return false;
+        }
+    }
+
+    public synchronized void cancelBooking() {
+        if (status == BookingStatus.CONFIRMED) {
+            for (MovieTicket ticket : tickets) {
+                ticket.getSeat().release();
+            }
+            status = BookingStatus.CANCELLED;
+            System.out.println("Booking #" + bookingId + " cancelled.");
+        }
+    }
+
+    public int getBookingId() {
+        return bookingId;
+    }
+
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    public BookingStatus getStatus() {
+        return status;
+    }
+
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public List<MovieTicket> getTickets() {
+        return Collections.unmodifiableList(tickets);
+    }
+
+    public Person getBookedBy() {
+        return bookedBy;
+    }
+}

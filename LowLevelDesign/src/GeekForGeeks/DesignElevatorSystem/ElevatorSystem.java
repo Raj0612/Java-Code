@@ -1,0 +1,28 @@
+package GeekForGeeks.DesignElevatorSystem;
+
+public class ElevatorSystem {
+
+    private Building building;
+    public ElevatorSystem(int totalFloors, int elevatorCount){
+        this.building = new Building(totalFloors, elevatorCount);
+    }
+
+    public void monitoring(){
+        System.out.println("Monitoring Elevator System...");
+    }
+
+    public void selectBestElevator(int requestFloor){
+        ElevatorCar elevator = building.getElevatorCars()[0];
+        elevator.move(requestFloor);
+        elevator.openDoor();
+        elevator.closeDoor();
+        System.out.println("Current Floor " + elevator.getCurrentFloor());
+
+    }
+
+    public static void main(String[] args) {
+        ElevatorSystem system = new ElevatorSystem(10, 2);
+        system.selectBestElevator(5);
+        system.monitoring();
+    }
+}

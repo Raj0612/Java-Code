@@ -1,0 +1,15 @@
+package DesignPatterns.Structural.Bridge.educative;
+
+public abstract class AbstractCorolla {
+
+    protected AbstractCorollaImpl corollaImpl;
+
+
+    abstract void listSafetyEquipment();
+
+    abstract boolean isCarRightHanded();
+
+    public void setCorollaImpl(AbstractCorollaImpl corollaImpl) {
+        this.corollaImpl = corollaImpl;
+    }
+}

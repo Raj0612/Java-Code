@@ -1,0 +1,23 @@
+package Educative.Cricinfo.commentary;
+
+import Educative.Cricinfo.matches.Match;
+
+import java.util.UUID;
+
+public class Commentator {
+    private final UUID id;
+    private String name;
+
+    public Commentator(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
+    public boolean assignMatch(Match match) {
+        match.addCommentator(this);
+        return true;
+    }
+    public UUID getId() { return id; }
+    public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
+}

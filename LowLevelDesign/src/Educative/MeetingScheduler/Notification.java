@@ -1,0 +1,59 @@
+package Educative.MeetingScheduler;
+
+import java.time.LocalDateTime;
+import java.util.Date;
+
+public class Notification {
+
+    static int notificationId =0;
+    private String content;
+    private LocalDateTime creationDate;
+    private boolean isRead;
+
+    public Notification(String content) {
+        this.content = content;
+        notificationId++;
+        this.isRead = false;
+    }
+
+    public boolean sendNotification(User user){
+        user.receiveNotification(this);
+        return true;
+
+    }
+    public boolean cancelNotification(User user){
+        return true;
+    }
+
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public LocalDateTime getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDateTime creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public boolean isRead() {
+        return isRead;
+    }
+
+    public void markAsRead() {
+        this.isRead = true;
+    }
+
+    public void markAsUnread() {
+        this.isRead = false;
+    }
+}

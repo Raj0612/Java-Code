@@ -1,0 +1,56 @@
+package Educative.StockBrokerage.stockexchange;
+
+import Educative.StockBrokerage.accounts.Member;
+import Educative.StockBrokerage.enums.TimeEnforcementType;
+import Educative.StockBrokerage.interfaces.StockObserver;
+import Educative.StockBrokerage.orders.Order;
+import Educative.StockBrokerage.stocks.*;
+
+import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+
+public class StockExchange {
+    private static class Helper {
+        private static final StockExchange INSTANCE = new StockExchange();
+    }
+    private Map<String, List<StockObserver>> observers;
+    private StockExchange() {
+        observers = new ConcurrentHashMap<>();
+    }
+    public static StockExchange getInstance() {
+        return Helper.INSTANCE;
+    }
+
+    public boolean placeOrder(Order order) {
+        // Add order to book, for simplicity, simulate immediate execution if possible
+        notifyObservers(order.getStock().getSymbol());
+        return true;
+    }
+
+    public void registerObserver(String stockSymbol, StockObserver observer) {
+        observers.computeIfAbsent(stockSymbol, k -> new ArrayList<>()).add(observer);
+    }
+    public void unregisterObserver(String stockSymbol, StockObserver observer) {
+        List<StockObserver> obs = observers.get(stockSymbol);
+        if (obs != null) obs.remove(observer);
+    }
+    public void notifyObservers(String stockSymbol) {
+        Stock stock = StockInventory.getInstance().searchSymbol(stockSymbol);
+        List<StockObserver> obs = observers.get(stockSymbol);
+        if (obs != null && stock != null) {
+            for (StockObserver o : obs) o.update(stock);
+        }
+    }
+
+    // Method to actually execute buy order
+    public void buyStock(Member member, Stock stock, double quantity, double price, TimeEnforcementType enforcementType) {
+        System.out.println("Placing BUY order: " + quantity + " of " + stock.getSymbol() + " at $" + price + " for " + member.getName());
+        // Logic to place order, update state, notify observers, etc.
+    }
+
+    // Method to actually execute sell order
+    public void sellStock(Member member, Stock stock, double quantity, double price, TimeEnforcementType enforcementType) {
+        System.out.println("Placing SELL order: " + quantity + " of " + stock.getSymbol() + " at $" + price + " for " + member.getName());
+        // Logic to place order, update state, notify observers, etc.
+    }
+}

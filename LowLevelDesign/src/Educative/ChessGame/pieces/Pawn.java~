@@ -1,0 +1,55 @@
+package Educative.ChessGame.pieces;
+
+import Educative.ChessGame.Box;
+import Educative.ChessGame.Chessboard;
+
+public class Pawn extends Piece {
+
+    private boolean firstMove = true;
+    public Pawn(boolean white) {
+        super(white);
+    }
+
+    @Override
+    public boolean canMove(Chessboard board, Box start, Box end) {
+        int startX = start.getX();
+        int startY = start.getY();
+        int endX = end.getX();
+        int endY = end.getY();
+
+        int direction = this.isWhite() ? -1 : 1; // White moves "up" (decreasing row), Black moves "down" (increasing row)
+
+        // Standard one-square forward move
+        if (startY == endY && endX - startX == direction) {
+            if (end.getPiece() == null) {
+                return true;
+            }
+        }
+
+        // First move: two squares forward
+        if (firstMove && startY == endY && endX - startX == 2 * direction) {
+            int intermediateX = startX + direction;
+            if (end.getPiece() == null && board.getBox(intermediateX, startY).getPiece() == null) {
+                return true;
+            }
+        }
+
+        // Capturing move: one square diagonally forward
+        if (Math.abs(startY - endY) == 1 && endX - startX == direction) {
+            if (end.getPiece() != null && end.getPiece().isWhite() != this.isWhite()) {
+                return true;
+            }
+        }
+
+        // (Optional: En passant and promotion logic would go here)
+        return false;
+    }
+
+    public void setFirstMove(boolean firstMove) {
+        this.firstMove = firstMove;
+    }
+
+    public boolean isFirstMove() {
+        return firstMove;
+    }
+}

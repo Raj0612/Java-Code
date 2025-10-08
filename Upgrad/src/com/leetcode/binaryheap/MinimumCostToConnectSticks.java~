@@ -1,0 +1,74 @@
+package com.leetcode.binaryheap;
+
+import java.util.Arrays;
+import java.util.PriorityQueue;
+
+//You have some number of sticks with positive integer lengths. These lengths are given as an array sticks, where sticks[i] is the length of the ith stick.
+//You can connect any two sticks of lengths x and y into one stick by paying a cost of x + y. You must connect all the sticks until there is only one stick remaining.
+//Return the minimum cost of connecting all the given sticks into one stick in this way.
+/*
+Input: sticks = [2,4,3]
+Output: 14
+Combine sticks of lengths 2 and 3 (costing 5), to get [5, 4].
+Then combine sticks of lengths 5 and 4 (costing 9), to get [9].
+The total cost would be 5 + 9 = 14.
+
+Input: sticks = [1,8,3,5]
+Output: 30
+ */
+public class MinimumCostToConnectSticks {
+    public static void main(String args[]){
+        //input1();
+        input2();
+    }
+
+    /*
+    By Sorting: n * nlogn
+    O(n^2)
+     */
+    //Time: O(nlogn)
+    static int minCostByPriorityQueue(int arr[], int n){
+        PriorityQueue<Integer> pq  = new PriorityQueue<Integer>();
+        for (int i = 0; i < n; i++) {
+            pq.add(arr[i]);
+        }
+        System.out.println("minCostByPriorityQueue pq " + pq);
+        int res = 0;
+        while (pq.size() > 1) {
+            // Extract shortest two ropes from pq
+            int first = pq.poll();
+            int second = pq.poll();
+            System.out.println("minCostByPriorityQueue first " + first + " second " + second);
+            // Connect the ropes: update result  and insert the new rope to pq
+            res += first + second;
+            System.out.println("minCostByPriorityQueue res " + res);
+            pq.add(first + second);
+            System.out.println("minCostByPriorityQueue pq1 " + pq);
+        }
+        System.out.println("minCostByPriorityQueue result " +res);
+        return res;
+    }
+    static void input1(){
+        int len[] = { 4, 3, 2, 6 };
+        System.out.println("input1 arr " + Arrays.toString(len));
+        int size = len.length;
+        minCostByPriorityQueue(len, size);
+        System.out.println("input1 : " + minCostByPriorityQueue(len, size));
+    }
+
+    static void input2(){
+        System.out.println();
+        int len[] = {1,8,3,5};
+        System.out.println("input2 arr " + Arrays.toString(len));
+        int size = len.length;
+        System.out.println("input2 : " + minCostByPriorityQueue(len, size));
+    }
+
+    static void input3(){
+        System.out.println();
+        int len[] = { 2,4, 3};
+        System.out.println("input2 arr " + Arrays.toString(len));
+        int size = len.length;
+        minCostByPriorityQueue(len, size);
+    }
+}

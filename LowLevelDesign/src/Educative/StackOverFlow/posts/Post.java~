@@ -1,0 +1,129 @@
+package Educative.StackOverFlow.posts;
+
+import Educative.StackOverFlow.accounts.User;
+import Educative.StackOverFlow.enums.VoteType;
+import Educative.StackOverFlow.votes.Flag;
+import Educative.StackOverFlow.votes.Vote;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Post {
+    protected String id;
+    protected String content;
+    protected User postedBy;
+    protected LocalDate creationDate;
+    protected List<Comment> comments;
+    protected List<Flag> flags;
+    protected List<Vote> votes;
+    protected int upVotes;
+    protected int downVotes;
+
+    public Post(String id, String content, User postedBy) {
+        this.id = id;
+        this.content = content;
+        this.postedBy = postedBy;
+        this.creationDate = LocalDate.now();
+        this.comments = new ArrayList<>();
+        this.flags = new ArrayList<>();
+        this.votes = new ArrayList<>();
+        this.upVotes = 0;
+        this.downVotes = 0;
+    }
+
+    public boolean addComment(Comment comment) {
+        comments.add(comment);
+        return true;
+    }
+
+    public boolean addFlag(Flag flag) {
+        for (Flag f : flags) {
+            if (f.getFlaggedBy().equals(flag.getFlaggedBy())) return false; // Already flagged by user
+        }
+        flags.add(flag);
+        return true;
+    }
+
+    public boolean addVote(Vote vote) {
+        for (Vote v : votes) {
+            if (v.getVotedBy().equals(vote.getVotedBy())) return false; // Already voted
+        }
+        votes.add(vote);
+        if (vote.getType() == VoteType.UPVOTE) upVotes++;
+        else if (vote.getType() == VoteType.DOWNVOTE) downVotes++;
+        return true;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public User getPostedBy() {
+        return postedBy;
+    }
+
+    public void setPostedBy(User postedBy) {
+        this.postedBy = postedBy;
+    }
+
+    public LocalDate getCreationDate() {
+        return creationDate;
+    }
+
+    public void setCreationDate(LocalDate creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Flag> getFlags() {
+        return flags;
+    }
+
+    public void setFlags(List<Flag> flags) {
+        this.flags = flags;
+    }
+
+    public List<Vote> getVotes() {
+        return votes;
+    }
+
+    public void setVotes(List<Vote> votes) {
+        this.votes = votes;
+    }
+
+    public int getUpVotes() {
+        return upVotes;
+    }
+
+    public void setUpVotes(int upVotes) {
+        this.upVotes = upVotes;
+    }
+
+    public int getDownVotes() {
+        return downVotes;
+    }
+
+    public void setDownVotes(int downVotes) {
+        this.downVotes = downVotes;
+    }
+}

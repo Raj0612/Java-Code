@@ -1,0 +1,13 @@
+package Educative.ParkingLot.vehicles;
+
+
+public class Car extends Vehicle {
+    public Car(String licenseNo) {
+        super(licenseNo);
+    }
+
+    @Override
+    public String getType() {
+        return "Car";
+    }
+}

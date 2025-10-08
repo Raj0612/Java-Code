@@ -1,0 +1,20 @@
+package Educative.HotelManagement.structures;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Hotel {
+
+    private String name;
+    private List<HotelBranch> locations = new ArrayList<>();
+
+    public Hotel(String name) {
+        this.name = name;
+    }
+    public boolean addLocation(HotelBranch location) {
+        return locations.add(location);
+    }
+    public List<HotelBranch> getLocations() {
+        return locations;
+    }
+}

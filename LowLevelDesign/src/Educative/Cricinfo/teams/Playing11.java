@@ -1,0 +1,25 @@
+package Educative.Cricinfo.teams;
+
+import Educative.Cricinfo.accounts.Player;
+
+import java.util.*;
+
+public class Playing11 {
+    private final List<Player> players;
+
+    public Playing11() {
+        this.players = new ArrayList<>(11);
+    }
+
+    public boolean addPlayer(Player player) {
+        if (players.size() < 11 && !players.contains(player)) {
+            players.add(player);
+            return true;
+        }
+        return false;
+    }
+
+    public List<Player> getPlayers() {
+        return Collections.unmodifiableList(players);
+    }
+}

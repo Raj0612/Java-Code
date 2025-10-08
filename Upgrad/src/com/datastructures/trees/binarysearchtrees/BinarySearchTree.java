@@ -1,0 +1,326 @@
+package com.datastructures.trees.binarysearchtrees;
+
+
+public class BinarySearchTree {
+
+    @Override
+    public String toString() {
+        return "BinarySearchTree={" + root + "}";
+    }
+
+    public TreeNode root;
+
+   static class TreeNode {
+        public int value;
+        public TreeNode left;
+        public TreeNode right;
+
+        TreeNode(int value) {
+            this.value = value;
+        }
+
+        @Override
+        public String toString() {
+            return "Node{" +
+                    "value=" + value +
+                    ", left=" + left +
+                    ", right=" + right +
+                    '}';
+        }
+    }
+
+    public boolean insert(int value) {
+        TreeNode newNode = new TreeNode(value);
+        if (root == null) {
+            root = newNode;
+            return true;
+        }
+        TreeNode temp = root;
+        while (true) {
+            if (newNode.value == temp.value)
+                return false;
+            if (newNode.value < temp.value) {
+                if (temp.left == null) {
+                    temp.left = newNode;
+                    return true;
+                }
+                temp = temp.left;
+            } else {
+                if (temp.right == null) {
+                    temp.right = newNode;
+                    return true;
+                }
+                temp = temp.right;
+            }
+        }
+    }
+
+    public void rInsert(int value){
+       TreeNode node = rInsert(root, value);
+    }
+    private TreeNode rInsert(TreeNode currentNode, int value) {
+            if(currentNode ==null)
+                return new TreeNode(value);
+
+            if(value < currentNode.value)
+                currentNode.left = rInsert(currentNode.left, value);
+            else
+                currentNode.right = rInsert(currentNode.right, value);
+
+            return currentNode;
+    }
+
+
+    private TreeNode rDeleteNode(TreeNode currentNode, int value) {
+
+        if (currentNode == null)
+            return null;
+
+        if (value < currentNode.value)
+            currentNode.left = rDeleteNode(currentNode.left, value);
+        else if (value > currentNode.value)
+            currentNode.right = rDeleteNode(currentNode.right, value);
+        else {
+            if (currentNode.left == null && currentNode.right == null) {
+                return null;
+            } else if (currentNode.left == null && currentNode.right != null) {
+                return currentNode.right;
+            } else if (currentNode.left != null && currentNode.right == null) {
+                return currentNode.left;
+            } else {
+                int subTreeMin = minValue(currentNode.right);
+                currentNode.value = subTreeMin;
+                System.out.println("delete currentNode " + currentNode);
+                currentNode.right =rDeleteNode(currentNode.right, subTreeMin);
+            }
+        }
+
+
+        return currentNode;
+    }
+
+    public void rDeleteNode(int value){
+            rDeleteNode(root, value);
+    }
+
+    public boolean contains(int value) {
+
+        if (root == null)
+            return false;
+
+        TreeNode temp = root;
+        while (temp != null) {
+
+            if (value < temp.value) {
+                temp = temp.left;
+            } else if (value > temp.value) {
+                temp = temp.right;
+            } else {
+                return true;
+            }
+                /*if(temp!=null &&value == temp.value)
+                    return true;*/
+        }
+        return false;
+    }
+
+    public boolean rContains(int value) {
+        return rContains(root, value);
+    }
+
+    private boolean rContains(TreeNode currentNode , int value) {
+
+        if(currentNode==null)
+            return false;
+
+        if(currentNode.value == value)
+            return true;
+
+        if(value < currentNode.value ){
+            return rContains(currentNode.left, value);
+        } else {
+           return rContains(currentNode.right, value);
+        }
+    }
+
+    public int minValue(TreeNode currentNode){
+        System.out.println("currentNode Value " + currentNode.value);
+        TreeNode minValueNode =  null;
+        while(currentNode!=null){
+            minValueNode = currentNode;
+            currentNode = currentNode.left;
+        }
+        System.out.println("Min Value " + minValueNode.value);
+        return minValueNode.value;
+    }
+    public static void main(String[] args) {
+        constructTree();
+       // insertTest();
+       // containsTest();
+       // deleteTest();
+    }
+    static void containsTest(){
+        BinarySearchTree tree = constructTree();
+        System.out.println("Tree contains 55 " + tree.contains(55));
+        System.out.println("Tree contains 52 " + tree.contains(52));
+        System.out.println("Tree contains 27 " + tree.contains(27));
+
+        System.out.println("Tree Recursive contains 27 " + tree.rContains(27));
+        System.out.println("Tree Recursive contains 18 " + tree.rContains(18));
+    }
+    static void insertTest(){
+        BinarySearchTree tree = constructTree();
+        tree.insert(73);
+        System.out.println("After Inserting 73 " + tree);
+        tree.insert(55);
+        System.out.println("After Inserting 55 " + tree);
+    }
+
+    static void deleteTest(){
+        BinarySearchTree tree = constructTree();
+        tree.rDeleteNode(76);
+    }
+    static BinarySearchTree constructTree(){
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.insert(47);
+        tree.insert(21);
+        tree.insert(76);
+        tree.insert(18);
+        tree.insert(52);
+        tree.insert(82);
+        tree.insert(27);
+        tree.rInsert(20);
+       // System.out.println("Tree Recursive Insert 20 " + tree );
+        tree.rInsert(16);
+
+        //System.out.println("Tree Recursive Insert 16 " + tree );
+        tree.rInsert(50);
+        tree.rInsert(53);
+        tree.rInsert(77);
+        tree.rInsert(83);
+        System.out.println("Tree  " + tree );
+         /*
+               47
+              /  \
+             /    \
+            21     76
+           / \    /  \
+          18 27  52  82
+         / \    / \    \
+        /   \  50 53    84
+       16   20
+        */
+        return tree;
+    }
+
+
+    static BinarySearchTree constructTree1(){
+        BinarySearchTree tree = new BinarySearchTree();
+        tree.insert(47);
+        tree.insert(21);
+        tree.insert(76);
+        tree.insert(18);
+        tree.insert(27);
+        tree.insert(52);
+        tree.rInsert(82);
+       // System.out.println("Tree Recursive Insert 20 " + tree );
+        //tree.rInsert(16);
+        //System.out.println("Tree Recursive Insert 16 " + tree );
+        System.out.println("Tree " + tree );
+         /*
+               47
+              / \
+             /   \
+            21    76
+           / \   /  \
+          18 27 52  82
+
+        */
+        return tree;
+    }
+
+
+    static TreeNode constructTree2(){
+        TreeNode root = new TreeNode(6);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(8);
+        root.left.left = new TreeNode(0);
+        root.left.right = new TreeNode(4);
+        root.right.left = new TreeNode(7);
+        root.right.right = new TreeNode(9);
+        root.left.right.left = new TreeNode(3);
+        root.left.right.right = new TreeNode(5);
+
+          /*
+               6
+              / \
+             /   \
+            2     8
+           / \   / \
+          0   4  7  9
+             / \
+           3   5
+        */
+        return root;
+    }
+
+    static TreeNode constructTree3(){
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.right = new TreeNode(3);
+
+          /*
+               1
+              / \
+             /   \
+            2     3
+        */
+        return root;
+    }
+
+    static TreeNode constructTree4(){
+        TreeNode root = new TreeNode(5);
+        root.left = new TreeNode(1);
+        root.right = new TreeNode(4);
+        root.right.left = new TreeNode(3);
+        root.right.right = new TreeNode(6);
+
+          /*
+               5
+              / \
+             /   \
+            1     4
+                 / \
+                3   6
+        */
+        return root;
+    }
+
+    static TreeNode constructTree5(){
+        TreeNode root = new TreeNode(8);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(10);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(6);
+        root.left.right.left = new TreeNode(4);
+        root.left.right.right = new TreeNode(7);
+        root.right.right = new TreeNode(14);
+        root.right.right.left = new TreeNode(13);
+
+          /*
+               8
+              / \
+             /   \
+            3     10
+          /  \      \
+         1    6      14
+             / \     /
+            4   7     13
+        */
+        return root;
+    }
+
+
+
+
+}

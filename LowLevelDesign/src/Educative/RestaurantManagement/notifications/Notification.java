@@ -1,0 +1,37 @@
+package Educative.RestaurantManagement.notifications;
+
+
+import Educative.RestaurantManagement.accounts.Person;
+
+import java.time.LocalDate;
+
+public abstract class Notification {
+
+    private int notificationId;
+    private LocalDate createdOn;
+    private String content;
+
+    public Notification(int notificationId, String content) {
+        this.notificationId = notificationId;
+        this.createdOn = LocalDate.now();
+        this.content = content;
+    }
+
+    public int getNotificationId() {
+        return notificationId;
+    }
+
+    public LocalDate getCreatedOn() {
+        return createdOn;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public abstract void send(Person person);
+}

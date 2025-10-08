@@ -1,0 +1,58 @@
+package com.leetcode.prefixsum;
+//Given an integer array nums, handle multiple queries of the following type: Calculate the sum of the elements of nums between indices left and right inclusive where left <= right.
+/*
+Implement the NumArray class:
+ # NumArray(int[] nums) Initializes the object with the integer array nums.
+ # int sumRange(int left, int right) Returns the sum of the elements of nums between indices left and right inclusive (i.e. nums[left] + nums[left + 1] + ... + nums[right])
+ # Input
+  ["NumArray", "sumRange", "sumRange", "sumRange"]
+  [[[-2, 0, 3, -5, 2, -1]], [0, 2], [2, 5], [0, 5]]
+
+  //Output: [null, 1, -1, -3]
+ */
+import java.util.Arrays;
+public class RangeSumQueryImmutable {
+
+    int[] array;
+
+    public static int[] nums = {-2, 0, 3, -5, 2, -1};
+    public static void main(String[] args) {
+        RangeSumQueryImmutable obj = new RangeSumQueryImmutable(nums);
+        int param_1 = obj.sumRange(0,5);
+        int param_2 = obj.sumRange(0,2);
+        int param_3 = obj.sumRange(2,5);
+        System.out.println("param_1 " + param_1 + " param_2 " + param_2 + " param_3 " + param_3);
+    }
+
+    //Time-O(1)
+    public RangeSumQueryImmutable(int[] nums) {
+        System.out.println("RangeSumQueryImmutable " + Arrays.toString(nums));
+        if(nums.length > 0) {
+            array = new int[nums.length];
+            array[0] = nums[0];
+            for(int i = 1; i < nums.length; ++i) {
+                array[i] = array[i - 1] + nums[i];
+            }
+            System.out.println("RangeSumQueryImmutable After sum " + Arrays.toString(array));
+        }
+    }
+
+    public int sumRange(int i, int j) {
+        if (i < 0 || j > array.length) {
+            return 0;
+        }
+        if (i == 0) {
+            return array[j];
+        }
+        return array[j] - array[i - 1];
+    }
+
+    //Time-O(n)
+    public int sumRangeNotOptimized(int left, int right) {
+        int sum = 0;
+        for(int i =left; i<=right; i++){
+            sum = sum + nums[i];
+        }
+        return sum;
+    }
+}

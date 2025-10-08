@@ -1,0 +1,80 @@
+package Educative.ParkingLot.features;
+
+import Educative.ParkingLot.parkingspots.ParkingSpot;
+import Educative.ParkingLot.vehicles.Vehicle;
+
+public class ParkingRate {
+    private double hours;
+    private double rate;
+
+    public ParkingRate(double hours, double rate) {
+        this.hours = hours;
+        this.rate = rate;
+    }
+
+    public double calculate(double duration, Vehicle vehicle, ParkingSpot spot) {
+
+        double baseRate = rate;
+        switch (vehicle.getType().toLowerCase()) {
+            case "motorcycle":
+                baseRate *= 0.5; // 50% of base rate for motorcycles
+                break;
+            case "car":
+                baseRate *= 1.0;
+                break;
+            case "van":
+                baseRate *= 1.2; // 20% higher for vans
+                break;
+            case "truck":
+                baseRate *= 1.5; // 50% higher for trucks
+                break;
+            default:
+                baseRate *= 1.0; // default base rate
+        }
+
+        // Adjust rate based on parking spot type
+        String spotType = spot.getSpotType().toLowerCase();
+        switch (spotType) {
+            case "handicapped":
+                baseRate *= 0.6; // 40% discount for handicapped spots
+                break;
+            case "compact":
+                baseRate *= 1.0; // no change
+                break;
+            case "large":
+                baseRate *= 1.1; // 10% higher for large spots
+                break;
+            case "motorcycle":
+                baseRate *= 0.8; // 20% discount for motorcycle spots
+                break;
+            default:
+                baseRate *= 1.0;
+        }
+
+        // Calculate total amount
+        double amount = baseRate * duration;
+
+        // Round to 2 decimal places
+        amount = Math.round(amount * 100.0) / 100.0;
+
+        return amount;
+    }
+
+    public double getHours() {
+        return hours;
+    }
+
+    public void setHours(double hours) {
+        this.hours = hours;
+    }
+
+    public double getRate() {
+        return rate;
+    }
+
+    public void setRate(double rate) {
+        this.rate = rate;
+    }
+
+
+}

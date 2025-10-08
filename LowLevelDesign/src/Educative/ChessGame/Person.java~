@@ -1,0 +1,20 @@
+package Educative.ChessGame;
+
+public class Person {
+
+    private String name;
+    private String streetAddress;
+    private String city;
+    private String state;
+    private int zipCode;
+    private String country;
+
+    public Person(String name, String streetAddress, String city, String state, int zipCode, String country) {
+        this.name = name;
+        this.streetAddress = streetAddress;
+        this.city = city;
+        this.state = state;
+        this.zipCode = zipCode;
+        this.country = country;
+    }
+}

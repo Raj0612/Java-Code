@@ -1,0 +1,84 @@
+package Educative.CarRentalSyatem.appservice;
+
+import Educative.CarRentalSyatem.account.Account;
+import Educative.CarRentalSyatem.enums.ReservationStatus;
+import Educative.CarRentalSyatem.features.Fine;
+import Educative.CarRentalSyatem.features.VehicleReservation;
+import Educative.CarRentalSyatem.notification.*;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class ReservationService {
+    private List<VehicleReservation> reservations = new ArrayList<>();
+    private NotificationService notificationService = new NotificationService();
+
+    public VehicleReservation createReservation(String customerId, String vehicleId, String pickupLocation, String returnLocation, LocalDate dueDate) {
+        VehicleReservation reservation = new VehicleReservation();
+        reservation.setReservationId(generateReservationId());
+        reservation.setCustomerId(customerId);
+        reservation.setVehicleId(vehicleId);
+        reservation.setCreationDate(LocalDateTime.now());
+        reservation.setStatus(ReservationStatus.PENDING);
+        reservation.setPickupLocation(pickupLocation);
+        reservation.setReturnLocation(returnLocation);
+        reservation.setDueDate(dueDate);
+        reservations.add(reservation);
+        return reservation;
+    }
+    public boolean confirmReservation(VehicleReservation reservation, Account customer) {
+        if (reservation.getStatus() == ReservationStatus.PENDING) {
+            reservation.setStatus(ReservationStatus.CONFIRMED);
+            notificationService.registerObserver(new EmailNotification(customer));
+            notificationService.registerObserver(new SmsNotification(customer));
+            notificationService.notifyObservers("Your reservation #" + reservation.getReservationId() + " is confirmed.");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean cancelReservation(VehicleReservation reservation, Account customer) {
+        if (reservation.getStatus() == ReservationStatus.PENDING || reservation.getStatus() == ReservationStatus.CONFIRMED) {
+            reservation.setStatus(ReservationStatus.CANCELED);
+            notificationService.registerObserver(new EmailNotification(customer));
+            notificationService.registerObserver(new SmsNotification(customer));
+            notificationService.notifyObservers("Your reservation #" + reservation.getReservationId() + " has been canceled.");
+            return true;
+        }
+        return false;
+    }
+
+    public boolean completeReservation(VehicleReservation reservation, Account customer) {
+        if (reservation.getStatus() == ReservationStatus.CONFIRMED) {
+            reservation.setStatus(ReservationStatus.COMPLETED);
+            reservation.setReturnDate(LocalDate.now());
+            notificationService.registerObserver(new EmailNotification(customer));
+            notificationService.registerObserver(new SmsNotification(customer));
+            notificationService.notifyObservers("Your reservation #" + reservation.getReservationId() + " has been completed.");
+            return true;
+        }
+        return false;
+    }
+    public void imposeFine(VehicleReservation reservation, Account customer, double amount, String reason) {
+        Fine fine = new Fine(amount, reason);
+        // Notify customer about fine
+        notificationService.registerObserver(new SmsNotification(customer));
+        notificationService.notifyObservers("You have been fined $" + amount + " for: " + reason);
+        // Additional logic to record fine can be added here
+    }
+
+    public List<VehicleReservation> getReservationHistory(String customerId) {
+        List<VehicleReservation> history = new ArrayList<>();
+        for (VehicleReservation r : reservations) {
+            if (r.getCustomerId().equals(customerId)) {
+                history.add(r);
+            }
+        }
+        return history;
+    }
+
+    private int generateReservationId() {
+        return reservations.size() + 1;
+    }
+}

@@ -1,0 +1,36 @@
+package Educative.AirlineManagement.search;
+
+import Educative.AirlineManagement.airports.*;
+
+import java.time.LocalDate;
+import java.util.*;
+
+public class SearchCatalog implements Search {
+    private List<FlightInstance> flightInstances;
+
+    public SearchCatalog(List<FlightInstance> flightInstances) {
+        this.flightInstances = flightInstances;
+    }
+
+    @Override
+    public List<FlightInstance> searchFlight(Airport source, Airport dest, LocalDate date) {
+        List<FlightInstance> result = new ArrayList<>();
+        for (FlightInstance fi : flightInstances) {
+            if (fi.getFlight().getDeparture().equals(source)
+                    && fi.getFlight().getArrival().equals(dest)
+                    && fi.getDepartureTime().toLocalDate().equals(date)) {
+                result.add(fi);
+            }
+        }
+        return result;
+    }
+
+    // Getters and setters
+    public List<FlightInstance> getFlightInstances() {
+        return flightInstances;
+    }
+
+    public void setFlightInstances(List<FlightInstance> flightInstances) {
+        this.flightInstances = flightInstances;
+    }
+}

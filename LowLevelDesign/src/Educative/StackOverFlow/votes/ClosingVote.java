@@ -1,0 +1,17 @@
+package Educative.StackOverFlow.votes;
+
+import Educative.StackOverFlow.accounts.User;
+import Educative.StackOverFlow.enums.ClosingDetail;
+
+public class ClosingVote {
+    private User user;
+    private ClosingDetail detail;
+
+    public ClosingVote(User user, ClosingDetail detail) {
+        this.user = user;
+        this.detail = detail;
+    }
+
+    public User getUser() { return user; }
+    public ClosingDetail getDetail() { return detail; }
+}

@@ -1,0 +1,10 @@
+package Educative.OnlineShopping.accounts;
+
+import Educative.OnlineShopping.carts.ShoppingCart;
+
+public abstract class Customer {
+
+    protected ShoppingCart cart;
+
+    public abstract ShoppingCart getShoppingCart();
+}

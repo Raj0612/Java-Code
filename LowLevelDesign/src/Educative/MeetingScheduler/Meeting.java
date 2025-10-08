@@ -1,0 +1,87 @@
+package Educative.MeetingScheduler;
+
+import java.util.List;
+import java.util.UUID;
+
+public class Meeting {
+
+    private String id;
+    private int participantsCount;
+    private List<User> participants;
+    private Interval interval;
+    private MeetingRoom room;
+    private String subject;
+
+
+    public Meeting(String subject, Interval interval,List<User> participants, MeetingRoom room ) {
+        this.id = UUID.randomUUID().toString();
+        this.participants = participants;
+        this.interval = interval;
+        this.room = room;
+        this.subject = subject;
+    }
+
+    // Methods for participant management with two-way association
+    public void addParticipant(User user) {
+        if (!participants.contains(user)) {
+            participants.add(user);
+            // Check if user already has this meeting to avoid infinite recursion
+            if (!user.getMeetings().contains(this)) {
+                user.addMeeting(this);
+            }
+        }
+    }
+
+    public void removeParticipant(User user) {
+        if (participants.contains(user)) {
+            participants.remove(user);
+            // Check if user still has this meeting to avoid infinite recursion
+            if (user.getMeetings().contains(this)) {
+                user.removeMeeting(this);
+            }
+        }
+    }
+
+    public Interval getTimeSlot() {
+        return interval;
+    }
+    public String getId() {
+        return id;
+    }
+
+    public int getParticipantsCount() {
+        return participants.size();
+    }
+
+    public List<User> getParticipants() {
+        return participants;
+    }
+
+    public void setParticipants(List<User> participants) {
+        this.participants = participants;
+    }
+
+    public Interval getInterval() {
+        return interval;
+    }
+
+    public void setInterval(Interval interval) {
+        this.interval = interval;
+    }
+
+    public MeetingRoom getRoom() {
+        return room;
+    }
+
+    public void setRoom(MeetingRoom room) {
+        this.room = room;
+    }
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+}

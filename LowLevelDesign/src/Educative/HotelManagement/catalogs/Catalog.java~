@@ -1,0 +1,24 @@
+package Educative.HotelManagement.catalogs;
+
+import Educative.HotelManagement.Room;
+import Educative.HotelManagement.enums.RoomStyle;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
+
+public class Catalog implements Search {
+    private List<Room> rooms;
+
+    public Catalog(List<Room> rooms) {
+        this.rooms = rooms;
+    }
+    public List<Room> search(RoomStyle style, LocalDate date, int duration) {
+        List<Room> available = new ArrayList<>();
+        for (Room r : rooms) {
+            if (r.getStyle() == style && r.isRoomAvailable())
+                available.add(r);
+        }
+        return available;
+    }
+}

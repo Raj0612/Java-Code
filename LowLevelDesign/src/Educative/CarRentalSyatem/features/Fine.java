@@ -1,0 +1,34 @@
+package Educative.CarRentalSyatem.features;
+
+public class Fine {
+    private double amount;
+    private String reason;
+
+    public Fine() {
+    }
+
+    public Fine(double amount, String reason) {
+        this.amount = amount;
+        this.reason = reason;
+    }
+
+    public double getAmount() {
+        return amount;
+    }
+
+    public void setAmount(double amount) {
+        this.amount = amount;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public double calculateFine() {
+        return amount;
+    }
+}

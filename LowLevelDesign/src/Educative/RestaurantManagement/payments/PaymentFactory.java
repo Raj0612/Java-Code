@@ -1,0 +1,36 @@
+package Educative.RestaurantManagement.payments;
+
+import Educative.RestaurantManagement.enums.PaymentStatus;
+import Educative.RestaurantManagement.enums.PaymentType;
+import Educative.RestaurantManagement.payments.strategy.DiscountStrategy;
+import Educative.RestaurantManagement.payments.strategy.NoDiscount;
+
+public class PaymentFactory {
+
+    public static Payment createPayment(String type,
+            int paymentID,
+            double amount,
+            PaymentStatus status,
+            DiscountStrategy discountStrategy ) {
+        if (discountStrategy == null) {
+            discountStrategy = new NoDiscount();
+        }
+        switch (type) {
+            case "CreditCard":
+                return new CreditCard(paymentID, amount, status, "Raj", 12345);
+            case "Check":
+                return new Check(paymentID, amount, status, "Bank of America", "12345");
+            case "Cash":
+                return new Cash(paymentID, amount, status,  123.45);
+            default:
+                throw new IllegalArgumentException("Unknown payment type: " + type);
+        }
+    }
+
+    public static Payment createPayment( String type,
+            int paymentID,
+            double amount,
+            PaymentStatus status ) {
+        return createPayment(type, paymentID, amount, status, new NoDiscount());
+    }
+}

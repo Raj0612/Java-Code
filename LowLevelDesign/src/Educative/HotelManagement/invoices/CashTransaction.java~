@@ -1,0 +1,23 @@
+package Educative.HotelManagement.invoices;
+
+import Educative.ParkingLot.enums.PaymentStatus;
+
+public class CashTransaction extends BillTransaction {
+    private double cashTendered;
+    public CashTransaction(double amt, double cash) {
+        super(amt); this.cashTendered = cash;
+    }
+    public void initiateTransaction() {
+        this.status = PaymentStatus.COMPLETED;
+        System.out.println("Cash payment completed.");
+    }
+
+    public double getCashTendered() {
+        return cashTendered;
+    }
+
+    public void setCashTendered(double cashTendered) {
+        this.cashTendered = cashTendered;
+    }
+}
+

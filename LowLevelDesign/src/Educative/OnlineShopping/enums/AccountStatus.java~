@@ -1,0 +1,7 @@
+package Educative.OnlineShopping.enums;
+
+public class AccountStatus {
+    ACTIVE,
+    INACTIVE,
+    BLOCKED
+}

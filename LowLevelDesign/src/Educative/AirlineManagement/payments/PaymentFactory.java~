@@ -1,0 +1,12 @@
+package Educative.AirlineManagement.payments;
+
+public class PaymentFactory {
+    public static Payment createPayment(String type, int paymentId, double amount, String... params) {
+        if (type.equalsIgnoreCase("Cash")) {
+            return new Cash(paymentId, amount);
+        } else if (type.equalsIgnoreCase("CreditCard") && params.length >= 2) {
+            return new CreditCard(paymentId, amount, params[0], params[1]);
+        }
+        throw new IllegalArgumentException("Invalid payment type or parameters");
+    }
+}

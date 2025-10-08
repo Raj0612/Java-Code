@@ -1,0 +1,22 @@
+package Educative.ChessGame.pieces;
+
+import Educative.ChessGame.Box;
+import Educative.ChessGame.Chessboard;
+
+public class Queen extends Piece {
+    public Queen(boolean white) {
+        super(white);
+    }
+
+    @Override
+    public boolean canMove(Chessboard board, Box start, Box end) {
+        // Implement Queen move logic (diagonal, vertical, horizontal)
+        int dx = Math.abs(start.getX() - end.getX());
+        int dy = Math.abs(start.getY() - end.getY());
+        if (dx == dy || start.getX() == end.getX() || start.getY() == end.getY()) {
+            // Should also check for obstacles in the path
+            return end.getPiece() == null || end.getPiece().isWhite() != this.isWhite();
+        }
+        return false;
+    }
+}

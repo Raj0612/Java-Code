@@ -1,0 +1,17 @@
+package Educative.RestaurantManagement.restaurants;
+
+public class SeatingChart {
+
+    private int seatingChartID;
+    private byte[] seatingChartImage;
+
+    public SeatingChart(int seatingChartID, byte[] seatingChartImage) {
+        this.seatingChartID = seatingChartID;
+        this.seatingChartImage = seatingChartImage;
+    }
+
+    public boolean print() {
+        System.out.println("Printing seating chart...");
+        return true;
+    }
+}

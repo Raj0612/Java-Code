@@ -1,0 +1,18 @@
+package Educative.LibraryManagement.accounts;
+
+import java.time.LocalDate;
+
+public class LibraryCard {
+    private String cardNumber;
+    private LocalDate issuedDate, expiryDate;
+
+    public LibraryCard(String cardNumber, LocalDate issuedDate, LocalDate expiryDate) {
+        this.cardNumber = cardNumber;
+        this.issuedDate = issuedDate;
+        this.expiryDate = expiryDate;
+    }
+
+    public String getCardNumber() {
+        return cardNumber;
+    }
+}

@@ -1,0 +1,16 @@
+package DesignPatterns.Creational.Prototype.GeekForGeeks;
+
+public class Client {
+
+    public static void main(String[] args) {
+        Shape circlePrototype = new Circle("red");
+
+        ShapeClient client = new ShapeClient(circlePrototype);
+
+        Shape redCircle = client.createShape();
+        System.out.println("circlePrototype " + circlePrototype.hashCode());
+        System.out.println("client " + client.hashCode());
+
+        redCircle.draw();
+    }
+}

@@ -1,0 +1,66 @@
+package com.leetcode.zothers;
+
+//root = (x + N/x)/2
+
+//1. Assign x to N
+//2.Find the error (error = root-1)
+//3.Update the value of x to root
+
+//Given a non-negative integer x, return the square root of x rounded down to the nearest integer. The returned integer should be non-negative as well.
+//You must not use any built-in exponent function or operator.
+//For example, do not use pow(x, 0.5) in c++ or x ** 0.5 in python.
+public class SQRTNewton {
+    public static void main(String[] args) {
+       input1();
+       input2();
+    }
+
+    static double sqrt(double n) {
+        double x = n;
+        double root;
+        while (true) {
+            root = 0.5 * (x + (n / x));
+            if (Math.abs(root - x) < 0.5) {
+                break;
+            }
+            System.out.println("root " + root + " Error " + Math.abs(root - x));
+            x = root;
+        }
+        return root;
+    }
+
+    static int sqrtNonOptimized(int n) {
+
+        for (int i = 1; i < n; i++) {
+            if(i*i == n)
+                return i;
+            else if(i*i >n)
+                return i-1;
+
+        }
+        return n;
+    }
+
+    static void input1(){
+        int n = 40;
+        System.out.println("input1 " + n);
+        System.out.println("input1 " +sqrt(n));
+        System.out.println("input1 sqrtNonOptimized " +sqrtNonOptimized(n));
+    }
+
+    static void input2(){
+        System.out.println();
+        int n = 28;
+        System.out.println("input2 " + n);
+        System.out.println("input2 " +sqrt(n));
+        System.out.println("input2 sqrtNonOptimized " +sqrtNonOptimized(n));
+    }
+
+    static void input3(){
+        System.out.println();
+        int n = 25;
+        System.out.println("input3 " + n);
+        System.out.println("input3 " +sqrt(n));
+        System.out.println("input3 sqrtNonOptimized " +sqrtNonOptimized(n));
+    }
+}

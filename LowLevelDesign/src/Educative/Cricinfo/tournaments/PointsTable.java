@@ -1,0 +1,51 @@
+package Educative.Cricinfo.tournaments;
+
+import Educative.Cricinfo.enums.MatchResult;
+import Educative.Cricinfo.teams.Team;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class PointsTable {
+    private final Map<String, Float> teamPoints;
+    private final Map<Team, MatchResult> matchResults;
+    private Tournament tournament;
+    private LocalDateTime lastUpdated;
+
+    public PointsTable(Tournament tournament) {
+        this.tournament = tournament;
+        this.teamPoints = new HashMap<>();
+        this.matchResults = new HashMap<>();
+        this.lastUpdated = LocalDateTime.now();
+    }
+
+    public void updatePoints(Team team, float points) {
+        teamPoints.put(team.getName(), points);
+        this.lastUpdated = LocalDateTime.now();
+    }
+
+    public void addMatchResult(Team team, MatchResult result) {
+        matchResults.put(team, result);
+        this.lastUpdated = LocalDateTime.now();
+    }
+
+    public Map<String, Float> getTeamPoints() {
+        return Collections.unmodifiableMap(teamPoints);
+    }
+
+    public Map<Team, MatchResult> getMatchResults() {
+        return Collections.unmodifiableMap(matchResults);
+    }
+
+    public Tournament getTournament() {
+        return tournament;
+    }
+
+    public LocalDateTime getLastUpdated() {
+        return lastUpdated;
+    }
+
+    public void setTournament(Tournament tournament) {
+        this.tournament = tournament;
+    }
+}

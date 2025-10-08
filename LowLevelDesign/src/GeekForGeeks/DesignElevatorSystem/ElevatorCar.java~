@@ -1,0 +1,80 @@
+package GeekForGeeks.DesignElevatorSystem;
+
+import GeekForGeeks.DesignElevatorSystem.panel.ElevatorPanel;
+
+public class ElevatorCar {
+
+    private int id;
+    private Door door;
+    private Display display;
+    private ElevatorPanel panel;
+    private int currentFloor;
+
+    public ElevatorCar(int id,  int totalFloors) {
+        this.id = id;
+        this.door = new Door();
+        this.display = new Display();
+        this.panel = new ElevatorPanel(totalFloors);
+        this.currentFloor = 0;
+    }
+
+    public void move(int destinationFloor){
+        System.out.println("Elevator "  + id + " moving to floor " + destinationFloor);
+        this.currentFloor = destinationFloor;
+    }
+
+    public void stop(){
+        System.out.println("Elevator " + id + " has stopped.");
+    }
+
+    public void openDoor(){
+        door.openDoor();
+        System.out.println("Elevator " + id + " door opened.");
+    }
+
+    public void closeDoor(){
+        door.closeDoor();
+        System.out.println("Elevator " + id + " door closed.");
+    }
+
+    public int getCurrentFloor(){
+        System.out.println("Elevator is at floor " + currentFloor);
+        return currentFloor;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Door getDoor() {
+        return door;
+    }
+
+    public void setDoor(Door door) {
+        this.door = door;
+    }
+
+    public Display getDisplay() {
+        return display;
+    }
+
+    public void setDisplay(Display display) {
+        this.display = display;
+    }
+
+    public ElevatorPanel getPanel() {
+        return panel;
+    }
+
+    public void setPanel(ElevatorPanel panel) {
+        this.panel = panel;
+    }
+
+    public void setCurrentFloor(int currentFloor) {
+        this.currentFloor = currentFloor;
+    }
+}

@@ -1,0 +1,53 @@
+package Educative.MovieBookingSystem.moviedetails;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+public class Hall {
+    private final int hallId;
+    private final List<ShowTime> shows;
+
+    public Hall(int hallId) {
+        this.hallId = hallId;
+        this.shows = new ArrayList<>();
+    }
+
+    // Ensure no overlapping shows in the same hall (R2)
+    public boolean addShow(ShowTime show) {
+        for (ShowTime s : shows) {
+            if (isOverlap(s, show)) {
+                return false; // overlapping showtime
+            }
+        }
+        shows.add(show);
+        return true;
+    }
+
+    public boolean removeShow(ShowTime show) {
+        return shows.remove(show);
+    }
+
+    public List<ShowTime> getShows() {
+        return Collections.unmodifiableList(shows);
+    }
+
+    public List<ShowTime> findCurrentShows() {
+        LocalDateTime now = LocalDateTime.now();
+        List<ShowTime> current = new ArrayList<>();
+        for (ShowTime show : shows) {
+            if (show.getStartTime().isBefore(now) && show.getStartTime().plusMinutes(show.getDuration()).isAfter(now)) {
+                current.add(show);
+            }
+        }
+        return current;
+    }
+
+    private boolean isOverlap(ShowTime s1, ShowTime s2) {
+        LocalDateTime start1 = s1.getStartTime();
+        LocalDateTime end1 = start1.plusMinutes(s1.getDuration());
+        LocalDateTime start2 = s2.getStartTime();
+        LocalDateTime end2 = start2.plusMinutes(s2.getDuration());
+
+        return start1.isBefore(end2) && start2.isBefore(end1);
+    }
+}

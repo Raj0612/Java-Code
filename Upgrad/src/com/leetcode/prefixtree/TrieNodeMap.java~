@@ -1,0 +1,21 @@
+package com.leetcode.prefixtree;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class TrieNodeMap {
+    Map<Character, TrieNodeMap> child = null;
+    boolean isEndOfWord = false;
+    public TrieNodeMap() {
+        child = new HashMap();
+        System.out.println("TrieNodeMap child " + child);
+    }
+
+    @Override
+    public String toString() {
+        return "TrieNodeMap{" +
+                "child=" + child +
+                ", isEndOfWord=" + isEndOfWord +
+                '}';
+    }
+}

@@ -1,0 +1,47 @@
+package Educative.AirlineManagement.accounts;
+import Educative.AirlineManagement.airports.FlightReservation;
+import Educative.AirlineManagement.airports.Itinerary;
+import Educative.AirlineManagement.interfaces.Observer;
+import Educative.AirlineManagement.payments.Payment;
+import Educative.AirlineManagement.seats.FlightSeat;
+
+import java.util.*;
+public class Customer extends Person implements Observer {
+    private int customerId;
+    private List<Itinerary> itineraries = new ArrayList<>();
+
+    public Customer(String name, Address address, String email, String phone, Account account, int customerId) {
+        super(name, address, email, phone, account);
+        this.customerId = customerId;
+    }
+
+    public List<Itinerary> viewItinerary() { return itineraries; }
+    public boolean addItinerary(Itinerary itinerary) {
+        return itineraries.add(itinerary);
+    }
+
+    public boolean createItinerary(Itinerary itinerary) {
+        return itineraries.add(itinerary);
+    }
+
+    public boolean createReservation(Itinerary itinerary, FlightReservation reservation) {
+        return itinerary.addReservation(reservation);
+    }
+
+    public boolean assignSeat(FlightReservation reservation, Passenger passenger, FlightSeat seat) {
+        return reservation.assignSeat(passenger, seat);
+    }
+
+    public boolean makePayment(Itinerary itinerary, Payment payment) {
+        return itinerary.makePayment(payment);
+    }
+
+    @Override
+    public void update(String message) {
+        System.out.println("Notification for Customer " + getName() + ": " + message);
+    }
+
+    public int getCustomerId() { return customerId; }
+    public void setCustomerId(int customerId) { this.customerId = customerId; }
+}
+

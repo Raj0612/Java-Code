@@ -1,0 +1,4 @@
+package Educative.Elevator.buttons;
+
+public class EmergencyButton {
+}

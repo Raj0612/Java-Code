@@ -1,0 +1,22 @@
+package DesignPatterns.Creational.Builder.geekforgeeks;
+
+public class Client {
+    public static void main(String[] args) {
+        GamingComputerBuilder gamingBuilder = new GamingComputerBuilder();
+        ComputerDirector director = new ComputerDirector();
+
+        director.construct(gamingBuilder);
+        Computer gamingComputer = gamingBuilder.getResult();
+
+        gamingComputer.displayInfo();
+
+
+        GamingComputerBuilder gamingBuilder1 = new GamingComputerBuilder();
+        gamingBuilder1.buildCPU();
+        Computer gamingComputer1 = gamingBuilder1.getResult();
+
+        gamingComputer1.displayInfo();
+
+        //Computer computer = new GamingComputerBuilder().buildCPU().buildStorage().getResult();
+    }
+}

@@ -1,0 +1,30 @@
+package Educative.HotelManagement.invoices;
+
+import Educative.ParkingLot.enums.PaymentStatus;
+
+public class CheckTransaction extends BillTransaction {
+    private String bankName, checkNumber;
+    public CheckTransaction(double amt, String bank, String checkNum) {
+        super(amt); this.bankName = bank; this.checkNumber = checkNum;
+    }
+    public void initiateTransaction() {
+        this.status = PaymentStatus.COMPLETED;
+        System.out.println("Check payment completed.");
+    }
+
+    public String getBankName() {
+        return bankName;
+    }
+
+    public void setBankName(String bankName) {
+        this.bankName = bankName;
+    }
+
+    public String getCheckNumber() {
+        return checkNumber;
+    }
+
+    public void setCheckNumber(String checkNumber) {
+        this.checkNumber = checkNumber;
+    }
+}

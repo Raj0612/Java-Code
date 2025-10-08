@@ -1,0 +1,120 @@
+package com.datastructures.trees.binarytrees;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class BinaryTreeLeftSideView {
+    static int max_level = 0;
+    public static void main(String[] args) {
+
+        TreeNode root = BinaryTree.constructTreeLeftRightView();
+         /*
+               10
+              / \
+             /   \
+            2     3
+           / \   / \
+          7  8  12  15
+               /
+              14
+        */
+        printLeftViewUsingLevelOrder(root);
+        System.out.println();
+        System.out.println("leftViewUsingQueueAndNullPointer " + leftViewUsingQueueAndNullPointer(root));
+        System.out.println();
+        leftViewUsingRecursion(root);
+
+    }
+
+    public static void printLeftViewUsingLevelOrder(TreeNode root) {
+        if (root == null)
+            return;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int n = queue.size();
+
+            for (int i = 0; i < n; i++) {
+                TreeNode temp = queue.poll();
+
+                if (i == 0)
+                    System.out.print(temp.value + " ");
+
+                if (temp.left != null)
+                    queue.add(temp.left);
+
+                if (temp.right != null)
+                    queue.add(temp.right);
+            }
+        }
+    }
+
+    public static ArrayList<Integer> leftViewUsingQueueAndNullPointer(TreeNode root) {
+        ArrayList<Integer> ans = new ArrayList<>();
+
+        if (root == null) {
+            return ans;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        queue.add(null);
+        boolean ok = true;
+
+        while (!queue.isEmpty()) {
+            TreeNode node = queue.poll();
+            if (node == null) {
+                if (ok == false) {
+                    ok = true;
+                }
+
+                if (queue.size() == 0)
+                    break;
+
+                else {
+                    queue.add(null);
+                }
+            }
+            else {
+                if (ok) {
+                    ans.add(node.value);
+                    ok = false;
+                }
+
+                if (node.left != null) {
+                    queue.add(node.left);
+                }
+
+                if (node.right != null) {
+                    queue.add(node.right);
+                }
+            }
+        }
+
+        return ans;
+    }
+
+    static void leftViewUtil(TreeNode node, int level)  {
+        // Base Case
+        if (node == null)
+            return;
+
+        // If this is the first node of its level
+        if (max_level < level) {
+            System.out.print(node.value + " ");
+            max_level = level;
+        }
+
+        // Recur for left and right subtrees
+        leftViewUtil(node.left, level + 1);
+        leftViewUtil(node.right, level + 1);
+    }
+
+    static void leftViewUsingRecursion(TreeNode root) {
+        max_level = 0;
+        leftViewUtil(root, 1);
+    }
+}

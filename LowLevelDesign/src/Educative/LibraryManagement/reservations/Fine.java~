@@ -1,0 +1,17 @@
+package Educative.LibraryManagement.reservations;
+
+import java.time.LocalDate;
+
+public class Fine {
+    private LocalDate creationDate;
+    private String bookItemId, memberId;
+    private double amount;
+    public Fine(LocalDate creationDate, String bookItemId, String memberId, double amount) {
+        this.creationDate = creationDate; this.bookItemId = bookItemId; this.memberId = memberId; this.amount = amount;
+    }
+    public static double calculateFine(LocalDate dueDate, LocalDate returnDate) {
+        if (returnDate == null || dueDate == null) return 0;
+        long daysLate = java.time.temporal.ChronoUnit.DAYS.between(dueDate, returnDate);
+        return daysLate > 0 ? daysLate * 2.0 : 0; // $2 per day fine
+    }
+}

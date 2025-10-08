@@ -1,0 +1,65 @@
+package Educative.Cricinfo.matches;
+
+import Educative.Cricinfo.accounts.*;
+import Educative.Cricinfo.commentary.Commentator;
+import Educative.Cricinfo.core.*;
+import Educative.Cricinfo.enums.MatchResult;
+import Educative.Cricinfo.enums.UmpireType;
+import Educative.Cricinfo.stats.MatchStat;
+import Educative.Cricinfo.teams.Playing11;
+import Educative.Cricinfo.tournaments.Stadium;
+
+import java.time.LocalDateTime;
+import java.util.*;
+
+public abstract class Match {
+    private final UUID id;
+    private LocalDateTime startTime;
+    private MatchResult result;
+    private int totalOvers;
+    private List<Playing11> teams;
+    private List<Innings> innings;
+    private Playing11 tossWin;
+    private Map<Umpire, UmpireType> umpires;
+    private Stadium stadium;
+    private List<Commentator> commentators;
+    private List<MatchStat> stats;
+
+    public Match(LocalDateTime startTime, int totalOvers) {
+        this.id = UUID.randomUUID();
+        this.startTime = startTime;
+        this.totalOvers = totalOvers;
+        this.teams = new ArrayList<>();
+        this.innings = new ArrayList<>();
+        this.umpires = new HashMap<>();
+        this.commentators = new ArrayList<>();
+        this.stats = new ArrayList<>();
+        this.result = MatchResult.LIVE;
+    }
+
+    public abstract boolean assignStadium(Stadium stadium);
+    public abstract boolean assignUmpire(Umpire umpire);
+
+    public UUID getId() { return id; }
+    public LocalDateTime getStartTime() { return startTime; }
+    public MatchResult getResult() { return result; }
+    public int getTotalOvers() { return totalOvers; }
+    public List<Playing11> getTeams() { return Collections.unmodifiableList(teams); }
+    public List<Innings> getInnings() { return Collections.unmodifiableList(innings); }
+    public Playing11 getTossWin() { return tossWin; }
+    public Map<Umpire, UmpireType> getUmpires() { return Collections.unmodifiableMap(umpires); }
+    public Stadium getStadium() { return stadium; }
+    public List<Commentator> getCommentators() { return Collections.unmodifiableList(commentators); }
+    public List<MatchStat> getStats() { return Collections.unmodifiableList(stats); }
+
+    public void setStartTime(LocalDateTime startTime) { this.startTime = startTime; }
+    public void setResult(MatchResult result) { this.result = result; }
+    public void setTotalOvers(int totalOvers) { this.totalOvers = totalOvers; }
+    public void setTossWin(Playing11 tossWin) { this.tossWin = tossWin; }
+    public void setStadium(Stadium stadium) { this.stadium = stadium; }
+    public void addTeam(Playing11 team) { teams.add(team); }
+    public void addInnings(Innings inning) { innings.add(inning); }
+    public void addUmpire(Umpire umpire, UmpireType type) { umpires.put(umpire, type); }
+    public void addCommentator(Commentator commentator) { commentators.add(commentator); }
+    public void addStat(MatchStat stat) { stats.add(stat); }
+}

@@ -1,0 +1,4 @@
+package DesignPatterns.Structural.Bridge.educative;
+
+public class Client {
+}

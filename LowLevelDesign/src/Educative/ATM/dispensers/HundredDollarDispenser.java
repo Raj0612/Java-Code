@@ -1,0 +1,24 @@
+package Educative.ATM.dispensers;
+
+public class HundredDollarDispenser extends CashDispenserHandler {
+    private int count;
+
+    public HundredDollarDispenser(int count) {
+        this.count = count;
+    }
+
+    @Override
+    public void dispense(int amount) {
+        int num = Math.min(amount / 100, count);
+        if (num > 0) {
+            System.out.println("Dispensing " + num + " $100 bills");
+            count -= num;
+            amount -= num * 100;
+        }
+        if (amount > 0 && nextHandler != null) {
+            nextHandler.dispense(amount);
+        } else if (amount > 0) {
+            System.out.println("Cannot dispense remaining $" + amount);
+        }
+    }
+}

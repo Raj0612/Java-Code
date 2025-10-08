@@ -1,0 +1,4 @@
+package DesignPatterns.Creational.Singleton.educative;
+
+public class Client {
+}

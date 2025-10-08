@@ -1,0 +1,82 @@
+package Educative.Cricinfo.accounts;
+
+import Educative.Cricinfo.commentary.*;
+import Educative.Cricinfo.matches.*;
+import Educative.Cricinfo.patterns.*;
+import Educative.Cricinfo.stats.*;
+import Educative.Cricinfo.teams.*;
+import Educative.Cricinfo.tournaments.*;
+
+import java.util.UUID;
+
+public class Admin {
+    private final UUID id;
+    private final String name;
+
+    public Admin(String name) {
+        this.id = UUID.randomUUID();
+        this.name = name;
+    }
+
+    public boolean addPlayer(Player player) {
+        CricinfoSystem system = CricinfoSystem.getInstance();
+        for (Player p : system.getPlayers()) {
+            if (p.getId().equals(player.getId())) {
+                return false;
+            }
+        }
+        return system.addPlayer(player);
+    }
+
+    public boolean addTeam(Team team) {
+        CricinfoSystem system = CricinfoSystem.getInstance();
+        for (Team t : system.getTeams()) {
+            if (t.getId().equals(team.getId())) {
+                return false;
+            }
+        }
+        return system.addTeam(team);
+    }
+
+    public boolean addMatch(Match match) {
+        CricinfoSystem system = CricinfoSystem.getInstance();
+        for (Match m : system.getMatches()) {
+            if (m.getId().equals(match.getId())) {
+                return false;
+            }
+        }
+        return system.addMatch(match);
+    }
+
+    public boolean addTournament(Tournament tournament) {
+        CricinfoSystem system = CricinfoSystem.getInstance();
+        for (Tournament t : system.getTournaments()) {
+            if (t.getId().equals(tournament.getId())) {
+                return false;
+            }
+        }
+        return system.addTournament(tournament);
+    }
+
+    public boolean addStats(Stat stats) {
+        return true;
+    }
+
+    public boolean addNews(News news) {
+        CricinfoSystem system = CricinfoSystem.getInstance();
+        for (News n : system.getNews()) {
+            if (n.getId().equals(news.getId())) {
+                return false;
+            }
+        }
+        return system.addNews(news);
+    }
+
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+}

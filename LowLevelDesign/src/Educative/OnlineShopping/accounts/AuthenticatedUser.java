@@ -1,0 +1,31 @@
+package Educative.OnlineShopping.accounts;
+
+import Educative.OnlineShopping.carts.ShoppingCart;
+import Educative.OnlineShopping.enums.OrderStatus;
+import Educative.OnlineShopping.orders.Order;
+
+public class AuthenticatedUser extends Customer {
+    private Account account;
+    private Order order; // For simplicity, using a single order reference.
+    private ShoppingCart cart;
+
+    public AuthenticatedUser(Account account) {
+        this.account = account;
+        this.cart = new ShoppingCart();
+    }
+
+    // Places an order and returns its status.
+    public OrderStatus placeOrder(Order order) {
+        this.order = order;
+        System.out.println("Order '" + order.getOrderNumber() + "' placed by user '" + account.getUserName() + "'.");
+        return order.getStatus();
+    }
+
+    public ShoppingCart getShoppingCart() {
+        return cart;
+    }
+
+    public Account getAccount() {
+        return account;
+    }
+}

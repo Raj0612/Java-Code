@@ -1,0 +1,4 @@
+package Educative.Cricinfo.enums;
+
+public enum RunType {
+}

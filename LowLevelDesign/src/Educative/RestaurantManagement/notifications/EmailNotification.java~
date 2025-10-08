@@ -1,0 +1,19 @@
+package Educative.RestaurantManagement.notifications;
+
+import Educative.RestaurantManagement.accounts.Person;
+
+import java.time.LocalDate;
+
+public class EmailNotification extends Notification {
+
+    private String email;
+
+    public EmailNotification(int notificationId, String content, String email) {
+        super(notificationId, createdOn, content);
+    }
+
+    public void send(Person person) {
+        // Send Email logic (placeholder)
+        System.out.println("Sending Email to " + person.getEmail());
+    }
+}

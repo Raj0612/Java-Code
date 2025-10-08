@@ -1,0 +1,60 @@
+package Educative.Linkedin;
+
+import Educative.Linkedin.accounts.*;
+import Educative.Linkedin.enums.*;
+import Educative.Linkedin.features.*;
+import Educative.Linkedin.profiledetails.*;
+import Educative.Linkedin.search.SearchCatalog;
+
+import java.time.*;
+import java.util.*;
+
+public class LinkedinDemo {
+
+    public static void main(String[] args) {
+        // Create users
+        Account acc1 = new Account("u1", "pass", "john", "john@email.com", AccountStatus.ACTIVE);
+        User user1 = new User("John Doe", new Address(12345, "Main St", "City", "State", "Country"), "1234567890", acc1, 1, LocalDate.now());
+        Account acc2 = new Account("u2", "pass", "jane", "jane@email.com", AccountStatus.ACTIVE);
+        User user2 = new User("Jane Smith", new Address(12345, "Second St", "City", "State", "Country"), "0987654321", acc2, 2, LocalDate.now());
+
+        // Search catalog
+        SearchCatalog catalog = new SearchCatalog();
+        catalog.addNewUser(user1);
+        catalog.addNewUser(user2);
+
+        // Connection invitation
+        ConnectionInvitation invite = new ConnectionInvitation(user1, user2, LocalDate.now());
+        user1.sendInvite(invite);
+        user2.acceptInvite(invite);
+
+        // Company page and job
+        CompanyPage company = new CompanyPage(1, "TechCorp", "A tech company", "IT", 500, user1);
+        Job job = new Job(1, "Software Engineer", LocalDate.now(), "Develop software", company, "Full-time", user1.getAddress(), JobStatus.OPEN);
+        company.createJobPosting(job);
+        catalog.addNewCompany(company);
+        catalog.addNewJob(job);
+
+        // Group
+        Group group = new Group(1, "Java Developers", "All about Java");
+        user1.createGroup(group);
+        catalog.addNewGroup(group);
+        user2.joinGroup(group);
+
+        // Post and comment
+        Post post = new Post(1, user1, "Hello LinkedIn!");
+        user1.createPost(post);
+        Comment comment = new Comment(1, user2, "Welcome!");
+        user2.createComment(comment, post);
+
+        // Notification with observer
+        Notification notif = new Notification(1, LocalDate.now(), "You have a new comment!");
+        notif.registerObserver(user1);
+        notif.sendNotification();
+
+        // Search
+        List<User> foundUsers = catalog.searchUser("John Doe");
+        System.out.println("Found users: " + foundUsers.size());
+        System.out.println("User1's notifications: " + user1.getNotifications().size());
+    }
+}

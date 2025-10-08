@@ -1,0 +1,11 @@
+package DesignPatterns.Creational.Prototype.educative;
+
+public interface IAircraftPrototype {
+    void fly();
+
+    IAircraftPrototype clone();
+
+    void setEngine(F16Engine f16Engine);
+
+    F16Engine getEngine();
+}

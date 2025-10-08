@@ -1,0 +1,7 @@
+package Educative.Elevator.enums;
+
+public enum Direction {
+    UP,
+    DOWN,
+    IDLE
+}

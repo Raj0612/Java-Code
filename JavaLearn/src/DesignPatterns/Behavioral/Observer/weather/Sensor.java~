@@ -1,0 +1,11 @@
+package DesignPatterns.Behavioral.Observer.weather;
+
+public class Sensor {
+
+    WeatherData wd;
+    WeatherStation ws;
+
+    void updateWs(WeatherData wd){
+        ws.setWd(wd);
+    }
+}

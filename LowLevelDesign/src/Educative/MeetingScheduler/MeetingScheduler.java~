@@ -1,0 +1,48 @@
+package Educative.MeetingScheduler;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class MeetingScheduler {
+    private final List<User> users;
+    private final List<MeetingRoom> rooms;
+    private final List<Meeting> meetings;
+
+
+    public MeetingScheduler(List<User> users, List<MeetingRoom> rooms) {
+        this.users = users;
+        this.rooms = rooms;
+        this.meetings = new ArrayList<>();
+    }
+    public Meeting scheduleMeeting(String title, List<User> participants, Interval interval) {
+        // Find available room
+        MeetingRoom availableRoom = null;
+        for (MeetingRoom room : rooms) {
+            if (room.isAvailable(interval)) {
+                availableRoom = room;
+                break;
+            }
+        }
+        if (availableRoom == null) return null;
+
+        // Check participants' availability
+        for (User user : participants) {
+            if (!user.getCalendar().isAvailable(interval)) {
+                return null;
+            }
+        }
+
+        // Create meeting
+        Meeting meeting = new Meeting( title, interval, participants, availableRoom);
+        meetings.add(meeting);
+        availableRoom.addBooking(meeting);
+
+        // Add to each participant's calendar and send notification
+        for (User user : participants) {
+            user.getCalendar().addMeeting(meeting);
+            user.addNotification(new Notification("You have a new meeting: " + title + " in room " + availableRoom.getName()));
+        }
+
+        return meeting;
+    }
+}

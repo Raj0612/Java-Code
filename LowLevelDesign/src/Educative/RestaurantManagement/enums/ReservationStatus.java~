@@ -1,0 +1,4 @@
+package Educative.RestaurantManagement.enums;
+
+public enum ReservationStatus {
+}

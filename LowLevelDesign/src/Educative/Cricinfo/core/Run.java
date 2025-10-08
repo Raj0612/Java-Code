@@ -1,0 +1,40 @@
+package Educative.Cricinfo.core;
+
+import Educative.Cricinfo.accounts.Player;
+import Educative.Cricinfo.enums.RunType;
+
+public class Run {
+    private int totalRuns;
+    private RunType type;
+    private Player scoredBy;
+
+    public Run(int totalRuns, RunType type, Player scoredBy) {
+        this.totalRuns = totalRuns;
+        this.type = type;
+        this.scoredBy = scoredBy;
+    }
+
+    public int getTotalRuns() {
+        return totalRuns;
+    }
+
+    public RunType getType() {
+        return type;
+    }
+
+    public Player getScoredBy() {
+        return scoredBy;
+    }
+
+    public void setTotalRuns(int totalRuns) {
+        this.totalRuns = totalRuns;
+    }
+
+    public void setType(RunType type) {
+        this.type = type;
+    }
+
+    public void setScoredBy(Player scoredBy) {
+        this.scoredBy = scoredBy;
+    }
+}

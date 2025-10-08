@@ -1,0 +1,65 @@
+package com.leetcode.recursion;
+//Given two strings s and t, return true if s is a subsequence of t, or false otherwise.
+//A subsequence of a string is a new string that is formed from the original string by deleting some (can be none) of the characters
+// without disturbing the relative positions of the remaining characters. (i.e., "ace" is a subsequence of "abcde" while "aec" is not).
+
+/*Example 1:
+        Input: s = "abc", t = "ahbgdc"
+        Output: true
+
+Example 2:
+        Input: s = "axc", t = "ahbgdc"
+        Output: false*/
+public class IsSubsequence {
+    static String S, T;
+    public static void main(String[] args) {
+        //String a = "abc" , b = "mnagbcd";
+        String a = "axc" , b = "ahbgdc";
+        System.out.println((isSubsequence(a, b) ? "true" : "false"));
+    }
+
+    static boolean checkSubsequenceRecursion(int i , int j) {
+        if(i == -1)
+            return true;
+        if(j == -1)
+            return false;
+        if(S.charAt(i) == T.charAt(j))
+            return checkSubsequenceRecursion(i - 1 , j - 1);
+        return checkSubsequenceRecursion(i , j - 1);
+    }
+
+    static boolean checkSubsequenceRecursion1(String s, String t, int i , int j) {
+        if(i == s.length())
+            return true;
+        if(j == t.length())
+            return false;
+        if(s.charAt(i) == t.charAt(j))
+            return checkSubsequenceRecursion1(s, t,i  +1 , j + 1);
+        else
+             return checkSubsequenceRecursion1(s, t, i , j +1);
+    }
+
+    static boolean isSubsequence(String s, String t) {
+        S = s;
+        T = t;
+        System.out.println("s Length " + s.length() + " t length " + t.length());
+       // return checkSubsequenceRecursion((int)s.length() - 1 , (int)t.length() - 1);
+        return checkSubsequenceRecursion1(s, t, 0, 0);
+    }
+
+
+    public statioc boolean isSubsequenceUsingWhile(String s, String t) {
+        int lengthS = s.length(), lengthT = t.length();
+        int indexS = 0, indexT = 0;
+
+        while(indexS < lengthS && indexT < lengthT) {
+            if(s.charAt(indexS) == t.charAt(indexT)) {
+                indexS++;
+            }
+            indexT++;
+        }
+        return indexS == lengthS;
+    }
+
+
+}

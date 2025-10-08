@@ -1,0 +1,105 @@
+package Educative.Cricinfo.accounts;
+
+import Educative.Cricinfo.enums.PlayingPosition;
+import Educative.Cricinfo.stats.PlayerStat;
+import Educative.Cricinfo.teams.Team;
+
+import java.util.Collections;
+import java.util.*;
+
+public class Player {
+    private final UUID id;
+    private String name;
+    private int age;
+    private String country;
+    private boolean isWicketKeeper;
+    private PlayingPosition position;
+    private List<Team> teams;
+    private PlayerStat stat;
+
+    public Player(String name, int age, String country, PlayingPosition position) {
+        this(name, age, country, position, false);
+    }
+
+    public Player(String name, int age, String country, PlayingPosition position, boolean isWicketKeeper) {
+        this.id = UUID.randomUUID();
+        setName(name);
+        setAge(age);
+        setCountry(country);
+        setPosition(position);
+        this.isWicketKeeper = isWicketKeeper;
+        this.teams = new ArrayList<>();
+        this.stat = new PlayerStat();
+    }
+    public UUID getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public PlayingPosition getPosition() {
+        return position;
+    }
+
+    public List<Team> getTeams() {
+        return Collections.unmodifiableList(new ArrayList<>(teams));
+    }
+
+
+    public PlayerStat getStat() {
+        return stat;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
+    public void setPosition(PlayingPosition position) {
+        this.position = position;
+    }
+
+    public void setWicketKeeper(boolean wicketKeeper) {
+        isWicketKeeper = wicketKeeper;
+    }
+    public void setStat(PlayerStat stat) {
+        this.stat = stat;
+    }
+
+    public void addTeam(Team team) {
+        if (!teams.contains(team)) teams.add(team);
+    }
+
+    public void removeTeam(Team team) {
+        teams.remove(team);
+    }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Player)) return false;
+        Player player = (Player) o;
+        return id.equals(player.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
+}

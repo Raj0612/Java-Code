@@ -1,0 +1,6 @@
+package Educative.StockBrokerage.interfaces;
+
+//Implemented in Member
+public interface StockObserver {
+    void update(Stock stock);
+}

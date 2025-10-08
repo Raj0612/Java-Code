@@ -1,0 +1,103 @@
+package Educative.MovieBookingSystem.catalogs;
+
+import Educative.MovieBookingSystem.moviedetails.*;
+import Educative.MovieBookingSystem.notifications.*;
+import Educative.MovieBookingSystem.observers.Observer;
+import Educative.MovieBookingSystem.observers.Subject;
+
+import java.time.LocalDate;
+import java.util.*;
+
+//Catalog class (Singleton + Subject for Observer pattern)
+public class Catalog implements Search, Subject {
+    private static Catalog instance;
+
+    private final Map<String, List<Movie>> movieTitles = new HashMap<>();
+    private final Map<String, List<Movie>> movieLanguages = new HashMap<>();
+    private final Map<String, List<Movie>> movieGenres = new HashMap<>();
+    private final Map<LocalDate, List<Movie>> movieReleaseDates = new HashMap<>();
+
+    private final List<Observer> observers = new ArrayList<>();
+
+    private Catalog() {}
+
+    public static synchronized Catalog getInstance() {
+        if (instance == null) {
+            instance = new Catalog();
+        }
+        return instance;
+    }
+
+    public synchronized boolean addMovie(Movie movie) {
+        addToMapList(movieTitles, movie.getTitle().toLowerCase(), movie);
+        addToMapList(movieLanguages, movie.getLanguage().toLowerCase(), movie);
+        addToMapList(movieGenres, movie.getGenre().toLowerCase(), movie);
+        addToMapList(movieReleaseDates, movie.getReleaseDate(), movie);
+
+        notifyObservers(new EmailNotification("New movie released: " + movie.getTitle()));
+        System.out.println("Movie added to catalog: " + movie.getTitle());
+        return true;
+    }
+
+    public synchronized boolean removeMovie(Movie movie) {
+        removeFromMapList(movieTitles, movie.getTitle().toLowerCase(), movie);
+        removeFromMapList(movieLanguages, movie.getLanguage().toLowerCase(), movie);
+        removeFromMapList(movieGenres, movie.getGenre().toLowerCase(), movie);
+        removeFromMapList(movieReleaseDates, movie.getReleaseDate(), movie);
+        System.out.println("Movie removed from catalog: " + movie.getTitle());
+        return true;
+    }
+
+    private <K> void addToMapList(Map<K, List<Movie>> map, K key, Movie movie) {
+        map.computeIfAbsent(key, k -> new ArrayList<>()).add(movie);
+    }
+
+    private <K> void removeFromMapList(Map<K, List<Movie>> map, K key, Movie movie) {
+        List<Movie> list = map.get(key);
+        if (list != null) {
+            list.remove(movie);
+            if (list.isEmpty()) {
+                map.remove(key);
+            }
+        }
+    }
+
+    @Override
+    public List<Movie> searchMovieTitle(String title) {
+        return movieTitles.getOrDefault(title.toLowerCase(), Collections.emptyList());
+    }
+
+    @Override
+    public List<Movie> searchMovieLanguage(String language) {
+        return movieLanguages.getOrDefault(language.toLowerCase(), Collections.emptyList());
+    }
+
+    @Override
+    public List<Movie> searchMovieGenre(String genre) {
+        return movieGenres.getOrDefault(genre.toLowerCase(), Collections.emptyList());
+    }
+
+    @Override
+    public List<Movie> searchMovieReleaseDate(LocalDate date) {
+        return movieReleaseDates.getOrDefault(date, Collections.emptyList());
+    }
+
+    // Subject interface methods
+    @Override
+    public void registerObserver(Observer observer) {
+        if (!observers.contains(observer))
+            observers.add(observer);
+    }
+
+    @Override
+    public void removeObserver(Observer observer) {
+        observers.remove(observer);
+    }
+
+    @Override
+    public void notifyObservers(Notification notification) {
+        for (Observer observer : observers) {
+            observer.update(notification);
+        }
+    }
+}

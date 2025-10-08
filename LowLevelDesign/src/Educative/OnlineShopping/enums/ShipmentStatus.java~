@@ -1,0 +1,4 @@
+package Educative.OnlineShopping.enums;
+
+public enum ShipmentStatus {
+}

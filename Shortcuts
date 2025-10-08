@@ -1,0 +1,8 @@
+Ctrl + Alt + C    => Copies File location
+Ctrl + Alt + <-   => Previous Navigation if file (Ctrl  +  <-)
+Ctrl + Alt + H    => Call Hierarchy
+Ctrl + Alt + Shift + H => Call hierarchy for type (class).
+Ctrl + Shift + F  => Search for a string across the whole project
+Ctrl + N          => Opens a new file
+Ctrl + Shift + O  => Organize imports
+Shift + Shift    => Opens Search bar

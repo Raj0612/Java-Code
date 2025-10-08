@@ -1,0 +1,4 @@
+package Educative.StockBrokerage.interfaces;
+
+public interface TradeCommand {
+}

@@ -1,0 +1,15 @@
+package Educative.StockBrokerage.orders;
+
+import java.time.LocalDate;
+
+public class OrderPart {
+    private double price;
+    private double quantity;
+    private LocalDate executedAt;
+
+    public OrderPart(double price, double quantity) {
+        this.price = price;
+        this.quantity = quantity;
+        this.executedAt = LocalDate.now();
+    }
+}

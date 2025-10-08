@@ -1,0 +1,122 @@
+package Educative.ParkingLot;
+
+import Educative.ParkingLot.accounts.Admin;
+import Educative.ParkingLot.accounts.ParkingAgent;
+import Educative.ParkingLot.designpatterns.ParkingSpotFactory;
+import Educative.ParkingLot.enums.*;
+import Educative.ParkingLot.features.*;
+import Educative.ParkingLot.accounts.Person;
+import Educative.ParkingLot.parkingspots.*;
+import Educative.ParkingLot.system.ParkingLot;
+import Educative.ParkingLot.vehicles.*;
+//With ParkingTicket Agent
+public class ParkingLotDemo1 {
+        public static void main(String[] args) throws InterruptedException {
+            System.out.println("\n====================== PARKING LOT SYSTEM DEMO ======================\n");
+
+            // Initialize system components
+            ParkingLot lot = ParkingLot.getInstance();
+
+            // Add parking spots
+            lot.addParkingSpot(new Handicapped(1));
+            lot.addParkingSpot(new Compact(2));
+            lot.addParkingSpot(new Large(3));
+            lot.addParkingSpot(new MotorCycleSpot(4));
+            lot.addParkingSpot(new Compact(5));
+            lot.addParkingSpot(new Large(6));
+
+            // Add display board
+            DisplayBoard board = new DisplayBoard(1);
+            lot.addDisplayBoard(board);
+
+            // Add entrance and exit
+            Entrance entrance = new Entrance(1);
+            Exit exit = new Exit(1);
+            lot.addEntrance(entrance);
+            lot.addExit(exit);
+
+            // Create ParkingAgent
+            ParkingAgent agent = new ParkingAgent();
+
+            // Scenario 1: Customer enters and parks a car
+            System.out.println("\n→→→ SCENARIO 1: Customer enters and parks a car\n");
+            Vehicle car = new Car("KA-01-HH-1234");
+            System.out.println("Car " + car.getLicenseNo() + " arrives at entrance");
+            ParkingTicket ticket1 = agent.handleVehicleEntry(car, entrance);
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Scenario 2: Customer exits and pays
+            System.out.println("\n→→→ SCENARIO 2: Customer exits and pays\n");
+            System.out.println("Car " + car.getLicenseNo() + " proceeds to exit");
+            Thread.sleep(1500); // Simulate parking duration
+            agent.handleVehicleExit(ticket1, exit);
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Scenario 3: Multiple vehicles enter until lot is full
+            System.out.println("\n→→→ SCENARIO 3: Multiple vehicles enter until lot is full\n");
+            Vehicle van = new Van("KA-01-HH-9999");
+            Vehicle motorcycle = new MotorCycle("KA-02-XX-3333");
+            Vehicle truck = new Truck("KA-04-AA-9988");
+            Vehicle car2 = new Car("DL-01-AA-1234");
+
+            ParkingTicket ticket2 = agent.handleVehicleEntry(van, entrance);
+            ParkingTicket ticket3 = agent.handleVehicleEntry(motorcycle, entrance);
+            ParkingTicket ticket4 = agent.handleVehicleEntry(truck, entrance);
+            ParkingTicket ticket5 = agent.handleVehicleEntry(car2, entrance);
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Attempt to park another car when lot might be full
+            Vehicle car3 = new Car("UP-01-CC-1001");
+            System.out.println("Car " + car3.getLicenseNo() + " attempts to enter");
+            ParkingTicket ticket6 = agent.handleVehicleEntry(car3, entrance);
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Scenario 4: Customer exits and pays
+            System.out.println("\n→→→ SCENARIO 4: Customer exits and pays\n");
+            if (ticket2 != null) {
+                agent.handleVehicleExit(ticket2, exit);
+            }
+            if (ticket3 != null) {
+                agent.handleVehicleExit(ticket3, exit);
+            }
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Scenario 5: Admin adds new parking spot
+            System.out.println("\n→→→ SCENARIO 5: Admin adds new parking spot\n");
+            Person adminPerson = new Person("Admin User", "123 Admin St", "1234567890", "admin@example.com");
+            Admin admin = new Admin("admin1", "password", adminPerson, AccountStatus.ACTIVE);
+            admin.resetPassword();
+
+            ParkingSpot newSpot = new Compact(7);
+            admin.addParkingSpot(newSpot);
+
+            // Update and show display board
+            board.update(lot.getAllSpots());
+            board.showSlot();
+
+            // Scenario 6: Vehicle tries to park in incompatible spot
+            System.out.println("\n→→→ SCENARIO 6: Motorcycle tries to park in Large spot\n");
+            ParkingSpot largeSpot = ParkingSpotFactory.createParkingSpot("large", 8);
+            lot.addParkingSpot(largeSpot);
+            Vehicle motorcycle2 = new MotorCycle("MH-01-XY-9876");
+            boolean assigned = largeSpot.assignVehicle(motorcycle2);
+            System.out.println("Motorcycle assigned to large spot: " + assigned);
+
+            System.out.println("\n====================== END OF DEMONSTRATION ======================\n");
+        }
+}

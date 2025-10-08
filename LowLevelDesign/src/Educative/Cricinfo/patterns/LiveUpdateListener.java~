@@ -1,0 +1,4 @@
+package Educative.Cricinfo.patterns;
+
+public interface LiveUpdateListener {
+}
