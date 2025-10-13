@@ -1,4 +1,4 @@
-package java8.streams;
+package java8.streams.createStream;
 
 import java.util.stream.Stream;
 

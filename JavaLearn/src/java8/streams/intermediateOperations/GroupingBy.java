@@ -1,4 +1,6 @@
-package java8.streams;
+package java8.streams.intermediateOperations;
+
+import java8.streams.Course;
 
 import java.util.*;
 import java.util.stream.Collectors;
