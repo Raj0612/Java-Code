@@ -171,9 +171,9 @@ public class MergeTwoSortedLists {
 
 
         reverseListByRecursion(list2);
-        ListNode.printList("mergeTwoListsByRecursion",mergeTwoListsByRecursion(list1, list2));
-       ListNode.printList("mergeTwoListsByRecursion1",mergeTwoListsByRecursion1(list1, list2));
-      // ListNode.printList("mergeTwoListsByDummyNodes",mergeTwoListsByDummyNodes(list1, list2));
+      //  ListNode.printList("mergeTwoListsByRecursion",mergeTwoListsByRecursion(list1, list2));
+    //   ListNode.printList("mergeTwoListsByRecursion1",mergeTwoListsByRecursion1(list1, list2));
+       ListNode.printList("mergeTwoListsByDummyNodes",mergeTwoListsByDummyNodes(list1, list2));
 
         // Not Working
         //  ListNode.printList("mergeTwoListsByReverse",mergeTwoListsByReverse(list1, list2));

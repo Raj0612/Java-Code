@@ -20,8 +20,6 @@ public class ReverseAnArray {
         for(int k =0; k< arr.length; k++){
             System.out.print(arr[k] + " ");
         }
-
-
     }
 
     static void reverseArrayByForLoopByRecursion(int arr[], int i, int j){

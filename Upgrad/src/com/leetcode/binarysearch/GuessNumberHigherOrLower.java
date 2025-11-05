@@ -28,7 +28,7 @@ public class GuessNumberHigherOrLower {
     public static int guessNumber(int n, int pick) {
         int left = 1;
         int right = n;
-        while (left <= n) {
+        while (left <= right) {
             int mid = left + (right - left) / 2; // (left + right/2)
             int g = guess(mid, pick);
             if (g == 0) {

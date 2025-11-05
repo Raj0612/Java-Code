@@ -20,14 +20,14 @@ public class ReverseLinkedList {
         }
 
         ListNode reverseList = reverseListByRecursion(head.next);
-        ListNode.printList("reverseListByRecursion reverseList", reverseList);
-        ListNode.printList("reverseListByRecursion head1", head);
+    //    ListNode.printList("reverseListByRecursion reverseList", reverseList);
+       // ListNode.printList("reverseListByRecursion head1", head);
         head.next.next = head;
-        System.out.println("reverseListByRecursion head val " + head.next.next.val);
+       // System.out.println("reverseListByRecursion head val " + head.next.next.val);
         head.next = null;
 
-        ListNode.printList("reverseListByRecursion head2", head);
-        ListNode.printList("reverseListByRecursion reverseList1", reverseList);
+       // ListNode.printList("reverseListByRecursion head2", head);
+       // ListNode.printList("reverseListByRecursion reverseList1", reverseList);
         System.out.println();
         return reverseList;
     }

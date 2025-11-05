@@ -120,7 +120,7 @@ public class RotateLinkedList {
 
         int k = 2;
         //ListNode.printList("input1 rotateRight",rotateRight(node, k));
-      //  ListNode.printList("input1 rotateRight1",rotateRight1(node, k));
+       // ListNode.printList("input1 rotateRight1",rotateRight1(node, k));
         ListNode.printList("input1 rotateRightByStack",rotateRightByStack(node, k));
     }
 
