@@ -2,7 +2,7 @@ package DesignPatterns.Structural.Flyweight.geekforgeeks;
 
 import java.util.HashMap;
 import java.util.Map;
-
+// Flyweight factory to manage creation and retrieval of flyweight objects
 public class IconFactory {
 
     private Map<String, Icon> iconCache = new HashMap<>();

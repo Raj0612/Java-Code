@@ -9,7 +9,7 @@ public class MotorCycleSpot extends ParkingSpot {
 
     @Override
     public boolean assignVehicle(Vehicle vehicle) {
-        if (isFree() && vehicle != null && vehicle instanceof MotorCycle) {
+        if (isFree() && vehicle instanceof MotorCycle) {
             setVehicle(vehicle);
             return true;
         }

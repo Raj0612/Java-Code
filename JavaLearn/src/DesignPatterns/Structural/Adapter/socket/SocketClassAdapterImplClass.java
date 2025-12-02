@@ -1,5 +1,5 @@
 package DesignPatterns.Structural.Adapter.socket;
-
+// Adapter - converts one interface to another
 public class SocketClassAdapterImplClass extends Socket implements SocketAdapter {
     @Override
     public Volt get120Volt() {

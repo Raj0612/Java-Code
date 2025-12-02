@@ -1,0 +1,7 @@
+*) If you have two applications, one spits out output as XML and the other takes in input as JSON then you'll need an adapter between the two to make them work seamlessly.
+
+*) Enumeration is a read-only interface from early days of Java which had only two methods hasMoreElements and nextElement. Later on, when Sun released Collections,
+    it introduced the Iterator interface which also allows to remove elements. To support legacy code, we can create an adapter class to translate between the two interfaces
+    and since enumeration is read-only, it can throw a runtime exception, when an item removal is requested.
+
+*) In the Java API, one can find java.io.InputStreamReader and java.io.OutputStreamWriter as examples of the adapter pattern

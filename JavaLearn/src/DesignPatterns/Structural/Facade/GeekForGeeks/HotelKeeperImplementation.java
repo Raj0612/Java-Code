@@ -1,21 +1,18 @@
 package DesignPatterns.Structural.Facade.GeekForGeeks;
 
 public class HotelKeeperImplementation implements HotelKeeper {
+    @Override
     public VegMenu getVegMenu() {
-        VegRestaurant v = new VegRestaurant();
-        VegMenu vegMenu = (VegMenu) v.getMenus();
-        return vegMenu;
+        return (VegMenu) new VegRestaurant().getMenus();
     }
 
+    @Override
     public NonVegMenu getNonVegMenu() {
-        NonVegRestaurant v = new NonVegRestaurant();
-        NonVegMenu NonvegMenu = (NonVegMenu) v.getMenus();
-        return NonvegMenu;
+        return (NonVegMenu) new NonVegRestaurant().getMenus();
     }
 
-    public Both getVegNonMenu() {
-        VegNonBothRestaurant v = new VegNonBothRestaurant();
-        Both bothMenu = (Both) v.getMenus();
-        return bothMenu;
+    @Override
+    public BothMenu getVegNonMenu() {
+        return (BothMenu) new VegNonBothRestaurant().getMenus();
     }
 }

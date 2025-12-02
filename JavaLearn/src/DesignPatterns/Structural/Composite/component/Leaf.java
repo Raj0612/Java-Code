@@ -1,7 +1,7 @@
 package DesignPatterns.Structural.Composite.component;
 
 public class Leaf implements Component{
-   public  String name;
+    public  String name;
     Double price;
     public Leaf() {
 

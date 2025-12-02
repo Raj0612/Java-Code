@@ -1,5 +1,5 @@
 package DesignPatterns.Structural.Flyweight.geekforgeeks;
-
+// Concrete Flyweight class representing a File Icon
 public class FileIcon implements Icon{
 
     private String type;  // Intrinsic state: type of file icon (e.g., document, image)

@@ -69,6 +69,8 @@ public class LeaveApplication {
 		return type + " leave for "+getNoOfDays()+" day(s) "+status
 				+ " by "+processedBy;
 	}
+
+
 	public static class Builder {
 		private Type type;
 		private LocalDate from;

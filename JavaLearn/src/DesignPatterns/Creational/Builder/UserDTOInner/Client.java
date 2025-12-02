@@ -1,7 +1,6 @@
 package DesignPatterns.Creational.Builder.UserDTOInner;
 
 import DesignPatterns.Creational.Builder.User.Address;
-import DesignPatterns.Creational.Builder.User.User;
 
 import java.time.LocalDate;
 
@@ -9,16 +8,16 @@ import java.time.LocalDate;
 public class Client {
 
 	public static void main(String[] args) {
-		User user = createUser();
+		DesignPatterns.Creational.Builder.User.User user = createUser();
 		// Client has to provide director with concrete builder
-		UserDTO dto = directBuild(UserDTO.getBuilder(), user);
+		User dto = directBuild(User.getBuilder(), user);
 		System.out.println(dto);
 	}
 
 	/**
 	 * This method serves the role of director in builder pattern.
 	 */
-	private static UserDTO directBuild(UserDTO.UserDTOBuilder builder, User user) {
+	private static User directBuild(User.UserBuilder builder, DesignPatterns.Creational.Builder.User.User user) {
 		return builder.withFirstName(user.getFirstName()).withLastName(user.getLastName())
 				.withBirthday(user.getBirthday()).withAddress(user.getAddress()).build();
 	}
@@ -26,8 +25,8 @@ public class Client {
 	/**
 	 * Returns a sample user.
 	 */
-	public static User createUser() {
-		User user = new User();
+	public static DesignPatterns.Creational.Builder.User.User createUser() {
+		DesignPatterns.Creational.Builder.User.User user = new DesignPatterns.Creational.Builder.User.User();
 		user.setBirthday(LocalDate.of(1960, 5, 6));
 		user.setFirstName("Ron");
 		user.setLastName("Swanson");

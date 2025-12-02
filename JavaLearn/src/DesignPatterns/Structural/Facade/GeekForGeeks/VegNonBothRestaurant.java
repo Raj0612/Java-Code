@@ -2,7 +2,7 @@ package DesignPatterns.Structural.Facade.GeekForGeeks;
 
 public class VegNonBothRestaurant implements Hotel {
     public Menus getMenus() {
-        Both b = new Both();
+        BothMenu b = new BothMenu();
         return b;
     }
 }

@@ -1,5 +1,5 @@
 package DesignPatterns.Structural.Flyweight.geekforgeeks;
-
+// Concrete Flyweight class representing a Folder Icon
 public class FolderIcon implements  Icon{
 
     private String color;  // Intrinsic state: color of the folder icon
