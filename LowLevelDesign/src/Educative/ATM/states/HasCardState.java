@@ -36,9 +36,10 @@ public class HasCardState extends ATMState {
         System.out.println("Authenticate PIN first.");
     }
     @Override
-    public void returnCard() {
+    public void returnCard(ATM atm) {
         System.out.println("Returning card. Going to idle state.");;
         // Assuming ATM context is available to set state to Idle
+        atm.setState(atm.getIdleState());
     }
     @Override
     public void exit(ATM atm) {

@@ -30,7 +30,7 @@ public class RemoveAllAdjacentDuplicatesInAStringII {
     }
 
     static void input1(){
-        String str = "azxxzy";
+        String str = "azxxxzy";
         int k = 2;
         System.out.println("input1 str: " + str);
         System.out.println("input1 removeDuplicates " + removeDuplicates(str, k));

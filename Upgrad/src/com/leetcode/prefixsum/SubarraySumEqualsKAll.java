@@ -2,6 +2,12 @@ package com.leetcode.prefixsum;
 
 import java.util.*;
 
+/*
+Example 2:
+    Input : [1, 2, -4, 4,5, -2 , -3],  k = 3
+    Output :
+ */
+
 public class SubarraySumEqualsKAll {
     public static void main(String[] args) {
       //  input1();

@@ -15,7 +15,7 @@ public class RotateLinkedList {
 
     public static void main(String[] args) {
         input1();
-        input2();
+      //  input2();
     }
 
     public static ListNode rotateRight(ListNode head, int k) {
@@ -120,8 +120,8 @@ public class RotateLinkedList {
 
         int k = 2;
         //ListNode.printList("input1 rotateRight",rotateRight(node, k));
-       // ListNode.printList("input1 rotateRight1",rotateRight1(node, k));
-        ListNode.printList("input1 rotateRightByStack",rotateRightByStack(node, k));
+        ListNode.printList("input1 rotateRight1",rotateRight1(node, k));
+       // ListNode.printList("input1 rotateRightByStack",rotateRightByStack(node, k));
     }
 
 

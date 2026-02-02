@@ -48,7 +48,7 @@ public class TransferMoneyState extends ATMState {
     }
 
     @Override
-    public void returnCard() {
+    public void returnCard(ATM atm) {
         System.out.println("Returning card. Thank you for using the ATM.");
     }
 

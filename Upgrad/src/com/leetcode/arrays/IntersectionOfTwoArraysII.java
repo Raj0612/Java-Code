@@ -16,7 +16,7 @@ Explanation: [9,4] is also accepted.
  */
 public class IntersectionOfTwoArraysII {
     public static void main(String[] args) {
-        input1();
+     //   input1();
         input2();
     }
 
@@ -27,7 +27,7 @@ public class IntersectionOfTwoArraysII {
     }
 
     static void input2(){
-        int[] nums1 = {4,9,5};
+        int[] nums1 = {4,9,9,5, 4};
         int[] nums2 ={9,4,9,8,4};
         System.out.println("input2 Result " + Arrays.toString(intersection(nums1, nums2)));
     }

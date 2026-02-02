@@ -32,7 +32,7 @@ public class RemoveAllAdjacentDuplicatesInAString1 {
     }
 
     static void input2(){
-        String str = "azxxzy";
+        String str = "azxxxzy";
         System.out.println("input2 removeDuplicates " + removeDuplicates(str));
     }
 }

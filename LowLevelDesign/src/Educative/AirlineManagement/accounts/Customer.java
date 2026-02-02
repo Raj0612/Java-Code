@@ -43,7 +43,5 @@ public class Customer extends Person implements Observer {
         System.out.println("Notification for Customer " + getName() + ": " + message);
     }
 
-    public int getCustomerId() { return customerId; }
-    public void setCustomerId(int customerId) { this.customerId = customerId; }
 }
 

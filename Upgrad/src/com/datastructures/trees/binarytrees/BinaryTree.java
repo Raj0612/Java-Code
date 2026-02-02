@@ -124,7 +124,7 @@ public class BinaryTree {
             /\   / \
            4  5  6  7
           / \        \
-         8   9        15
+         8   9        10
          */
 
         return root;
@@ -340,6 +340,7 @@ public class BinaryTree {
         root.left.left = new TreeNode(4);
         root.left.right = new TreeNode(5);
         root.left.right.left = new TreeNode(6);
+        root.left.right.left.right = new TreeNode(7);
 
         /*     1
               / \
@@ -348,6 +349,8 @@ public class BinaryTree {
           4   5
              /
             6
+             \
+              7
          */
 
         return root;

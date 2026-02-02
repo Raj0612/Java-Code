@@ -15,12 +15,16 @@ public class Composite implements Component{
     @Override
     public void showPrice() {
         for (Component c : components) {
-            System.out.println("c " + c);  ;
+            System.out.println("Component Name " + c.getName());  ;
             c.showPrice();
         }
     }
 
     public void add(Component subComponent) {
         components.add(subComponent);
+    }
+
+    public String getName(){
+        return name;
     }
 }

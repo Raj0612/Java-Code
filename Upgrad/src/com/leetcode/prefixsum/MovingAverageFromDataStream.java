@@ -68,7 +68,8 @@ public class MovingAverageFromDataStream {
         if(count<= window_size){
             return sum/count;
         }else{
-            sum = sum - (list.get(list.size()-1-(int)window_size));
+            int i = list.size()-1-(int)window_size;
+            sum = sum - list.get(i);
             return sum/window_size;
         }
     }

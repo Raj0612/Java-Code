@@ -32,7 +32,7 @@ public class ISSymmetricTree {
               \   \
                3   3  */
 
-        System.out.println("isSymmetricNonRecursive " + isSymmetricNonRecursive(root));
+        System.out.println("isSymmetricNonRecursiveByStack " + isSymmetricNonRecursiveByStack(root));
         System.out.println("isSymmetric " + isSymmetric(root));
     }
 
@@ -53,7 +53,7 @@ public class ISSymmetricTree {
         return isSymmetricSubTree(left.left, right.right) && isSymmetricSubTree(left.right, right.left);
     }
 
-    public static boolean isSymmetricNonRecursive(TreeNode root) {
+    public static boolean isSymmetricNonRecursiveByStack(TreeNode root) {
         if (root == null)
             return true;
 

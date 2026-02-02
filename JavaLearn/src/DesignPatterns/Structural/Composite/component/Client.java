@@ -14,8 +14,8 @@ public class Client {
 
     public static void main(String[] args) {
 
-       // getResult1();
-        getResult2();
+        getResult1();
+       // getResult2();
     }
 
     static void getResult1(){

@@ -48,18 +48,18 @@ public class MergeKSortedLists {
         while(!pq.isEmpty()){
 
             ListNode curr=pq.remove();
-            ListNode.printList("mergeKListsUsingPriorityQueue curr", curr);
+          //  ListNode.printList("mergeKListsUsingPriorityQueue curr", curr);
             last.next=curr;
             last=last.next;
-            ListNode.printList("mergeKListsUsingPriorityQueue last", last);
+         //   ListNode.printList("mergeKListsUsingPriorityQueue last", last);
             if(curr.next!=null){
                 pq.add(curr.next);
             }
-            pq.forEach(
-                    q -> {
-                        ListNode.printList("mergeKListsUsingPriorityQueue q", q);
-                    }
-            );
+//            pq.forEach(
+//                    q -> {
+//                        ListNode.printList("mergeKListsUsingPriorityQueue q", q);
+//                    }
+//            );
         }
         return dummy.next;
     }

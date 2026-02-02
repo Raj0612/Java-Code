@@ -21,8 +21,8 @@ Output: [1,1,0]
 public class DailyTemperatures {
 
     public static void main(String[] args) {
-       // input1();
-        input2();
+        input1();
+      //  input2();
        // input3();
         //input4();
     }

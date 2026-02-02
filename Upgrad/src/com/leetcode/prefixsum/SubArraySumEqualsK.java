@@ -7,6 +7,10 @@ package com.leetcode.prefixsum;
         Output: 2
 
         Example 2:
+        Input : nums [ 1, 2, -4, 4,5, -2 , -3, 6] k =3
+        Output
+
+        Example 3:
         Input: nums = [1,2,3], k = 3
         Output: 2
  */
@@ -15,7 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 public class SubArraySumEqualsK {
     public static void main(String[] args) {
-       // input1();
+        //input1();
         input2();
       //  input3();
        // input4();
@@ -116,16 +120,16 @@ public class SubArraySumEqualsK {
 
     static void input2(){
         System.out.println();
-        int[] nums = { 1, 2, -4, 4,5, -2 , -3};
+        int[] nums = { 1, 2, -4, 4,5, -2 , -3, 6};
         int k = 3;
         System.out.println("input2 " + Arrays.toString(nums) + " k:" +k);
-        System.out.println("input2 subarraySum " + subarraySum(nums, k));
+       // System.out.println("input2 subarraySum " + subarraySum(nums, k));
         System.out.println("******************************************");
         System.out.println("input2 subarraySumUpgrad " + subarraySumUpgrad(nums, k));
         System.out.println("******************************************");
-        System.out.println("input2 subarraySum2 " + subarraySum2(nums, k));
+      //  System.out.println("input2 subarraySum2 " + subarraySum2(nums, k));
         System.out.println("******************************************");
-        System.out.println("input2 subarraySumNotOptimized " + subarraySumNotOptimized(nums, k));
+       // System.out.println("input2 subarraySumNotOptimized " + subarraySumNotOptimized(nums, k));
     }
 
     static void input3(){

@@ -23,6 +23,11 @@ public class TagService {
     public List<Tag> getTopTags(int n) {
         List<Map.Entry<Tag, Integer>> list = new ArrayList<>(tagCounts.entrySet());
         list.sort((a, b) -> Integer.compare(b.getValue(), a.getValue()));
+
+
+      //  list.sort(
+               // Comparator.comparing(Map.Entry<Tag, Integer>::getValue)
+                        //.reversed()
         List<Tag> out = new ArrayList<>();
         for (int i = 0; i < Math.min(n, list.size()); i++)
             out.add(list.get(i).getKey());

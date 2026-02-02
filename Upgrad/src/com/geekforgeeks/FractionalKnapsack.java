@@ -54,8 +54,8 @@ public class FractionalKnapsack {
                 ans = ans + val;
             }else{
                 double fraction = (double) W/ (double)weight;
-                int frac = W/weight;
-                System.out.println("frac " + frac + " (val * fraction) " + (val * fraction));
+                //int frac = W/weight;
+              //  System.out.println("frac " + frac + " (val * fraction) " + (val * fraction));
                 ans = ans + (val * fraction);
               // W = (int) (W- (weight * fraction));
                 break;

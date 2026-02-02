@@ -21,31 +21,37 @@ public class RemoveAllAdjacentDuplicatesInAString {
         String str = "";
         str = "abbaca";
         //str = "azxxzy";
-       str = "aabbba";
-      // str = "abbaca";
+      // str = "aabbba";
+        str = "abxxxxxbbbx";
         System.out.println("input : " + str);
         System.out.println("removeDuplicates " + removeDuplicates(str));
         System.out.println("removeDuplicatesByBruteForce " + removeDuplicatesByBruteForce(str));
-        System.out.println("removeAdjacentDuplicates " + removeAdjacentDuplicates(str));
-        removeDuplicates1(str);
+     //   System.out.println("removeAdjacentDuplicates " + removeAdjacentDuplicates(str));
+        System.out.println("removeDuplicates1  " +  removeDuplicates1(str));
       //  System.out.println("removeDuplicatesNotOptimized " + removeDuplicatesNotOptimized(str));
     }
 
 
-    public static void removeDuplicates1(String s) {
+    public static String removeDuplicates1(String s) {
         Stack<Character> stack = new Stack<>();
-        for (int i = 0; i < s.length(); i++) {
-            char ch = s.charAt(i);
-            if (!stack.isEmpty()) {
-                while (!stack.isEmpty() &&stack.peek() == ch) {
-                    stack.pop();
-                }
-            } else{
-                    stack.add(ch);
-                }
+
+        for (char ch : s.toCharArray()) {
+            if (!stack.isEmpty() && stack.peek() == ch) {
+                stack.pop();   // remove adjacent duplicate
+            } else {
+                stack.push(ch);
             }
-            System.out.println("removeDuplicates1 stack " + stack);
         }
+
+        // Build result
+        StringBuilder sb = new StringBuilder();
+        for (char ch : stack) {
+            sb.append(ch);
+        }
+
+        return sb.toString();
+    }
+
 
     public static String removeDuplicates(String s) {
         Stack<Character> stack = new Stack<>();

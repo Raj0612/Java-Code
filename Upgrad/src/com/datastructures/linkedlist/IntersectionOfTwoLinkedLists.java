@@ -28,7 +28,7 @@ There are 3 nodes before the intersected node in A; There are 1 node before the 
 public class IntersectionOfTwoLinkedLists {
 
     public static void main(String[] args) {
-      //  input1();
+        input1();
         input2();
     }
 
@@ -45,8 +45,8 @@ public class IntersectionOfTwoLinkedLists {
     static void input1(){
         ListNode node1 = new ListNode(4);
         node1.next = new ListNode(8);
-        node1.next.next.next = new ListNode(4);
-        node1.next.next.next.next = new ListNode(5);
+        node1.next.next = new ListNode(4);
+        node1.next.next.next = new ListNode(5);
 
         ListNode node2 = new ListNode(5);
         node2.next = new ListNode(6);

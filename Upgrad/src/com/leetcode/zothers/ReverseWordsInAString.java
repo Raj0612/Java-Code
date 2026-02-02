@@ -119,9 +119,9 @@ public class ReverseWordsInAString {
     }
 
     static void input2(){
-        String s = "  hello world  ";
+        String s = "  hello  world  ";
         System.out.println("input2 s: " + s);
-       // System.out.println("input2: " + reverseWords(s));
+        System.out.println("input2: reverseWords " + reverseWords(s));
     //    System.out.println("input2: " + reverseWords1(s));
          System.out.println("input2: reverseWordsTwoPointers " + reverseWordsTwoPointers(s));
         System.out.println();
@@ -130,7 +130,7 @@ public class ReverseWordsInAString {
     static void input3(){
         String s = "a good   example";
         System.out.println("input3 s: " + s);
-        //System.out.println("input3: " + reverseWords(s));
+        System.out.println("input3: " + reverseWords(s));
        // System.out.println("input3: " + reverseWords1(s));
      //   reverseAString(s);
         System.out.println("input3: reverseWordsTwoPointers " + reverseWordsTwoPointers(s));

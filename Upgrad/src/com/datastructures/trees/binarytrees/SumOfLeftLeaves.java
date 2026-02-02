@@ -6,10 +6,11 @@ public class SumOfLeftLeaves {
     static int sum =0;
 
     public static void main(String[] args) {
-
+        TreeNode root = null;
        // TreeNode root = BinaryTree.constructTree4();
         //TreeNode root = constructTree();
-        TreeNode root = constructTree1();
+        root = constructTree();
+        root = BinaryTree.constructTree4();
         System.out.println("sumOfLeftLeaves " +sumOfLeftLeaves(root));
        // System.out.println("sumOfLeftLeavesMorrisInOrder " +sumOfLeftLeavesMorrisInOrder(root));
         System.out.println("sumOfLeftLeavesByPreOrder " +sumOfLeftLeavesByPreOrderByUpgrad(root));

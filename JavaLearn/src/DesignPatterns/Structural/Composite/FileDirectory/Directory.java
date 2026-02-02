@@ -15,7 +15,7 @@ public class Directory extends File {
 
 	@Override
 	public void ls() {
-		System.out.println(getName());
+		System.out.println("Name " + getName());
 		children.forEach(File::ls);
 	}
 

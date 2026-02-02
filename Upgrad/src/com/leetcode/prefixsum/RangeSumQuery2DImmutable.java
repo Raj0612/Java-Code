@@ -52,19 +52,19 @@ public class RangeSumQuery2DImmutable {
     }
 
     public void optimized(){
-        int param_1 = sumRegionByRowArray(2, 1, 4, 3);
+      //  int param_1 = sumRegionByRowArray(2, 1, 4, 3);
         int param_2 = sumRegionByRowArray(1, 1, 2, 2);
-        int param_3 = sumRegionByRowArray(1, 2, 2, 4);
-        System.out.println("optimized param_1: " + param_1 + " param_2: " + param_2 + " param_3: " + param_3);
+      //  int param_3 = sumRegionByRowArray(1, 2, 2, 4);
+        System.out.println("param2 " + param_2);
     }
 
     public RangeSumQuery2DImmutable(int[][] matrix) {
         array = new int[matrix.length][matrix[0].length];
         array = matrix;
         System.out.println("Array " + Arrays.deepToString(array));
-        populateSumArrayByRow();
-      //  populateSumArray1();
-        populateSumArrayByColumn();
+       // populateSumArrayByRow();
+        populateSumArray1();
+      //  populateSumArrayByColumn();
     }
 
     void populateSumArrayByRow(){
@@ -82,6 +82,7 @@ public class RangeSumQuery2DImmutable {
     void populateSumArray1(){
         sumRowArray = new int[matrix.length][matrix[0].length];
         sumRowArray = matrix;
+        System.out.println("populateSumArray1 " + Arrays.deepToString(sumRowArray));
         for(int i = 0; i<matrix.length; i++){
             for(int j = 1; j<matrix[0].length; j++){
                 sumRowArray[i][j] = sumRowArray[i][j-1] + sumRowArray[i][j];
@@ -94,12 +95,13 @@ public class RangeSumQuery2DImmutable {
     void populateSumArrayByColumn(){
         sumColArray = new int[matrix.length][matrix[0].length];
         sumColArray = matrix;
+        System.out.println("populateSumArrayByColumn1 " + Arrays.deepToString(sumColArray));
         for(int col = 0; col<matrix[0].length; col++){
             for(int row = 1; row<matrix.length; row++){
                 sumColArray[row][col] = sumColArray[row-1][col] + sumColArray[row][col];
             }
         }
-        System.out.println("populateSumArrayByColumn " + Arrays.deepToString(sumColArray));
+        System.out.println("populateSumArrayByColumn2 " + Arrays.deepToString(sumColArray));
     }
 
     public static int sumRegionByRowArray(int row1, int col1, int row2, int col2){

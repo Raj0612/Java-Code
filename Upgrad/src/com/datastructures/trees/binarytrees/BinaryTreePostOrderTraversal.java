@@ -23,9 +23,10 @@ public class BinaryTreePostOrderTraversal {
         / \   /\  / \   / \
        8  9 10 11 12 13 14 15
          */
-        TreeNode root = BinaryTree.constructTree();
-      //  TreeNode root = BinaryTree.constructTree1();
-        //TreeNode root = BinaryTree.constructTree2();
+        TreeNode root = null;
+      //  root = BinaryTree.constructTree();
+// root = BinaryTree.constructTree1();
+        root = BinaryTree.constructTree4();
         ArrayList<Integer> list = new ArrayList<>();
         postOrderTraversal(root, list);
         System.out.println("Result " + list);

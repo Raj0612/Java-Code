@@ -29,7 +29,7 @@ public class DistributeCandies {
     public static void main(String[] args) {
         //int[] candyType = {1,2,1,3,3,2};
         int[] candyType = {6,6,6,6};
-      //  int[] candyType = {1,1,2,3};
+      // int[] candyType = {1,1,2,3};
         System.out.println("getDistributeCandies: " + getDistributeCandies(candyType)) ;
         System.out.println("getDistributeCandies1: " + getDistributeCandies1(candyType)) ;
     }

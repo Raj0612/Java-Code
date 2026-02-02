@@ -17,7 +17,7 @@ public abstract class ATMState {
 
     public abstract void transferMoney(ATM atm, ATMCard card, int accountNumber, int transferAmount);
 
-    public abstract void returnCard();
+    public abstract void returnCard(ATM atm);
 
     public abstract void exit(ATM atm);
 }

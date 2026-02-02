@@ -83,7 +83,6 @@ public class KClosestPointsToOrigin {
         PriorityQueue<int[]> pq = new PriorityQueue<int[]>((point1, point2) -> point2[0] * point2[0] + point2[1] * point2[1] - point1[0] * point1[0] - point1[1] * point1[1]);
         System.out.println("kClosestByPriorityQueue pq " + pq );
         for (int[] point : points) {
-          //  System.out.println("point " + Arrays.toString(point));
             pq.offer(point);
             if (pq.size() > k) {
               int[] poll  =   pq.poll();
@@ -103,13 +102,7 @@ public class KClosestPointsToOrigin {
         for (int[] point : points) {
             System.out.println("point " + Arrays.toString(point));
             pq.offer(point);
-//            if (pq.size() > k) {
-//                int[] poll  =   pq.poll();
-//                System.out.println("poll " + poll.toString());
-//            }
         }
-
-
 
         int[][] ans = new int[k][2];
         int i= 0;

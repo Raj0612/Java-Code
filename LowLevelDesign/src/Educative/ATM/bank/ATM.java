@@ -113,7 +113,7 @@ public class ATM {
     }
 
     public void returnCard() {
-        currentATMState.returnCard();
+        currentATMState.returnCard(this);
     }
     public void exit() {
         currentATMState.exit(this);

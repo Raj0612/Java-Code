@@ -26,7 +26,8 @@ public class MaximumAverageSubarrayI {
         System.out.println("max_sum " + max_sum + " curr_sum " + curr_sum);
         //O(n-k)
         for(int i=k; i< nums.length; i++){
-            curr_sum = curr_sum + nums[i] - nums[i-k];
+            curr_sum = curr_sum + nums[i] ;
+            curr_sum = curr_sum  - nums[i-k];
             max_sum = Math.max(max_sum, curr_sum);
         }
        double ans = max_sum/k;

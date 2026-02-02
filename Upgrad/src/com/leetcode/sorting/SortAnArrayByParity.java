@@ -121,7 +121,7 @@ public class SortAnArrayByParity {
     static void input2(){
         int[] nums = {3,1,2,4, 5, 6, 8};
         System.out.println("input2 " + Arrays.toString(nums));
-       // System.out.println("input2 sortArrayByParity Result" + Arrays.toString(sortArrayByParity(nums)));
+       System.out.println("input2 sortArrayByParity Result" + Arrays.toString(sortArrayByParity(nums)));
        // System.out.println("input2 sortAnArrayByParityBruteForce1 Result" + Arrays.toString(sortAnArrayByParityBruteForce1(nums)));
         //System.out.println("input2 sortAnArrayByParityBruteForce2 Result" + Arrays.toString(sortAnArrayByParityBruteForce2(nums)));
        // System.out.println("input2 sortAnArrayByParityBruteForce Result" + Arrays.toString(sortAnArrayByParityBruteForce(nums)));

@@ -59,7 +59,7 @@ public class SameTree {
         tree1.root = new TreeNode(1);
         tree1.root.left = new TreeNode(2);
         tree1.root.right = new TreeNode(3);
-        tree1.root.left.left = new TreeNode(4);
+        tree1.root.left.left = new TreeNode(8);
         tree1.root.left.right = new TreeNode(5);
         tree1.root.left.left.left= new TreeNode(6);
         tree1.root.left.left.right = new TreeNode(7);

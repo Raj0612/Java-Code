@@ -32,7 +32,7 @@ public class IdleState extends ATMState {
         System.out.println("No card inserted.");
     }
     @Override
-    public void returnCard() {
+    public void returnCard(ATM atm) {
         System.out.println("No card to return.");
     }
     @Override

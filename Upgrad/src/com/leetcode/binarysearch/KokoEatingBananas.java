@@ -25,7 +25,7 @@ public class KokoEatingBananas {
     public static void main(String[] args) {
 
         input1();
-       input2();
+      // input2();
     }
 
     //O(log(max) *n ) n - length of the piles

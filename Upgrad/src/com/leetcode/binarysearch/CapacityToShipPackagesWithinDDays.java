@@ -34,7 +34,8 @@ public class CapacityToShipPackagesWithinDDays {
     }
 
     public static int shipWithinDays(int[] weights, int days) {
-        int left = Arrays.stream(weights).max().getAsInt();
+        //int left = Arrays.stream(weights).max().getAsInt();
+        int left = 1;
         int right = Arrays.stream(weights).sum();
         System.out.println("shipWithinDays left " + left + " right " + right + " mid " + (left + right) / 2 + " days " + days);
         while (left < right) {

@@ -12,8 +12,8 @@ public class RateLimiterMain {
         }
 
         // Wait a minute and try again
-        Thread.sleep(60_000);
-        System.out.println("After 1 minute:");
-        System.out.println("Request 8: " + (limiter.allowRequest(user) ? "allowed" : "blocked"));
+   //     Thread.sleep(60_000);
+     //   System.out.println("After 1 minute:");
+    //    System.out.println("Request 8: " + (limiter.allowRequest(user) ? "allowed" : "blocked"));
     }
 }

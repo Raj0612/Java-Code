@@ -17,7 +17,7 @@ public class Leaf implements Component{
     }
 
 
-    public void  getName(){
-        System.out.println("name " + name);
+    public String  getName(){
+        return name;
     }
 }

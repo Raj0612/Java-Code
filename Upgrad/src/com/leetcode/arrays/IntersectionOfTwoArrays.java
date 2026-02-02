@@ -18,7 +18,7 @@ Explanation: [4,9] is also accepted.
 public class IntersectionOfTwoArrays {
 
     public static void main(String[] args) {
-        input1();
+      //  input1();
         input2();
     }
 

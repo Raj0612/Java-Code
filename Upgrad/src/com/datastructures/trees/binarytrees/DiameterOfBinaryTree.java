@@ -26,8 +26,8 @@ public class DiameterOfBinaryTree {
         System.out.println("input1 diameterOfBinaryTree " + diameterOfBinaryTree(root));
       //  System.out.println("input1 leftHeight " + leftHeight(root));
         System.out.println("input1 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
-       System.out.println("diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
-        System.out.println("input1 maxDepthNonRecursive " + maxDepthNonRecursive(root));
+     //  System.out.println("diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
+        System.out.println("input1 maxDepthNonRecursiveByQueue " + maxDepthNonRecursiveByQueue(root));
     }
 
     static void input2(){
@@ -48,32 +48,34 @@ public class DiameterOfBinaryTree {
        // System.out.println("DiameterByQueue " + diameterOfBinaryTreeByNonRecursion(root));//Error
         System.out.println("input2 leftHeight " + leftHeight(root));
         System.out.println("input2 diameterOfBinaryTree " + diameterOfBinaryTree(root));
-        System.out.println("input2 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
-        System.out.println("input2 maxDepthNonRecursive " + maxDepthNonRecursive(root));
-        System.out.println("input2 diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
+      //  System.out.println("input2 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
+        System.out.println("input2 maxDepthNonRecursiveByQueue " + maxDepthNonRecursiveByQueue(root));
+     //   System.out.println("input2 diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
     }
 
     static void input3(){
         TreeNode root = BinaryTree.constructTree10();
-          /*   1
+        /*     1
               / \
              2   3
            / \
           4   5
              /
             6
+             \
+              7
          */
         System.out.println("input3 leftHeight " + leftHeight(root));
         System.out.println("input3 diameterOfBinaryTree " + diameterOfBinaryTree(root));
-        System.out.println("input3 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
-        System.out.println("input3 maxDepthNonRecursive " + maxDepthNonRecursive(root));
-        System.out.println("input3 diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
+       // System.out.println("input3 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
+        System.out.println("input3 maxDepthNonRecursiveByQueue " + maxDepthNonRecursiveByQueue(root));
+       // System.out.println("input3 diameterOfBinaryTreeByNonRecursionStack " + diameterOfBinaryTreeByNonRecursion(root));
     }
 
     static void input4(){
         TreeNode root = new TreeNode(4);
         System.out.println("input3 diameterOfBinaryTree " + diameterOfBinaryTree(root));
-        System.out.println("input3 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
+      //  System.out.println("input3 diameterOfBinaryTree1 " + diameterOfBinaryTree1(root));
     }
 
     public static int diameterOfBinaryTree(TreeNode root) {
@@ -116,7 +118,7 @@ public class DiameterOfBinaryTree {
     }
 
     //Wrong
-    static int maxDepthNonRecursive(TreeNode root) {
+    static int maxDepthNonRecursiveByQueue(TreeNode root) {
         if (root == null) return 0;
 
         int diameter = 0;

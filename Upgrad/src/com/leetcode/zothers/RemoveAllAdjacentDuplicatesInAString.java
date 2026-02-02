@@ -56,7 +56,7 @@ public class RemoveAllAdjacentDuplicatesInAString {
     }
 
     static void input1(){
-        String str = "abbaca";
+        String str = "abbbaca";
         System.out.println("removeDuplicates " + removeDuplicates(str));
         //System.out.println("removeDuplicatesNotOptimized " + removeDuplicatesNotOptimized(str));
     }

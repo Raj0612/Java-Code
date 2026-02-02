@@ -30,7 +30,7 @@ public class MaximumDepthOfBinaryTree {
 
         System.out.println("maxDepth " + maxDepth(root));
         System.out.println("maxDepth1 " + maxDepth1(root));
-        System.out.println("maxDepthNonRecursive " + maxDepthNonRecursive(root));
+        System.out.println("maxDepthNonRecursiveByQueue " + maxDepthNonRecursiveByQueue(root));
         System.out.println("maxDepthNonRecursiveStack " + maxDepthNonRecursiveStack(root));
         System.out.println("maxDepthNonRecursiveByStack " + maxDepthNonRecursiveByStack(root));
     }
@@ -49,7 +49,7 @@ public class MaximumDepthOfBinaryTree {
         return Math.max(left, right) + 1;
     }
 
-    static int maxDepthNonRecursive(TreeNode root) {
+    static int maxDepthNonRecursiveByQueue(TreeNode root) {
         if (root == null) return 0;
 
         int depth = 0;

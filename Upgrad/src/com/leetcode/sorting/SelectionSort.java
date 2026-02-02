@@ -5,7 +5,6 @@ import java.util.Arrays;
 public class SelectionSort {
 
     public static void main(String[] args) {
-
       //  input1();
         input2();
     }

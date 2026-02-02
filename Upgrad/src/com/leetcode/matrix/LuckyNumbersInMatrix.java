@@ -27,8 +27,8 @@ import java.util.List;
 public class LuckyNumbersInMatrix {
     public static void main(String[] args) {
 
-        input1();
-        //input2();
+        //input1();
+        input2();
     }
     static List<Integer> luckyNumbers(int[][] matrix) {
         int n = matrix.length;
